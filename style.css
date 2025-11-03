@@ -1,0 +1,211 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+#game-container {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 900px;
+    width: 100%;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #2d3748;
+    font-size: 2.5em;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #718096;
+    font-size: 1.1em;
+}
+
+#game-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f7fafc;
+    border-radius: 10px;
+}
+
+.info-panel {
+    text-align: center;
+}
+
+.label {
+    font-weight: bold;
+    color: #4a5568;
+    margin-right: 5px;
+}
+
+#current-hole, #total-holes, #par, #strokes, #score {
+    color: #2d3748;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#game-canvas {
+    display: block;
+    margin: 0 auto;
+    border: 3px solid #4a5568;
+    border-radius: 10px;
+    background: #90EE90;
+    cursor: crosshair;
+}
+
+#controls {
+    margin-top: 20px;
+    padding: 20px;
+    background: #edf2f7;
+    border-radius: 10px;
+}
+
+#power-control, #angle-control {
+    margin-bottom: 15px;
+}
+
+label {
+    display: inline-block;
+    width: 80px;
+    font-weight: bold;
+    color: #2d3748;
+}
+
+input[type="range"] {
+    width: 60%;
+    margin: 0 10px;
+}
+
+#power-value, #angle-value {
+    display: inline-block;
+    width: 50px;
+    text-align: right;
+    font-weight: bold;
+    color: #4a5568;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#message-box {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#message-box.success {
+    background: #c6f6d5;
+    color: #22543d;
+}
+
+#message-box.info {
+    background: #bee3f8;
+    color: #2c5282;
+}
+
+#message-box.warning {
+    background: #feebc8;
+    color: #7c2d12;
+}
+
+#instructions {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f7fafc;
+    border-radius: 10px;
+}
+
+#instructions h3 {
+    color: #2d3748;
+    margin-bottom: 10px;
+}
+
+#instructions ul {
+    margin-left: 20px;
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+#game-over {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    z-index: 1000;
+}
+
+#game-over h2 {
+    color: #2d3748;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+#final-score {
+    font-size: 1.5em;
+    color: #4a5568;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 850px) {
+    #game-canvas {
+        width: 100%;
+        height: auto;
+    }
+}
