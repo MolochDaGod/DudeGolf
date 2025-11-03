@@ -1,0 +1,17 @@
+ARM
+ARM64
+x64
+x86
+Release
+Debug
+*.user
+imgui.ini
+.vs
+
+.DS_Store
+
+build/
+bundle/
+install/
+
+assets

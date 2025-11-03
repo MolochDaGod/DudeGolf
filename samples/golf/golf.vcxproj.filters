@@ -1,0 +1,1566 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\golf">
+      <UniqueIdentifier>{223ba715-5ad5-4690-90c9-039a16979013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\golf">
+      <UniqueIdentifier>{2dc529c6-e396-45e2-b984-720bea400709}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\golf\server">
+      <UniqueIdentifier>{fa470af2-0f42-461f-a1a1-e611d162355a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\golf\server">
+      <UniqueIdentifier>{08716eb7-be0f-4e65-8a07-0717962e4559}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\golf\client">
+      <UniqueIdentifier>{0334852e-a3d7-40a5-9327-9012d15bd76b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\golf\client\states">
+      <UniqueIdentifier>{d60308a8-5f22-45eb-841c-0232f1ed22a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\golf\client">
+      <UniqueIdentifier>{09a8a285-f5aa-486f-8110-65ed9d2f9651}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\golf\client\states">
+      <UniqueIdentifier>{5960c170-5e2f-420b-8929-4b38ad1f396c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\golf\shared">
+      <UniqueIdentifier>{1bdc2a82-9c53-46f8-80ac-d48be17ca5c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\golf\server\systems">
+      <UniqueIdentifier>{82fd6024-66a7-4c81-89bf-e99c87bda655}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\golf\server\systems">
+      <UniqueIdentifier>{02db95df-396a-4102-bd9c-cd85745f5ac2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\golf\client\systems">
+      <UniqueIdentifier>{acdac83e-c873-4123-9186-41c89e6f6294}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\golf\client\systems">
+      <UniqueIdentifier>{f887ea67-27ad-4323-ab5c-67764d76bc6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\golf\client\shaders">
+      <UniqueIdentifier>{f1004cbe-0ee0-4d66-8188-73de37f48b53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\golf\client\directors">
+      <UniqueIdentifier>{d2e40c71-df8a-4aaf-972c-9c4609f12782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\golf\client\directors">
+      <UniqueIdentifier>{ac49d76a-c9e3-46b1-8ee8-3b845a7951bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\golf\server\directors">
+      <UniqueIdentifier>{9435f93f-32eb-4f29-b555-81dc58f0b4f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\golf\server\directors">
+      <UniqueIdentifier>{f9b88068-78c7-43b5-ae2e-d550da45d78a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\rss">
+      <UniqueIdentifier>{ef7b3139-894e-44fc-a3ea-0c51f24ad336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\rss">
+      <UniqueIdentifier>{0d07744f-6e49-4edb-a849-8597724e7dc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\golf\shared">
+      <UniqueIdentifier>{cc15016c-fb7e-48c0-9272-933fa4fc0d7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sqlite">
+      <UniqueIdentifier>{85312517-49cc-40f5-9b1e-8ab1e765d01c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sqlite">
+      <UniqueIdentifier>{db65c6dd-34b6-4bd9-91b7-166a75834bb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\endless">
+      <UniqueIdentifier>{28c29afc-eb94-4e79-8538-3b4cf9430775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\endless">
+      <UniqueIdentifier>{3a86c79e-897c-4491-86c6-22f4eb59f43d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\scrub">
+      <UniqueIdentifier>{b77f3a21-7112-4537-8b5e-77d331e1a0a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\scrub">
+      <UniqueIdentifier>{4ba8aac9-a5e8-479b-b1da-bce7d195fb06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\golf\client\time of day">
+      <UniqueIdentifier>{53f50006-c51f-4812-b3b9-fa5904be7d82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\golf\client\time of day">
+      <UniqueIdentifier>{be9dd921-53a3-46e0-a093-6cb68606eb52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\websocket">
+      <UniqueIdentifier>{a14b2d76-cfba-4b2d-9e4e-cf90b38df669}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\websocket">
+      <UniqueIdentifier>{8a948265-bb55-4baf-bc64-4d1f02135f7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sportsball">
+      <UniqueIdentifier>{bc5b40f9-ed82-4b64-9a5b-3d19a004d9d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sportsball">
+      <UniqueIdentifier>{774b2a37-f5e3-4e3f-8adf-d216c7e3173f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\LoadingScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GolfGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\server\Server.cpp">
+      <Filter>Source Files\golf\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\server\ServerGolfState.cpp">
+      <Filter>Source Files\golf\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\server\ServerLobbyState.cpp">
+      <Filter>Source Files\golf\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\MenuCreation.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\MenuState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\GolfState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\ErrorState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\SharedStateData.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\BallSystem.cpp">
+      <Filter>Source Files\golf\server\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\InputParser.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\GolfStateUI.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\TerrainBuilder.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\PlayerAvatar.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\ClientCollisionSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\GolfCartSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\OptionsState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\PauseState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\ParticleDirector.cpp">
+      <Filter>Source Files\golf\client\directors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\GolfParticleDirector.cpp">
+      <Filter>Source Files\golf\client\directors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SplashScreenState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\SoundEffectsDirector.cpp">
+      <Filter>Source Files\golf\client\directors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\GolfSoundDirector.cpp">
+      <Filter>Source Files\golf\client\directors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\TutorialState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\MenuSoundDirector.cpp">
+      <Filter>Source Files\golf\client\directors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\TutorialDirector.cpp">
+      <Filter>Source Files\golf\client\directors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\CameraFollowSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\KeyboardState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\Weather.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\CollisionMesh.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\DebugDraw.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\FpsCameraSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\PracticeState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\DrivingState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\DrivingRangeDirector.cpp">
+      <Filter>Source Files\golf\client\directors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\DrivingStateUI.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\LeaderboardTexture.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\spooky2.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\MenuCustomisation.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DefaultAchievements.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\NotificationSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\TrophyDisplaySystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\CloudSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\ClubhouseState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\ClubhouseStateUI.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\MenuCallbacks.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\server\ServerBilliardsState.cpp">
+      <Filter>Source Files\golf\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\BilliardsState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\BilliardsSystem.cpp">
+      <Filter>Source Files\golf\server\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\BilliardsStateUI.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\server\EightballDirector.cpp">
+      <Filter>Source Files\golf\server\directors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\BilliardsInput.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\BilliardsClientCollision.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\BilliardsSoundDirector.cpp">
+      <Filter>Source Files\golf\client\directors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\StudioCameraSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\TrophyState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\server\NineballDirector.cpp">
+      <Filter>Source Files\golf\server\directors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\server\SnookerDirector.cpp">
+      <Filter>Source Files\golf\server\directors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\PocketBallSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\VatFile.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\CPUGolfer.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\VatAnimationSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\GolfStateDebug.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\SpectatorSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\Path.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\PropFollowSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rss\Newsfeed.cpp">
+      <Filter>Source Files\rss</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rss\pugixml.cpp">
+      <Filter>Source Files\rss</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\NewsState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\editor\BushState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\PlaylistState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\MessageOverlayState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\NameScrollSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\FloatingTextSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\CreditsState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\Swingput.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\MiniBallSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\TerrainDepthmap.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\RayResultCallback.cpp">
+      <Filter>Source Files\golf\shared</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\TerrainChunks.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\BallAnimationSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\Clubs.cpp">
+      <Filter>Source Files\golf\shared</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\UnlockState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\MenuAvatars.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\ProfileState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\PlayerData.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\BallTrail.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sqlite\SqliteState.cpp">
+      <Filter>Source Files\sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sqlite\ProfileDB.cpp">
+      <Filter>Source Files\sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\server\ServerGolfRules.cpp">
+      <Filter>Source Files\golf\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\LeaderboardState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\StatsState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\MapOverviewState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\M3UPlaylist.cpp">
+      <Filter>Source Files\golf</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\ProgressIcon.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\GcState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\GolfStateScoring.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\TextChat.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\League.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\LeagueState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\GolfStateCameras.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\BilliardsSystemReact.cpp">
+      <Filter>Source Files\golf\server\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\TableData.cpp">
+      <Filter>Source Files\golf\shared</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\LightAnimationSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\WeatherAnimationSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\GolfStateAssets.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\WeatherDirector.cpp">
+      <Filter>Source Files\golf\server\directors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\PlayerManagementState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\ChunkVisSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\runner\EndlessDrivingState.cpp">
+      <Filter>Source Files\endless</Filter>
+    </ClCompile>
+    <ClCompile Include="src\runner\EndlessAttractState.cpp">
+      <Filter>Source Files\endless</Filter>
+    </ClCompile>
+    <ClCompile Include="src\runner\EndlessPauseState.cpp">
+      <Filter>Source Files\endless</Filter>
+    </ClCompile>
+    <ClCompile Include="src\runner\CarSystem.cpp">
+      <Filter>Source Files\endless</Filter>
+    </ClCompile>
+    <ClCompile Include="src\runner\Track.cpp">
+      <Filter>Source Files\endless</Filter>
+    </ClCompile>
+    <ClCompile Include="src\runner\EndlessSoundDirector.cpp">
+      <Filter>Source Files\endless</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\Career.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\FreePlayState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\CareerState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\GameConsts.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\server\ServerVoice.cpp">
+      <Filter>Source Files\golf\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\VoiceChat.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\LeagueNames.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\ButtonHoldSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\FireworksSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scrub\ScrubAttractState.cpp">
+      <Filter>Source Files\scrub</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scrub\ScrubBackgroundState.cpp">
+      <Filter>Source Files\scrub</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scrub\ScrubGameState.cpp">
+      <Filter>Source Files\scrub</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scrub\ScrubPauseState.cpp">
+      <Filter>Source Files\scrub</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scrub\ScrubSoundDirector.cpp">
+      <Filter>Source Files\scrub</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scrub\ScrubPhysicsSystem.cpp">
+      <Filter>Source Files\scrub</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scrub\ScrubParticleDirector.cpp">
+      <Filter>Source Files\scrub</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sunclock.cpp">
+      <Filter>Source Files\golf\client\time of day</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\TimeOfDay.cpp">
+      <Filter>Source Files\golf\client\time of day</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\RopeSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\LightmapProjectionSystem.cpp">
+      <Filter>Source Files\golf\client\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\Tournament.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\TournamentState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\ClubModels.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXBench.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXCancellationRequest.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXConnectionState.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXDNSLookup.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXExponentialBackoff.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXGetFreePort.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXGzipCodec.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXHttp.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXHttpClient.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXHttpServer.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXNetSystem.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXSelectInterrupt.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXSelectInterruptEvent.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXSelectInterruptFactory.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXSelectInterruptPipe.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXSetThreadName.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXSocket.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXSocketConnect.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXSocketFactory.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXSocketServer.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXSocketTLSOptions.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXStrCaseCompare.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXUdpSocket.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXUrlParser.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXUserAgent.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXUuid.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXWebSocket.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXWebSocketCloseConstants.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXWebSocketHandshake.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXWebSocketHttpHeaders.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXWebSocketPerMessageDeflate.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXWebSocketPerMessageDeflateCodec.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXWebSocketPerMessageDeflateOptions.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXWebSocketProxyServer.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXWebSocketServer.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sockets\IXWebSocketTransport.cpp">
+      <Filter>Source Files\websocket</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WebsocketServer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\server\ServerLobbyGame.cpp">
+      <Filter>Source Files\golf\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\MenuStateCan.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\CoinSystem.cpp">
+      <Filter>Source Files\golf\server\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\ShopState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\ClubInfoState.cpp">
+      <Filter>Source Files\golf\client\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sportsball\SBallAttractState.cpp">
+      <Filter>Source Files\sportsball</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sportsball\SBallBackgroundState.cpp">
+      <Filter>Source Files\sportsball</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sportsball\SBallGameState.cpp">
+      <Filter>Source Files\sportsball</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sportsball\SBallParticleDirector.cpp">
+      <Filter>Source Files\sportsball</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sportsball\SBallPhysicsSystem.cpp">
+      <Filter>Source Files\sportsball</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sportsball\SBallSoundDirector.cpp">
+      <Filter>Source Files\sportsball</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sportsball\BackgroundPhysicsSystem.cpp">
+      <Filter>Source Files\sportsball</Filter>
+    </ClCompile>
+    <ClCompile Include="src\golf\MoonPhase.cpp">
+      <Filter>Source Files\golf\client</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ErrorCheck.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LoadingScreen.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GolfGame.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StateIDs.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\server\Server.hpp">
+      <Filter>Header Files\golf\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\server\ServerGolfState.hpp">
+      <Filter>Header Files\golf\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\server\ServerLobbyState.hpp">
+      <Filter>Header Files\golf\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\server\ServerMessages.hpp">
+      <Filter>Header Files\golf\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\server\ServerPacketData.hpp">
+      <Filter>Header Files\golf\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\server\ServerState.hpp">
+      <Filter>Header Files\golf\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\CommonConsts.hpp">
+      <Filter>Header Files\golf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\ClientPacketData.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\MenuState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\SharedStateData.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\GolfState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\CommandIDs.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\GameConsts.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\ErrorState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\Utility.hpp">
+      <Filter>Header Files\golf\shared</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\HoleData.hpp">
+      <Filter>Header Files\golf\shared</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\BallSystem.hpp">
+      <Filter>Header Files\golf\server\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\InterpolationSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\CircularBuffer.hpp">
+      <Filter>Header Files\golf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\PlayerColours.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\InputParser.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\InputBinding.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\MessageIDs.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\Clubs.hpp">
+      <Filter>Header Files\golf\shared</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\Terrain.hpp">
+      <Filter>Header Files\golf\shared</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\TerrainBuilder.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\PacketIDs.hpp">
+      <Filter>Header Files\golf\shared</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\PoissonDisk.hpp">
+      <Filter>Header Files\golf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\MenuConsts.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\TextAnimCallback.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\PlayerAvatar.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\ClientCollisionSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\ScoreStrings.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\Billboard.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\GolfCartSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\OptionsState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\PauseState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\ParticleDirector.hpp">
+      <Filter>Header Files\golf\client\directors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\GolfParticleDirector.hpp">
+      <Filter>Header Files\golf\client\directors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SplashScreenState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\SoundEffectsDirector.hpp">
+      <Filter>Header Files\golf\client\directors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\GolfSoundDirector.hpp">
+      <Filter>Header Files\golf\client\directors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\TutorialState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\RandNames.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\MenuSoundDirector.hpp">
+      <Filter>Header Files\golf\client\directors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\TutorialDirector.hpp">
+      <Filter>Header Files\golf\client\directors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\CameraFollowSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\KeyboardState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\CollisionMesh.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\DebugDraw.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\FpsCameraSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\PracticeState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\DrivingState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\DrivingRangeDirector.hpp">
+      <Filter>Header Files\golf\client\directors</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\LeaderboardTexture.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\spooky2.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\PuttingState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DefaultAchievements.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\NotificationSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\TrophyDisplaySystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\CloudSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\ClubhouseState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\MenuCallbacks.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\server\ServerBilliardsState.hpp">
+      <Filter>Header Files\golf\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\BilliardsState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\BilliardsSystem.hpp">
+      <Filter>Header Files\golf\server\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\server\BilliardsDirector.hpp">
+      <Filter>Header Files\golf\server\directors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\server\EightballDirector.hpp">
+      <Filter>Header Files\golf\server\directors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\BilliardsInput.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\BilliardsClientCollision.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\BilliardsSoundDirector.hpp">
+      <Filter>Header Files\golf\client\directors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\StudioCameraSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\TrophyState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\server\NineballDirector.hpp">
+      <Filter>Header Files\golf\server\directors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\server\SnookerDirector.hpp">
+      <Filter>Header Files\golf\server\directors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\PocketBallSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\VatFile.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\CPUGolfer.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\VatAnimationSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\BeaconCallback.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\Networking.hpp">
+      <Filter>Header Files\golf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\server\Networking.hpp">
+      <Filter>Header Files\golf\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\SpectatorSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\Path.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\PropFollowSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rss\Newsfeed.hpp">
+      <Filter>Header Files\rss</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rss\pugiconfig.hpp">
+      <Filter>Header Files\rss</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rss\pugixml.hpp">
+      <Filter>Header Files\rss</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\NewsState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\Treeset.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\editor\BushState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\SpectatorAnimCallback.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\PlaylistState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\MessageOverlayState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\NameScrollSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\FloatingTextSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\CreditsState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\EventOverlay.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\Swingput.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\MiniBallSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\TerrainDepthmap.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\RayResultCallback.hpp">
+      <Filter>Header Files\golf\shared</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\CallbackData.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\TerrainChunks.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\BallAnimationSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\UnlockState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\UnlockItems.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\MinimapZoom.hpp">
+      <Filter>Header Files\golf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\ProfileState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\PlayerData.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\BallTrail.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\XPAwardStrings.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sqlite\SqliteState.hpp">
+      <Filter>Header Files\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sqlite\ProfileDB.hpp">
+      <Filter>Header Files\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\LeaderboardState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\server\CPUStats.hpp">
+      <Filter>Header Files\golf\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImTheme.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionNumber.hpp">
+      <Filter>Header Files\golf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\StatsState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\MapOverviewState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\M3UPlaylist.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\ProgressIcon.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\GcState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\TextChat.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\League.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\LeagueState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\BilliardsSystemReact.hpp">
+      <Filter>Header Files\golf\server\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\TableData.hpp">
+      <Filter>Header Files\golf\shared</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\LightAnimationSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\WeatherAnimationSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\WeatherDirector.hpp">
+      <Filter>Header Files\golf\server\directors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\PlayerManagementState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\ScoreType.hpp">
+      <Filter>Header Files\golf\shared</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\ChunkVisSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runner\EndlessDrivingState.hpp">
+      <Filter>Header Files\endless</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runner\EndlessAttractState.hpp">
+      <Filter>Header Files\endless</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runner\EndlessPauseState.hpp">
+      <Filter>Header Files\endless</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runner\Track.hpp">
+      <Filter>Header Files\endless</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runner\TrackCamera.hpp">
+      <Filter>Header Files\endless</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runner\TrackSegment.hpp">
+      <Filter>Header Files\endless</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runner\TrackSprite.hpp">
+      <Filter>Header Files\endless</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runner\EndlessConsts.hpp">
+      <Filter>Header Files\endless</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runner\CarSystem.hpp">
+      <Filter>Header Files\endless</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runner\EndlessMessages.hpp">
+      <Filter>Header Files\endless</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runner\EndlessSoundDirector.hpp">
+      <Filter>Header Files\endless</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runner\Player.hpp">
+      <Filter>Header Files\endless</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runner\EndlessShared.hpp">
+      <Filter>Header Files\endless</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\Career.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\FreePlayState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\CareerState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\SharedCourseData.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\Thumbsticks.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\server\ServerVoice.hpp">
+      <Filter>Header Files\golf\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\VoiceChat.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\LeagueNames.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\ClubModifiers.hpp">
+      <Filter>Header Files\golf\shared</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\ButtonHoldSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\AvatarRotationSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\FireworksSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scrub\ScrubAttractState.hpp">
+      <Filter>Header Files\scrub</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scrub\ScrubBackgroundState.hpp">
+      <Filter>Header Files\scrub</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scrub\ScrubGameState.hpp">
+      <Filter>Header Files\scrub</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scrub\ScrubPauseState.hpp">
+      <Filter>Header Files\scrub</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scrub\ScrubSoundDirector.hpp">
+      <Filter>Header Files\scrub</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scrub\ScrubConsts.hpp">
+      <Filter>Header Files\scrub</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scrub\ScrubSharedData.hpp">
+      <Filter>Header Files\scrub</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scrub\ScrubPhysicsSystem.hpp">
+      <Filter>Header Files\scrub</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scrub\ScrubParticleDirector.hpp">
+      <Filter>Header Files\scrub</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sunclock.hpp">
+      <Filter>Header Files\golf\client\time of day</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LatLong.hpp">
+      <Filter>Header Files\golf\client\time of day</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\TimeOfDay.hpp">
+      <Filter>Header Files\golf\client\time of day</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\RopeSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\LightmapProjectionSystem.hpp">
+      <Filter>Header Files\golf\client\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\Tournament.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\TournamentState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\ClubModels.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXBase64.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXBench.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXCancellationRequest.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXConnectionState.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXDNSLookup.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXExponentialBackoff.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXGetFreePort.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXGzipCodec.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXHttp.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXHttpClient.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXHttpServer.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXNetSystem.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXProgressCallback.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXSelectInterrupt.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXSelectInterruptEvent.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXSelectInterruptFactory.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXSelectInterruptPipe.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXSetThreadName.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXSocket.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXSocketConnect.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXSocketFactory.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXSocketServer.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXSocketTLSOptions.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXStrCaseCompare.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXUdpSocket.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXUniquePtr.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXUrlParser.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXUserAgent.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXUtf8Validator.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXUuid.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocket.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketCloseConstants.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketCloseInfo.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketErrorInfo.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketHandshake.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketHandshakeKeyGen.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketHttpHeaders.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketInitResult.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketMessage.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketMessageType.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketOpenInfo.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketPerMessageDeflate.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketPerMessageDeflateCodec.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketPerMessageDeflateOptions.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketProxyServer.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketSendData.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketSendInfo.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketServer.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketTransport.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sockets\IXWebSocketVersion.h">
+      <Filter>Header Files\websocket</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WebsocketServer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\CoinSystem.hpp">
+      <Filter>Header Files\golf\server\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\Inventory.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\ShopState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\SharedProfileData.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\XPValues.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\ClubInfoState.hpp">
+      <Filter>Header Files\golf\client\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\BannerTexture.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\golf\AvatarAnimation.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlayerGuide.hpp">
+      <Filter>Header Files\golf\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sportsball\SBallBackgroundState.hpp">
+      <Filter>Header Files\sportsball</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sportsball\SBallGameState.hpp">
+      <Filter>Header Files\sportsball</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sportsball\SBallPhysicsSystem.hpp">
+      <Filter>Header Files\sportsball</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sportsball\BallType.hpp">
+      <Filter>Header Files\sportsball</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sportsball\SBallConsts.hpp">
+      <Filter>Header Files\sportsball</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sportsball\SBallAttractState.hpp">
+      <Filter>Header Files\sportsball</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scrub\TabData.hpp">
+      <Filter>Header Files\scrub</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sportsball\SballParticleDirector.hpp">
+      <Filter>Header Files\sportsball</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sportsball\SBallSoundDirector.hpp">
+      <Filter>Header Files\sportsball</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sportsball\BackgroundPhysicsSystem.hpp">
+      <Filter>Header Files\sportsball</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Colordome-32.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\golf\OptionsEnum.inl">
+      <Filter>Header Files\golf\client\states</Filter>
+    </None>
+    <None Include="src\golf\MenuEnum.inl">
+      <Filter>Header Files\golf\client\states</Filter>
+    </None>
+    <None Include="src\golf\ProfileEnum.inl">
+      <Filter>Header Files\golf\client\states</Filter>
+    </None>
+    <None Include="src\golf\shaders\BeaconShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\BillboardShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\CelShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\CloudShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\CompositeShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\GlowShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\MinimapShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\PaletteSwap.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\PointLightShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\PostProcess.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\ShaderIncludes.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\ShadowMapping.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\TerrainShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\TransitionShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\TreeShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\TutorialShaders.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\TVShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\UnlockShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\WaterShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\WireframeShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\Glass.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\Blur.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\LensFlare.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\Weather.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\scrub\Shaders.inl">
+      <Filter>Header Files\scrub</Filter>
+    </None>
+    <None Include="src\golf\shaders\Lantern.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\RoidShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\EmissiveShader.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\ShopEnum.inl">
+      <Filter>Header Files\golf\client\states</Filter>
+    </None>
+    <None Include="src\golf\shaders\ShopItems.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\Hole.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\Hologram.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+    <None Include="src\golf\shaders\TerrainMaterials.inl">
+      <Filter>Header Files\golf\client\shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="golf.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{f3bf3311-ba22-40ec-abf5-624ec4310cf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\TL">
+      <UniqueIdentifier>{4c6a8ab7-0ecc-4bba-a341-78a5b5167fca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\SDL2-android\src\main\android\SDL_android_main.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\MyApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\ColourSystem.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\MainState.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\MenuMain.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\MenuOptions.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\MenuScores.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\GameState.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\DriftSystem.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\RotateSystem.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\SliderSystem.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\PostRadial.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\LoadingScreen.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\TerrainChunk.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\ChunkBuilder.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\RockFallSystem.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\RandomTranslation.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\VelocitySystem.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\PlayerDirector.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\BackgroundDirector.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\BackgroundSystem.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\ItemsDirector.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\ItemSystem.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\NpcSystem.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\NpcDirector.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\PlayerSystem.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\PlayerWeaponsSystem.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\MenuMapSelect.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\NpcWeaponSystem.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\ExplosionSystem.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\HudItems.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\HudDirector.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\BuddySystem.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\EmpSystem.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\GameOverState.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\PauseState.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\RoundEndState.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testwin\src\BossSystem.cpp">
+      <Filter>src\TL</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

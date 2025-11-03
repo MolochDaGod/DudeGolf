@@ -1,0 +1,2735 @@
+/*-----------------------------------------------------------------------
+
+Matt Marchant 2020 - 2025
+http://trederia.blogspot.com
+
+Super Video Golf - zlib licence.
+
+This software is provided 'as-is', without any express or
+implied warranty.In no event will the authors be held
+liable for any damages arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute
+it freely, subject to the following restrictions :
+
+1. The origin of this software must not be misrepresented;
+you must not claim that you wrote the original software.
+If you use this software in a product, an acknowledgment
+in the product documentation would be appreciated but
+is not required.
+
+2. Altered source versions must be plainly marked as such,
+and must not be misrepresented as being the original software.
+
+3. This notice may not be removed or altered from any
+source distribution.
+
+-----------------------------------------------------------------------*/
+
+#include "GolfGame.hpp"
+#include "LoadingScreen.hpp"
+#include "SplashScreenState.hpp"
+#include "icon.hpp"
+#include "Achievements.hpp"
+#include "ImTheme.hpp"
+#include "M3UPlaylist.hpp"
+#include "WebsocketServer.hpp"
+#include "rss/pugixml.hpp"
+
+#include "golf/MenuState.hpp"
+#include "golf/GolfState.hpp"
+#include "golf/ShopState.hpp"
+#include "golf/BilliardsState.hpp"
+#include "golf/ErrorState.hpp"
+#include "golf/OptionsState.hpp"
+#include "golf/PauseState.hpp"
+#include "golf/TutorialState.hpp"
+#include "golf/KeyboardState.hpp"
+#include "golf/PracticeState.hpp"
+#include "golf/CareerState.hpp"
+#include "golf/TournamentState.hpp"
+#include "golf/DrivingState.hpp"
+#include "golf/ClubhouseState.hpp"
+#include "golf/LeagueState.hpp"
+#include "golf/GcState.hpp"
+#include "golf/MessageOverlayState.hpp"
+#include "golf/TrophyState.hpp"
+#include "golf/NewsState.hpp"
+#include "golf/PlaylistState.hpp"
+#include "golf/PlayerManagementState.hpp"
+#include "golf/CreditsState.hpp"
+#include "golf/UnlockState.hpp"
+#include "golf/ProfileState.hpp"
+#include "golf/LeaderboardState.hpp"
+#include "golf/StatsState.hpp"
+#include "golf/FreePlayState.hpp"
+#include "golf/MapOverviewState.hpp"
+#include "golf/EventOverlay.hpp"
+#include "golf/MenuConsts.hpp"
+#include "golf/GameConsts.hpp"
+#include "golf/MessageIDs.hpp"
+#include "golf/PacketIDs.hpp"
+#include "golf/UnlockItems.hpp"
+#include "golf/Clubs.hpp"
+#include "golf/ClubInfoState.hpp"
+#include "golf/XPAwardStrings.hpp"
+
+#include "editor/BushState.hpp"
+#include "sqlite/SqliteState.hpp"
+#include "runner/EndlessAttractState.hpp"
+#include "runner/EndlessDrivingState.hpp"
+#include "runner/EndlessPauseState.hpp"
+#include "runner/EndlessShared.hpp"
+#include "scrub/ScrubAttractState.hpp"
+#include "scrub/ScrubBackgroundState.hpp"
+#include "scrub/ScrubGameState.hpp"
+#include "scrub/ScrubPauseState.hpp"
+
+#include "sportsball/SBallBackgroundState.hpp"
+#include "sportsball/SBallAttractState.hpp"
+#include "sportsball/SBallGameState.hpp"
+
+#include "ErrorCheck.hpp"
+
+#include <AchievementIDs.hpp>
+#include <AchievementStrings.hpp>
+
+#ifdef USE_GNS
+#include <AchievementsImpl.hpp>
+#include <Social.hpp>
+#include <Discord.hpp>
+#endif
+#ifdef USE_WORKSHOP
+#include <WorkshopState.hpp>
+#endif
+#include <Content.hpp>
+
+//#define NO_PROF
+
+#include <crogine/audio/AudioMixer.hpp>
+#include <crogine/core/Clock.hpp>
+#include <crogine/core/Message.hpp>
+#include <crogine/core/ConfigFile.hpp>
+#include <crogine/core/SysTime.hpp>
+#include <crogine/gui/Gui.hpp>
+#include <crogine/graphics/SpriteSheet.hpp>
+#include <crogine/detail/Types.hpp>
+#include <crogine/ecs/systems/RenderSystem2D.hpp>
+
+#include <crogine/util/Network.hpp>
+#include <crogine/util/Random.hpp>
+#include <crogine/util/String.hpp>
+
+#include <filesystem>
+
+using namespace cl;
+
+namespace
+{
+#include "golf/shaders/TutorialShaders.inl"
+#include "golf/shaders/TerrainShader.inl"
+#include "golf/shaders/BeaconShader.inl"
+#include "golf/shaders/PostProcess.inl"
+#include "golf/shaders/ShaderIncludes.inl"
+#include "golf/RandNames.hpp"
+
+#ifdef NO_PROF
+    constexpr bool safeMode = true;
+#else
+    bool safeMode = false;
+#endif
+
+    struct HelpNav final
+    {
+        std::int32_t chapterCount = 0;
+        std::int32_t scrollIndex = 0;
+        std::int32_t targetIndex = 0;
+
+        std::int32_t selectedScroll = 0;
+
+        bool wantsScroll = false;
+
+        float manualScroll = 0.f;
+        float currTime = 0.f;
+        static constexpr float ScrollTime = 0.025f;
+        static constexpr float ScrollAmount = 12.f;
+
+    }helpNav;
+
+    els::SharedStateData elsShared;
+
+    struct ShaderDescription final
+    {
+        const char* fragmentString = nullptr;
+        std::string description;
+        std::string toolTip;
+
+        ShaderDescription(const char* frag, const std::string& desc, const std::string& tip)
+            : fragmentString(frag), description(desc), toolTip(tip) {}
+    };
+
+    const std::string TerminalDistorted = "#define DISTORTION\n" + TerminalFragment;
+
+    const std::array PostShaders =
+    {
+        ShaderDescription(TerminalFragment.c_str(), ShaderNames[0], "by Mostly Hairless."),
+        ShaderDescription(TerminalDistorted.c_str(), ShaderNames[1], "by Mostly Hairless."),
+        ShaderDescription(BWFragment.c_str(), ShaderNames[2], "by Mostly Hairless."),
+        ShaderDescription(CRTFragment.c_str(), ShaderNames[3], "PUBLIC DOMAIN CRT STYLED SCAN-LINE SHADER\nby Timothy Lottes"),
+        ShaderDescription(CinematicFragment.c_str(), ShaderNames[4], ""),
+    };
+
+    std::vector<CreditEntry> credits;
+
+    void parseCredits()
+    {
+        cro::ConfigFile file;
+        if (file.loadFromFile("assets/credits.tgl"))
+        {
+            const auto& entries = file.getObjects();
+            for (const auto& entry : entries)
+            {
+                if (entry.getName() == "section")
+                {
+                    auto& creditEntry = credits.emplace_back();
+                    const auto& props = entry.getProperties();
+                    for (const auto& prop : props)
+                    {
+                        const auto& name = prop.getName();
+                        if (name == "title")
+                        {
+                            creditEntry.title = prop.getValue<cro::String>();
+                        }
+                        else if (name == "name")
+                        {
+                            creditEntry.names.emplace_back(prop.getValue<cro::String>());
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+cro::RenderTarget* GolfGame::m_renderTarget = nullptr;
+
+GolfGame::GolfGame()
+    : m_stateStack  ({*this, getWindow()}),
+    //m_cursor        (/*cro::SystemCursor::Hand*/"assets/images/cursor.png", 0, 0),
+    m_activeIndex   (0)
+{
+    //must be set before anything, else cfg is still loaded from default path
+    setApplicationStrings("Trederia", "golf");
+
+    std::fill(m_sharedData.profileIndices.begin(), m_sharedData.profileIndices.end(), 0);
+
+    m_stateStack.registerState<SplashState>(StateID::SplashScreen, m_sharedData);
+    m_stateStack.registerState<KeyboardState>(StateID::Keyboard, m_sharedData);
+    m_stateStack.registerState<NewsState>(StateID::News, m_sharedData);
+    m_stateStack.registerState<MenuState>(StateID::Menu, m_sharedData, m_profileData);
+    m_stateStack.registerState<ProfileState>(StateID::Profile, m_sharedData, m_profileData);
+    m_stateStack.registerState<OptionsState>(StateID::Options, m_sharedData);
+    m_stateStack.registerState<CreditsState>(StateID::Credits, m_sharedData, credits);
+    m_stateStack.registerState<UnlockState>(StateID::Unlock, m_sharedData);
+    m_stateStack.registerState<GolfState>(StateID::Golf, m_sharedData, m_profileData);
+    m_stateStack.registerState<ErrorState>(StateID::Error, m_sharedData);
+    m_stateStack.registerState<PauseState>(StateID::Pause, m_sharedData);
+    m_stateStack.registerState<PlayerManagementState>(StateID::PlayerManagement, m_sharedData);
+    m_stateStack.registerState<TutorialState>(StateID::Tutorial, m_sharedData);
+    m_stateStack.registerState<PracticeState>(StateID::Practice, m_sharedData);
+    m_stateStack.registerState<CareerState>(StateID::Career, m_sharedData);
+    m_stateStack.registerState<TournamentState>(StateID::Tournament, m_sharedData);
+    m_stateStack.registerState<FreePlayState>(StateID::FreePlay, m_sharedData);
+    m_stateStack.registerState<DrivingState>(StateID::DrivingRange, m_sharedData, m_profileData);
+    m_stateStack.registerState<ClubhouseState>(StateID::Clubhouse, m_sharedData, m_profileData, *this);
+    m_stateStack.registerState<BilliardsState>(StateID::Billiards, m_sharedData);
+    m_stateStack.registerState<ShopState>(StateID::Shop, m_sharedData, m_profileData);
+    m_stateStack.registerState<TrophyState>(StateID::Trophy, m_sharedData);
+    m_stateStack.registerState<ClubInfoState>(StateID::ClubInfo, m_sharedData);
+    m_stateStack.registerState<PlaylistState>(StateID::Playlist, m_sharedData);
+    m_stateStack.registerState<LeaderboardState>(StateID::Leaderboard, m_sharedData);
+    m_stateStack.registerState<StatsState>(StateID::Stats, m_sharedData);
+    m_stateStack.registerState<LeagueState>(StateID::League, m_sharedData, m_profileData);
+    m_stateStack.registerState<MapOverviewState>(StateID::MapOverview, m_sharedData);
+    m_stateStack.registerState<BushState>(StateID::Bush, m_sharedData);
+    m_stateStack.registerState<EndlessAttractState>(StateID::EndlessAttract, m_sharedData, elsShared);
+    m_stateStack.registerState<EndlessDrivingState>(StateID::EndlessRunner, m_sharedData, elsShared);
+    m_stateStack.registerState<EndlessPauseState>(StateID::EndlessPause, m_sharedData, elsShared);
+    m_stateStack.registerState<MessageOverlayState>(StateID::MessageOverlay, m_sharedData);
+    m_stateStack.registerState<EventOverlayState>(StateID::EventOverlay);
+    m_stateStack.registerState<GCState>(StateID::GC);
+
+    m_stateStack.registerState<ScrubBackgroundState>(StateID::ScrubBackground, m_minigameData);
+    m_stateStack.registerState<ScrubAttractState>(StateID::ScrubAttract, m_sharedData, m_minigameData);
+    m_stateStack.registerState<ScrubGameState>(StateID::ScrubGame, m_sharedData, m_minigameData);
+    m_stateStack.registerState<ScrubPauseState>(StateID::ScrubPause, m_minigameData);
+
+    m_stateStack.registerState<SBallBackgroundState>(StateID::SBallBackground, m_sharedData, m_minigameData);
+    m_stateStack.registerState<SBallAttractState>(StateID::SBallAttract, m_sharedData, m_minigameData);
+    m_stateStack.registerState<SBallGameState>(StateID::SBallGame, m_sharedData, m_minigameData);
+
+    m_sharedData.courseIndex = courseOfTheMonth();
+
+#ifdef CRO_DEBUG_
+    m_stateStack.registerState<SqliteState>(StateID::SQLite);
+#endif
+
+#ifdef _WIN32
+    assertFileSystem(); //explicitly ensures the property directories are created
+#endif
+
+#ifdef USE_WORKSHOP
+    m_stateStack.registerState<WorkshopState>(StateID::Workshop);
+#endif
+}
+
+//public
+void GolfGame::setSafeModeEnabled(bool sm)
+{
+    safeMode = sm || cro::FileSystem::fileExists("assets/safe_mode.txt");
+}
+
+void GolfGame::handleEvent(const cro::Event& evt)
+{
+    if (m_sharedData.showHelp)
+    {
+        const auto doScroll =
+            [&]()
+            {
+                helpNav.wantsScroll = true;
+                auto* msg = postMessage<SystemEvent>(MessageID::SystemMessage);
+                msg->type = SystemEvent::MenuSwitched;
+            };
+
+        const auto scrollUp = 
+            [&]()
+            {
+                helpNav.targetIndex = (helpNav.selectedScroll + (helpNav.chapterCount - 1)) % helpNav.chapterCount;
+                doScroll();
+            };
+        const auto scrollDown = 
+            [&]()
+            {
+                helpNav.targetIndex = (helpNav.selectedScroll + 1) % helpNav.chapterCount;
+                doScroll();
+            };
+
+        switch (evt.type)
+        {
+        default: break;
+        case SDL_MOUSEBUTTONUP:
+            if (evt.button.button == SDL_BUTTON_RIGHT)
+            {
+                m_sharedData.showHelp = false;
+            }
+            break;
+        case SDL_CONTROLLERBUTTONUP:
+            switch (evt.cbutton.button)
+            {
+            default: break;
+            case cro::GameController::ButtonB:
+                m_sharedData.showHelp = false;
+                break;
+            case cro::GameController::DPadDown:
+                scrollDown();
+                break;
+            case cro::GameController::DPadUp:
+                scrollUp();
+                break;
+            }
+            break;
+        case SDL_KEYUP:
+            switch (evt.key.keysym.sym)
+            {
+            default: break;
+            case SDLK_ESCAPE:
+            case SDLK_BACKSPACE:
+                m_sharedData.showHelp = false;
+                break;
+            case SDLK_DOWN:
+                scrollDown();
+                break;
+            case SDLK_UP:
+                scrollUp();
+                break;
+            }
+            break;
+        }
+        return;
+    }
+
+    switch (evt.type)
+    {
+    default: break;
+    case SDL_MOUSEMOTION:
+        //cro::App::getWindow().setMouseCaptured(false);
+        break;
+    case SDL_KEYUP:
+        switch (evt.key.keysym.sym)
+        {
+        default: break;
+#ifdef CRO_DEBUG_
+        case SDLK_ESCAPE:
+        case SDLK_AC_BACK:
+            App::quit();
+            break;
+        /*case SDLK_KP_PERIOD:
+            m_progressIcon->show(0, 10, 10);
+            break;*/
+#ifndef USE_GNS
+        case SDLK_t:
+            m_achievements->showTest();
+            break;
+#endif
+#endif
+        case SDLK_KP_MINUS:
+            togglePixelScale(m_sharedData, false);
+            break;
+        case SDLK_KP_PLUS:
+            togglePixelScale(m_sharedData, true);
+            break;
+        case SDLK_KP_MULTIPLY:
+            //hmm what was this for???
+            //m_sharedData.sharedResources->fonts.get(FontID::Label).setSmooth(true);
+        {
+            /*ProgressMessage m;
+            m.title = "Credits Awarded";
+            m.message = "Prize Reward: " + std::to_string(2000) + "Cr\nCurrent Balance : " + std::to_string(m_sharedData.inventory.balance) + "Cr";
+            m.type = ProgressMessage::Message;
+            m.audioID = ProgressMessage::Reward;
+            m_progressIcon->queueMessage(m);*/
+        }
+            break;
+        case SDLK_KP_DIVIDE:
+            m_sharedData.showHelp = true;
+            break;
+        }
+        break;
+    }
+    
+    m_stateStack.handleEvent(evt);
+}
+
+void GolfGame::handleMessage(const cro::Message& msg)
+{
+    if (msg.id == cro::Message::StateMessage)
+    {
+        const auto& data = msg.getData<cro::Message::StateEvent>();
+        if (data.action == cro::Message::StateEvent::Popped)
+        {
+            switch (data.id)
+            {
+            default: break;
+            case StateID::ClubInfo:
+                m_sharedData.showClubUpdate = false;
+                [[fallthrough]];
+            case StateID::Options:
+            case StateID::PlayerManagement:
+            case StateID::MessageOverlay:
+                saveSettings();
+                savePreferences();
+                break;
+            }
+        }
+        else if (data.action == cro::Message::StateEvent::Cleared)
+        {
+            savePreferences();
+        }
+    }
+    else if (msg.id == cro::Message::ConsoleMessage)
+    {
+        const auto& data = msg.getData<cro::Message::ConsoleEvent>();
+        if (data.type == cro::Message::ConsoleEvent::Closed)
+        {
+            savePreferences();
+        }
+    }
+    else if (msg.id == cro::Message::WindowMessage)
+    {
+        const auto& data = msg.getData<cro::Message::WindowEvent>();
+        if (data.event == SDL_WINDOWEVENT_SIZE_CHANGED)
+        {
+            if (m_sharedData.usePostProcess)
+            {
+                recreatePostProcess();
+            }
+            //ImGui::GetStyle().ScaleAllSizes(getViewScale());
+            //ImGui::GetIO().FontGlobalScale = getViewScale();
+        }
+    }
+    else if (msg.id == MessageID::SystemMessage)
+    {
+        const auto& data = msg.getData<SystemEvent>();
+        switch (data.type)
+        {
+        default: break;
+        case SystemEvent::RequestOSK:
+            if (m_stateStack.getTopmostState() != StateID::Keyboard)
+            {
+                if (data.data == 1)
+                {
+                    m_sharedData.useOSKBuffer = true;
+                    m_sharedData.OSKBuffer.clear();
+                }
+                else
+                {
+                    m_sharedData.useOSKBuffer = false;
+                }
+                m_stateStack.pushState(StateID::Keyboard);
+            }
+            break;
+        case SystemEvent::PostProcessToggled:
+            if (m_postShader->getGLHandle() != 0)
+            {
+                m_sharedData.usePostProcess = !m_sharedData.usePostProcess;
+
+                auto windowSize = cro::App::getWindow().getSize();
+                if (m_sharedData.usePostProcess)
+                {
+                    recreatePostProcess();
+                    m_renderTarget = m_postBuffer.get();
+                }
+                else
+                {
+                    m_renderTarget = &cro::App::getWindow();
+                }
+
+                //create a fake resize event to trigger any camera callbacks.
+                SDL_Event resizeEvent;
+                resizeEvent.type = SDL_WINDOWEVENT_SIZE_CHANGED;
+                resizeEvent.window.windowID = 0;
+                resizeEvent.window.data1 = windowSize.x;
+                resizeEvent.window.data2 = windowSize.y;
+                SDL_PushEvent(&resizeEvent);
+            }
+            break;
+        case SystemEvent::PostProcessIndexChanged:
+            applyPostProcess();
+            break;
+        }
+    }
+    else if (msg.id == Social::MessageID::SocialMessage)
+    {
+        const auto& data = msg.getData<Social::SocialEvent>();
+        if (data.type == Social::SocialEvent::LevelUp)
+        {
+            switch (data.level)
+            {
+            default: break;
+            case 1:
+                Achievements::awardAchievement(AchievementStrings[AchievementID::GettingStarted]);
+                break;
+            case 10:
+                Achievements::awardAchievement(AchievementStrings[AchievementID::Junior]);
+                break;
+            case 20:
+                Achievements::awardAchievement(AchievementStrings[AchievementID::Amateur]);
+                break;
+            case 30:
+                Achievements::awardAchievement(AchievementStrings[AchievementID::Enthusiast]);
+                break;
+            case 40:
+                Achievements::awardAchievement(AchievementStrings[AchievementID::SemiPro]);
+                break;
+            case 50:
+                Achievements::awardAchievement(AchievementStrings[AchievementID::Pro]);
+                break;
+            }
+        }
+        else if (data.type == Social::SocialEvent::OverlayActivated)
+        {
+            if (data.level != 0)
+            {
+                m_stateStack.pushState(StateID::EventOverlay);
+            }
+        }
+        else if (data.type == Social::SocialEvent::MonthlyProgress)
+        {
+            ProgressMessage m;
+            m.index = data.challengeID;
+            m.progress = data.level;
+            m.total = data.reason;
+            m.type = ProgressMessage::Challenge;
+            m_progressIcon->queueMessage(m);
+
+            if (data.challengeID > -1)
+            {
+                if(data.level == data.reason)
+                {
+                    Social::awardXP(1000, XPStringID::ChallengeComplete);
+                    Achievements::awardAchievement(AchievementStrings[AchievementID::UpForTheChallenge]);
+                }
+                else
+                {
+                    //hmm we don't know what type the challenge is here - we probably want
+                    //to award different values based on whether it's a counter or not
+                    Social::awardXP(/*data.type == Challenge::Counter ? 2 : 10*/2, XPStringID::MonthlyChallenge);
+                }
+            }
+        }
+        else if (data.type == Social::SocialEvent::LeagueProgress)
+        {
+            ProgressMessage m;
+            m.index = data.challengeID;
+            m.progress = data.level;
+            m.total = data.reason;
+            m.type = ProgressMessage::League;
+            m_progressIcon->queueMessage(m);
+
+            //achievement is awarded by League class on completion
+        }
+        else if (data.type == Social::SocialEvent::CreditsAwarded)
+        {
+            m_sharedData.inventory.balance = std::min(MaxCredits, m_sharedData.inventory.balance + data.level);
+            inv::write(m_sharedData.inventory);
+
+            ProgressMessage m;
+            m.title = "Credits Awarded";
+            m.message = "Prize Reward: " + std::to_string(data.level) + "Cr\nCurrent Balance : " + std::to_string(m_sharedData.inventory.balance) + "Cr";
+            m.type = ProgressMessage::Message;
+            m.audioID = ProgressMessage::Reward;
+            m_progressIcon->queueMessage(m);
+        }
+        else if (data.type == Social::SocialEvent::NewClubset)
+        {
+            ProgressMessage m;
+            m.title = inv::Manufacturers[data.level];
+            m.message = data.reason ? "New Ball Model Unlocked" : "New Clubset Model Unlocked";
+            m.type = ProgressMessage::Message;
+            m_progressIcon->queueMessage(m);
+
+            //hacky way of unlocking the ball model
+            if (auto res = std::find_if(m_sharedData.ballInfo.begin(), m_sharedData.ballInfo.end(), 
+                [&m](const SharedStateData::BallInfo& bi)
+                {
+                    return bi.label.find(m.title) != cro::String::InvalidPos;
+                }); 
+                res != m_sharedData.ballInfo.end())
+            {
+                res->locked = false;
+            }
+        }
+        else if (data.type == Social::SocialEvent::AchievementProgress)
+        {
+            ProgressMessage m;
+            m.index = data.challengeID;
+            m.progress = data.level;
+            m.total = data.reason;
+            m.type = ProgressMessage::AchievementProgress;
+            m_progressIcon->queueMessage(m);
+        }
+    }
+    else if (msg.id == cro::Message::SystemMessage)
+    {
+        const auto& data = msg.getData<cro::Message::SystemEvent>();
+        if (data.type == cro::Message::SystemEvent::ScreenshotTaken)
+        {
+            ProgressMessage m;
+            m.title = " ";
+            m.message = "Screenshot Saved.";
+            m.type = ProgressMessage::Message;
+            m.audioID = ProgressMessage::ScreenShot;
+            m_progressIcon->queueMessage(m);
+        }
+    }
+
+    m_stateStack.handleMessage(msg);
+}
+
+void GolfGame::simulate(float dt)
+{
+    if (m_sharedData.showHelp)
+    {
+        const auto scroll = 
+            [&](float dir)
+            {
+                helpNav.currTime += dt;
+                if (helpNav.currTime > HelpNav::ScrollTime)
+                {
+                    helpNav.currTime -= HelpNav::ScrollTime;
+                    helpNav.manualScroll = dir;
+                }
+            };
+
+        if (cro::GameController::getAxisPosition(0, cro::GameController::AxisRightY) > cro::GameController::LeftThumbDeadZoneV)
+        //if(cro::Keyboard::isKeyPressed(SDLK_PAGEUP))
+        {
+            scroll(1.f);
+        }
+        else if (cro::GameController::getAxisPosition(0, cro::GameController::AxisRightY) < -cro::GameController::LeftThumbDeadZoneV)
+        //else if (cro::Keyboard::isKeyPressed(SDLK_PAGEDOWN))
+        {
+            scroll(-1.f);
+        }
+    }
+
+    if (m_sharedData.usePostProcess)
+    {
+        //update optional uniforms (should be -1 if not loaded)
+        static float accum = 0.f;
+        accum += dt;
+
+        glUseProgram(m_postShader->getGLHandle());
+        glUniform1f(m_uniformIDs[UniformID::Time], accum);
+    }
+
+    m_stateStack.simulate(dt);
+
+    Achievements::update();
+    m_progressIcon->update(dt);
+
+    m_sharedData.mumLink->update();
+}
+
+void GolfGame::render()
+{
+    if (m_sharedData.usePostProcess)
+    {
+        m_postBuffer->clear();
+        m_stateStack.render();
+        m_postBuffer->display();
+
+        m_postQuad->draw();
+    }
+    else
+    {
+        m_stateStack.render();
+    }
+
+#ifndef USE_GNS
+    m_achievements->drawOverlay();
+#endif
+    m_progressIcon->draw();
+}
+
+bool GolfGame::initialise()
+{
+    auto path = cro::App::getPreferencePath() + "user/";
+    if (!cro::FileSystem::directoryExists(path))
+    {
+        cro::FileSystem::createDirectory(path);
+    }
+    path = cro::App::getPreferencePath() + "courses/";
+    if (!cro::FileSystem::directoryExists(path))
+    {
+        cro::FileSystem::createDirectory(path);
+    }
+
+
+#if defined USE_GNS
+    m_achievements = std::make_unique<SteamAchievements>(MessageID::AchievementMessage);
+#else
+    m_achievements = std::make_unique<DefaultAchievements>();
+#endif
+    auto initResult = Achievements::init(*m_achievements);
+
+    //in 1.15 we moved user prefs to individual user IDs
+    //so multiple users can have their own profiles on the
+    //same device. This just looks for existing data and
+    //moves it to the current user's dir, in an attempt to
+    //prevent any profile loss.
+    if (initResult)
+    {
+        //we can't assume linux users have a DE to display this
+#ifndef __linux__
+        if (safeMode && !Social::isSteamdeck())
+        {
+            cro::App::getWindow().setFullScreen(false);
+            cro::App::getWindow().setSize({ 800u, 600u });
+
+            std::stringstream msg;
+            msg << "Game loading is currently paused\nso that you may optionally remove\nor backup your profile directory.\n";
+            msg << "Your profile directory is " << Content::getUserContentPath(Content::UserContent::Profile) << "\n";
+            msg << "Press OK when you are ready to continue, or Cancel to quit.";
+
+            if (!cro::FileSystem::showMessageBox("SAFE MODE", msg.str(), cro::FileSystem::OKCancel))
+            {
+                return false;
+            }
+        }
+#endif
+        //however this relies on having successfully
+        //init Steam as we need the uid of the logged on user
+        convertPreferences();
+        
+        for (auto i = 0; i < Content::UserContent::Count; ++i)
+        {
+            const auto path = Content::getUserContentPath(i);
+            if (!cro::FileSystem::directoryExists(path))
+            {
+                cro::FileSystem::createDirectory(path);
+            }
+        }
+
+        //tidy up any stuff left over from workshop tools
+        const auto tempPath = Content::getBaseContentPath() + "temp";
+        if (cro::FileSystem::directoryExists(tempPath))
+        {
+            std::error_code ec;
+            std::filesystem::remove_all(tempPath, ec);
+
+            if (ec)
+            {
+                LogE << ec.message() << std::endl;
+            }
+        }
+    }
+
+    //do this first because if we quit early the preferences will otherwise get overwritten by defaults.
+    loadPreferences();
+
+    if (!initResult)
+    {
+        //no point trying to load the menu if we failed to init.
+        return false;
+    }
+
+    loadAvatars(); //this relies on steam being initialised
+
+    /*if (Social::isSteamdeck())
+    {
+        getWindow().setVsyncEnabled(true);
+    }*/
+
+#ifdef CRO_DEBUG_
+#ifndef USE_GNS
+    m_achievements->clearAchievement(AchievementStrings[AchievementID::IntoOrbit]);
+#endif // !USE_GNS
+#endif
+
+#ifndef USE_GNS
+    m_hostAddresses = cro::Util::Net::getLocalAddresses();
+    if (m_hostAddresses.empty())
+    {
+        cro::Logger::log("No suitable host addresses were found", cro::Logger::Type::Error, cro::Logger::Output::All);
+        return false;
+    }
+    Social::userIcon = cropAvatarImage("assets/images/default_profile.png");
+#endif
+
+    parseCredits();
+    createHowTo();
+
+    registerConsoleTab("Advanced",
+        [&]()
+        {
+            ImGui::Text("Post Process:");
+            bool usePost = m_sharedData.usePostProcess;
+            if (ImGui::Checkbox("PostProcess", &usePost))
+            {
+                //we rely on the message handler to actually
+                //set the shared data property, in case we need to first create the buffer
+
+                //raise a message to resize the post process buffers
+                auto* msg = getMessageBus().post<SystemEvent>(MessageID::SystemMessage);
+                msg->type = SystemEvent::PostProcessToggled;
+            }
+
+            ImGui::PushItemWidth(260.f);
+            if (ImGui::BeginCombo("Shader", PostShaders[m_sharedData.postProcessIndex].description.c_str()))
+            {
+                for (auto i = 0u; i < PostShaders.size(); ++i)
+                {
+                    bool selected = (m_sharedData.postProcessIndex == static_cast<std::int32_t>(i));
+                    if (ImGui::Selectable(PostShaders[i].description.c_str(), selected))
+                    {
+                        m_sharedData.postProcessIndex = static_cast<std::int32_t>(i);
+                    }
+
+                    if (selected)
+                    {
+                        ImGui::SetItemDefaultFocus();
+                    }
+                }
+
+                ImGui::EndCombo();
+            }
+            ImGui::PopItemWidth();
+
+            if (ImGui::IsItemHovered())
+            {
+                ImGui::BeginTooltip();
+                ImGui::Text("%s", PostShaders[m_sharedData.postProcessIndex].toolTip.c_str());
+                ImGui::EndTooltip();
+            }
+
+            if (!m_sharedData.customShaderPath.empty())
+            {
+                ImGui::Text("Custom shader: %s", m_sharedData.customShaderPath.c_str());
+            }
+            else
+            {
+                ImGui::Text("No Custom Shader Loaded.");
+            }
+
+            if (ImGui::Button("Apply"))
+            {
+                applyPostProcess();
+            }
+            if (ImGui::IsItemHovered())
+            {
+                ImGui::BeginTooltip();
+                ImGui::Text("Apply the selected built-in shader.");
+                ImGui::EndTooltip();
+            }
+
+            ImGui::SameLine();
+            if (ImGui::Button("Open"))
+            {
+                auto path = cro::FileSystem::openFileDialogue("", "txt,frag,glsl");
+                std::replace(path.begin(), path.end(), '\\', '/');
+                if (!path.empty())
+                {
+                    cro::RaiiRWops file;
+                    file.file = SDL_RWFromFile(path.c_str(), "r");
+                    if (file.file)
+                    {
+                        auto size = SDL_RWsize(file.file);
+                        std::vector<char> buffer(size);
+                        if (SDL_RWread(file.file, buffer.data(), size, 1))
+                        {
+                            //teminate the string!
+                            buffer.push_back(0);
+                            if (setShader(buffer.data()))
+                            {
+                                m_sharedData.customShaderPath = path;
+                            }
+                            else
+                            {
+                                m_sharedData.customShaderPath.clear();
+                            }
+                        }
+                        else
+                        {
+                            cro::FileSystem::showMessageBox("Error", "Could not read file");
+                        }
+                    }
+                    else
+                    {
+                        cro::FileSystem::showMessageBox("Error", "Failed to open file");
+                    }
+                }
+            }
+            if (ImGui::IsItemHovered())
+            {
+                ImGui::BeginTooltip();
+                ImGui::Text("Open a fragment shader from a text file.");
+                ImGui::EndTooltip();
+            }
+
+            ImGui::NewLine();
+
+            /*ImVec4 c = m_sharedData.mumLink->connected() ? ImVec4(0.f, 1.f, 0.f, 1.f) : ImVec4(1.f, 0.f, 0.f, 1.f);
+            ImGui::ColorButton("##mumble", c, 0, { 24.f,24.f });
+            ImGui::SameLine();
+            ImGui::Text("Mumble Connection");
+            ImGui::SameLine();
+            if (ImGui::Button("Reconnect"))
+            {
+                m_sharedData.mumLink->connect();
+            }*/
+        });
+
+    registerCommand("log_benchmark", 
+        [&](const std::string& state)
+        {
+            if (state.empty())
+            {
+                cro::Console::print(m_sharedData.logBenchmarks ? "Logging is enabled" : "Logging is disabled");
+                cro::Console::print("Use log_benchmark <true|false> to toggle");
+            }
+            else
+            {
+                if (state == "true")
+                {
+                    m_sharedData.logBenchmarks = true;
+                    cro::Console::print("Benchmarks will be logged to " + cro::App::getPreferencePath() + "benchmark/");
+                }
+                else if (state == "false")
+                {
+                    m_sharedData.logBenchmarks = false;
+                    cro::Console::print("Benchmark logging disabled");
+                }
+                else
+                {
+                    cro::Console::print("Use log_benchmark <true|false> to toggle");
+                }
+            }
+        });
+
+    registerCommand("show_userdir",
+        [](const std::string&)
+        {
+            //this assumes that the directory was successfully creates already...
+            cro::Util::String::parseURL(Content::getBaseContentPath());
+        });
+
+    registerCommand("reset_leagues", 
+        [&](const std::string&)
+        {
+            if (cro::FileSystem::showMessageBox("Information", "This will reset the leagues and close the game", cro::FileSystem::ButtonType::OK, cro::FileSystem::IconType::Warning))
+            {
+                League l(LeagueRoundID::Club, m_sharedData);
+                l.reset();
+
+                Career::instance(m_sharedData).reset();
+
+                Social::setUnlockStatus(Social::UnlockType::CareerAvatar, 0);
+                Social::setUnlockStatus(Social::UnlockType::CareerBalls, 0);
+                Social::setUnlockStatus(Social::UnlockType::CareerHair, 0);
+                Social::setUnlockStatus(Social::UnlockType::CareerPosition, 0);
+                
+                cro::Clock c;
+                while (c.elapsed().asSeconds() < 1.5f) {}
+                cro::App::quit();
+            }
+        });
+
+    cro::Console::addConvar("shuffle_music", "false", "If true then custom music playlists will be shuffled when loaded.");
+
+    registerCommand("cl_shuffle_music",
+        [&](const std::string& param)
+        {
+            if (cro::Util::String::toLower(param) == "true")
+            {
+                cro::Console::setConvarValue("shuffle_music", true);
+                cro::Console::print("cl_shuffle_music set to TRUE");
+            }
+            else if (cro::Util::String::toLower(param) == "false")
+            {
+                cro::Console::setConvarValue("shuffle_music", false);
+                cro::Console::print("cl_shuffle_music set to FALSE");
+            }
+            else if (param.empty())
+            {
+                bool b = cro::Console::getConvarValue<bool>("shuffle_music");
+                if (b)
+                {
+                    cro::Console::print("cl_shuffle_music set to TRUE");
+                }
+                else
+                {
+                    cro::Console::print("cl_shuffle_music set to FALSE");
+                }
+            }
+            else
+            {
+                cro::Console::print(param + ": invalid argument. Set to TRUE or FALSE");
+            }
+        });
+
+    registerCommand("connect_voice", 
+        [&](const std::string&)
+        {
+            if (m_sharedData.clientConnection.connected)
+            {
+                if (m_sharedData.hosting)
+                {
+#ifdef USE_GNS
+                    if (m_sharedData.serverInstance.addLocalVoiceConnection(m_sharedData.voiceConnection.netClient))
+                    {
+                        m_sharedData.voiceConnection.connected = true;
+                        cro::Console::print("Connected to local voice server");
+                    }
+                    else
+                    {
+                        m_sharedData.voiceConnection.connected = false;
+                        cro::Console::print("Could not connect to local voice server");
+                    }
+#else
+                    m_sharedData.voiceConnection.connected = m_sharedData.voiceConnection.netClient.connect("255.255.255.255", ConstVal::VoicePort);
+                    if (!m_sharedData.voiceConnection.connected)
+                    {
+                        m_sharedData.voiceConnection.connected = m_sharedData.voiceConnection.netClient.connect("127.0.0.1", ConstVal::VoicePort);
+                    }
+#endif
+                }
+                else
+                {
+#ifdef USE_GNS
+                    if (m_sharedData.voiceConnection.netClient.connect(CSteamID(uint64(m_sharedData.clientConnection.hostID)), ConstVal::VoicePort))
+                    {
+                        m_sharedData.voiceConnection.connected = true;
+                        m_sharedData.voiceConnection.hostID = m_sharedData.clientConnection.hostID;
+                        cro::Console::print("Connected to remote voice server");
+                    }
+                    else
+                    {
+                        m_sharedData.voiceConnection.connected = false;
+                        cro::Console::print("Could not connect to remote voice server");
+                    }
+#else
+                    m_sharedData.voiceConnection.connected = m_sharedData.voiceConnection.netClient.connect(m_sharedData.targetIP.toAnsiString(), ConstVal::VoicePort);
+#endif
+                }
+            }
+            else
+            {
+                cro::Console::print("Not connected to a server");
+            }
+        });
+
+    registerCommand("disconnect_voice", [&](const std::string&) 
+        {
+            if (m_sharedData.voiceConnection.connected)
+            {
+                m_sharedData.voiceConnection.netClient.disconnect();
+                m_sharedData.voiceConnection.connected = false;
+                m_sharedData.voiceConnection.connectionID = ConstVal::NullValue;
+                cro::Console::print("Disconnected from voice server");
+            }        
+        });
+
+    registerCommand("show_websock", [](const std::string&)
+        {
+            cro::Console::print(WebSock::getStatus());
+        });
+
+    registerCommand("scrub", 
+        [&](const std::string&)
+        {
+            m_stateStack.clearStates();
+            m_stateStack.pushState(StateID::ScrubBackground);
+        });
+
+#ifdef USE_GNS
+    registerCommand("discord_connect",
+        [](const std::string&) 
+        {
+            Discord::connect(); 
+        });
+
+    registerCommand("discord_disconnect",
+        [](const std::string&) 
+        {
+            Discord::disconnect(); 
+        });
+#endif
+
+    getWindow().setLoadingScreen<LoadingScreen>(m_sharedData);
+    getWindow().setTitle("Super Video Golf - " + StringVer);
+    getWindow().setIcon(icon);
+    m_renderTarget = &getWindow();
+
+    cro::AudioMixer::setLabel("Menu Music", MixerChannel::Music);
+    cro::AudioMixer::setLabel("Effects", MixerChannel::Effects);
+    cro::AudioMixer::setLabel("Menu", MixerChannel::Menu);
+    cro::AudioMixer::setLabel("Announcer", MixerChannel::Voice);
+    cro::AudioMixer::setLabel("Vehicles", MixerChannel::Vehicles);
+    cro::AudioMixer::setLabel("Environment", MixerChannel::Environment);
+    cro::AudioMixer::setLabel("Game Music", MixerChannel::UserMusic);
+    cro::AudioMixer::setLabel("Text To Speech", MixerChannel::TextToSpeech);
+
+    m_sharedData.clientConnection.netClient.create(ConstVal::MaxClients);
+    m_sharedData.sharedResources = std::make_unique<cro::ResourceCollection>();
+
+    //texture used to hold name tags
+    for (auto& t : m_sharedData.nameTextures)
+    {
+        t.create(LabelTextureSize.x, LabelTextureSize.y, false);
+    }
+
+    //preload resources which will be used in dynamically loaded menus
+    //TODO now we switched to pre-cached states this is probably unnecessary
+    //though it won't do any harm
+    initFonts();
+
+    for (const auto& [name, str] : IncludeMappings)
+    {
+        m_sharedData.sharedResources->shaders.addInclude(name, str);
+    }
+    static const std::string MapSizeString = "const vec2 MapSize = vec2(" + std::to_string(MapSize.x) + ".0, " + std::to_string(MapSize.y) + ".0); ";
+    m_sharedData.sharedResources->shaders.addInclude("MAP_SIZE", MapSizeString.c_str());
+
+    m_sharedData.sharedResources->shaders.loadFromString(ShaderID::TutorialSlope, TutorialVertexShader, TutorialSlopeShader);
+    m_sharedData.sharedResources->shaders.loadFromString(ShaderID::Beacon, BeaconVertex, BeaconFragment, "#define SPRITE\n");
+    m_sharedData.sharedResources->shaders.loadFromString(ShaderID::FlagPreview, cro::RenderSystem2D::getDefaultVertexShader(), FlagFrag, "#define TEXTURED\n");
+
+    m_sharedData.resolutions = getWindow().getAvailableResolutions();
+    std::reverse(m_sharedData.resolutions.begin(), m_sharedData.resolutions.end());
+    for (auto r : m_sharedData.resolutions)
+    {
+        auto& str = m_sharedData.resolutionStrings.emplace_back();
+        str += std::to_string(r.x) + " x " + std::to_string(r.y);
+    }
+
+    cro::SpriteSheet s;
+    s.loadFromFile("assets/golf/sprites/options.spt", m_sharedData.sharedResources->textures);
+    s.loadFromFile("assets/golf/sprites/facilities_menu.spt", m_sharedData.sharedResources->textures);
+    s.loadFromFile("assets/golf/sprites/scoreboard.spt", m_sharedData.sharedResources->textures);
+    s.loadFromFile("assets/golf/sprites/controller_buttons.spt", m_sharedData.sharedResources->textures);
+    s.loadFromFile("assets/golf/sprites/unlocks.spt", m_sharedData.sharedResources->textures);
+    s.loadFromFile("assets/golf/sprites/tutorial.spt", m_sharedData.sharedResources->textures);
+    s.loadFromFile("assets/sprites/osk.spt", m_sharedData.sharedResources->textures);
+
+    cro::ModelDefinition md(*m_sharedData.sharedResources);
+    md.loadFromFile("assets/golf/models/trophies/trophy01.cmt");
+    md.loadFromFile("assets/golf/models/trophies/trophy02.cmt");
+    md.loadFromFile("assets/golf/models/trophies/trophy03.cmt");
+    md.loadFromFile("assets/golf/models/trophies/trophy04.cmt");
+    md.loadFromFile("assets/golf/models/trophies/trophy05.cmt");
+    md.loadFromFile("assets/golf/models/trophies/trophy06.cmt");
+    md.loadFromFile("assets/golf/models/trophies/trophy07.cmt");
+    md.loadFromFile("assets/golf/models/trophies/trophy08.cmt");
+    md.loadFromFile("assets/golf/models/trophies/trophy09.cmt");
+    md.loadFromFile("assets/golf/models/trophies/level01.cmt");
+    md.loadFromFile("assets/golf/models/trophies/level10.cmt");
+    md.loadFromFile("assets/golf/models/trophies/level20.cmt");
+    md.loadFromFile("assets/golf/models/trophies/level30.cmt");
+    md.loadFromFile("assets/golf/models/trophies/level40.cmt");
+    md.loadFromFile("assets/golf/models/trophies/level50.cmt");
+
+    for (const auto& str : ul::ModelPaths) //models displayed in 'unlock' state
+    {
+        md.loadFromFile(str);
+    }
+
+    //icon for challenge progress
+    m_progressIcon = std::make_unique<ProgressIcon>(m_sharedData.sharedResources->fonts.get(FontID::Label));
+
+    //set up the post process
+    auto windowSize = cro::App::getWindow().getSize();
+    m_postBuffer = std::make_unique<cro::RenderTexture>();
+    m_postBuffer->create(windowSize.x, windowSize.y, false);
+    m_postShader = std::make_unique<cro::Shader>();
+    if (!m_sharedData.customShaderPath.empty())
+    {
+        cro::RaiiRWops file;
+        file.file = SDL_RWFromFile(m_sharedData.customShaderPath.c_str(), "r");
+        if (file.file)
+        {
+            auto size = SDL_RWsize(file.file);
+            std::vector<char> buffer(size);
+            if (SDL_RWread(file.file, buffer.data(), size, 1))
+            {
+                //teminate the string!
+                buffer.push_back(0);
+                if (!m_postShader->loadFromString(PostVertex, buffer.data()))
+                {
+                    m_postShader->loadFromString(PostVertex, PostShaders[m_sharedData.postProcessIndex].fragmentString);
+                }
+            }
+            else
+            {
+                LogE << "Failed reading " << m_sharedData.customShaderPath << std::endl;
+                m_sharedData.customShaderPath.clear();
+            }
+        }
+        else
+        {
+            LogE << "Could not open " << m_sharedData.customShaderPath << std::endl;
+            m_sharedData.customShaderPath.clear();
+        }
+    }
+    else
+    {
+        m_postShader->loadFromString(PostVertex, PostShaders[m_sharedData.postProcessIndex].fragmentString);
+    }
+    auto shaderRes = glm::vec2(windowSize);
+    glCheck(glUseProgram(m_postShader->getGLHandle()));
+    glCheck(glUniform2f(m_postShader->getUniformID("u_resolution"), shaderRes.x, shaderRes.y));
+    float scale = getViewScale(shaderRes);
+    glCheck(glUniform2f(m_postShader->getUniformID("u_scale"), scale, scale));
+    m_uniformIDs[UniformID::Time] = m_postShader->getUniformID("u_time");
+    
+    m_postQuad = std::make_unique<cro::SimpleQuad>();
+    m_postQuad->setTexture(m_postBuffer->getTexture());
+    m_postQuad->setShader(*m_postShader);
+
+    m_activeIndex = m_sharedData.postProcessIndex;
+
+#ifdef CRO_DEBUG_
+    m_stateStack.pushState(StateID::Menu);
+    //m_stateStack.pushState(StateID::Bush);
+    //m_stateStack.pushState(StateID::Clubhouse);
+    //m_stateStack.pushState(StateID::SplashScreen);
+    //m_stateStack.pushState(StateID::Shop);
+    //m_stateStack.pushState(StateID::SBallBackground);
+    //m_stateStack.pushState(StateID::EndlessAttract);
+    //m_stateStack.pushState(StateID::Workshop);
+#else
+    m_stateStack.pushState(StateID::SplashScreen);
+    //m_stateStack.pushState(StateID::Clubhouse);
+#endif
+
+    applyImGuiStyle(m_sharedData);
+
+    if (m_sharedData.webSocket)
+    {
+        WebSock::start(m_sharedData.webPort);
+    }
+
+#ifdef USE_GNS
+    //if (m_sharedData.useDiscord)
+    /*{
+        Discord::connect();
+    }*/
+    //Discord::disconnect();
+#endif
+
+    m_sharedData.mumLink = std::make_unique<cro::MumbleLink>(cro::String("Super Video Golf"), cro::String("Owen's Finest."));
+    m_sharedData.mumLink->setIdentity(m_profileData.playerProfiles[0].playerData.name);
+    //m_sharedData.mumLink->connect();
+
+    //cro::App::getWindow().setCursor(&m_cursor);
+
+    return true;
+}
+
+void GolfGame::finalise()
+{
+    m_sharedData.clientConnection.netClient.disconnect();
+    m_sharedData.serverInstance.stop(); //this waits for any threads to finish first.
+
+    savePreferences();
+
+    m_stateStack.clearStates();
+    m_stateStack.simulate(0.f);
+
+    cro::App::unloadPlugin(m_stateStack);
+
+    for (auto& c : m_sharedData.avatarTextures)
+    {
+        for (auto& t : c)
+        {
+            t = {};
+        }
+    }
+
+    for (auto& t : m_sharedData.nameTextures)
+    {
+        t = {};
+    }
+
+    Achievements::shutdown();
+
+    if (m_minigameData.fonts)
+    {
+        m_minigameData.fonts.reset();
+    }
+
+    m_sharedData.sharedResources.reset();
+    m_postQuad.reset();
+    m_postShader.reset();
+    m_postBuffer.reset();
+    m_achievements.reset();
+
+    getWindow().setCursor(nullptr);
+}
+
+void GolfGame::initFonts()
+{
+    m_sharedData.sharedResources->fonts.load(FontID::UI, "assets/golf/fonts/IBM_CGA.ttf");
+    m_sharedData.sharedResources->fonts.load(FontID::Info, "assets/golf/fonts/MCPixel.otf");
+    m_sharedData.sharedResources->fonts.load(FontID::Label, "assets/golf/fonts/ProggyClean.ttf");
+
+    m_sharedData.sharedResources->fonts.load(FontID::OSK, "assets/fonts/VeraMono.ttf");
+
+    //international fonts - these mappings are those used in DearImGui
+    cro::FontAppendmentContext ctx;
+    static const std::array FontMappings =
+    {
+        std::make_pair("assets/golf/fonts/NotoSans-Regular.ttf", cro::CodePointRange::Cyrillic),
+        std::make_pair("assets/golf/fonts/NotoSans-Regular.ttf", cro::CodePointRange::Greek),
+        //std::make_pair("assets/golf/fonts/NotoSans-Regular.ttf", std::array<std::uint32_t, 2u>({0x0102, 0x0103})), //VT
+        //std::make_pair("assets/golf/fonts/NotoSans-Regular.ttf", std::array<std::uint32_t, 2u>({0x0110, 0x0111})), //VT
+        //std::make_pair("assets/golf/fonts/NotoSans-Regular.ttf", std::array<std::uint32_t, 2u>({0x0128, 0x0129})), //VT
+        //std::make_pair("assets/golf/fonts/NotoSans-Regular.ttf", std::array<std::uint32_t, 2u>({0x0168, 0x0169})), //VT
+        std::make_pair("assets/golf/fonts/NotoSans-Regular.ttf", std::array<std::uint32_t, 2u>({0x0100, 0x017F})), //extended latin-a
+        std::make_pair("assets/golf/fonts/NotoSans-Regular.ttf", std::array<std::uint32_t, 2u>({0x0180, 0x024F})), //extended latin-b
+        //std::make_pair("assets/golf/fonts/NotoSans-Regular.ttf", std::array<std::uint32_t, 2u>({0x01A0, 0x01A1})), //VT
+        //std::make_pair("assets/golf/fonts/NotoSans-Regular.ttf", std::array<std::uint32_t, 2u>({0x01AF, 0x01B0})), //VT
+        //std::make_pair("assets/golf/fonts/NotoSans-Regular.ttf", std::array<std::uint32_t, 2u>({0x1EA0, 0x1EF9})), //VT
+
+        std::make_pair("assets/golf/fonts/NotoSansThai-Regular.ttf", std::array<std::uint32_t, 2u>({0x2010, 0x205E})),
+        std::make_pair("assets/golf/fonts/NotoSansThai-Regular.ttf", std::array<std::uint32_t, 2u>({0x0E00, 0x0E7F})),
+        std::make_pair("assets/golf/fonts/NotoSansKR-Regular.ttf", std::array<std::uint32_t, 2u>({0x3131, 0x3163})),
+        std::make_pair("assets/golf/fonts/NotoSansKR-Regular.ttf", std::array<std::uint32_t, 2u>({0xAC00, 0xD7A3})),
+        std::make_pair("assets/golf/fonts/NotoSansTC-Regular.ttf", std::array<std::uint32_t, 2u>({0x2000, 0x206F})),
+        std::make_pair("assets/golf/fonts/NotoSansTC-Regular.ttf", std::array<std::uint32_t, 2u>({0x3000, 0x30FF})),
+        std::make_pair("assets/golf/fonts/NotoSansTC-Regular.ttf", std::array<std::uint32_t, 2u>({0x31F0, 0x31FF})),
+        std::make_pair("assets/golf/fonts/NotoSansTC-Regular.ttf", std::array<std::uint32_t, 2u>({0xFF00, 0xFFEF})),
+        //std::make_pair("assets/golf/fonts/NotoSansTC-Regular.ttf", std::array<std::uint32_t, 2u>({0xFFFD, 0xFFFD})),
+        std::make_pair("assets/golf/fonts/NotoSansTC-Regular.ttf", std::array<std::uint32_t, 2u>({0x4e00, 0x9FAF})),
+    };
+
+    for (const auto& [path, codepoints] : FontMappings)
+    {
+        ctx.codepointRange = codepoints;
+        m_sharedData.sharedResources->fonts.get(FontID::UI).appendFromFile(path, ctx);
+        m_sharedData.sharedResources->fonts.get(FontID::Info).appendFromFile(path, ctx);
+        m_sharedData.sharedResources->fonts.get(FontID::Label).appendFromFile(path, ctx);
+
+        m_sharedData.sharedResources->fonts.get(FontID::OSK).appendFromFile(path, ctx);
+    }
+
+
+
+    //emoji fonts
+    ctx.allowBold = false;
+    ctx.allowFillColour = false;
+    ctx.allowOutline = false;
+
+    static constexpr std::array Ranges =
+    {
+        cro::CodePointRange::EmojiLower,
+        cro::CodePointRange::EmojiMid,
+        cro::CodePointRange::EmojiUpper,
+    };
+
+#ifdef _WIN32
+    const std::string winPath = "C:/Windows/Fonts/seguiemj.ttf";
+    //const std::string winPath = "assets/golf/fonts/TwemojiCOLRv0.ttf";
+    //const std::string winPath = "assets/golf/fonts/NotoEmoji-Regular.ttf";
+    
+    if (cro::FileSystem::fileExists(winPath))
+    {
+        for (const auto& r : Ranges)
+        {
+            ctx.codepointRange = r;
+            m_sharedData.sharedResources->fonts.get(FontID::UI).appendFromFile(winPath, ctx);
+            m_sharedData.sharedResources->fonts.get(FontID::Info).appendFromFile(winPath, ctx);
+            m_sharedData.sharedResources->fonts.get(FontID::Label).appendFromFile(winPath, ctx);
+
+            m_sharedData.sharedResources->fonts.get(FontID::OSK).appendFromFile(winPath, ctx);
+        }
+    }
+    else
+#endif
+    {
+        const std::string path = "assets/golf/fonts/TwemojiCOLRv0.ttf";
+        //const std::string monoPath = "assets/golf/fonts/NotoEmoji-Regular.ttf";
+
+        for (const auto& r : Ranges)
+        {
+            ctx.codepointRange = r;
+            m_sharedData.sharedResources->fonts.get(FontID::UI).appendFromFile(path, ctx);
+            m_sharedData.sharedResources->fonts.get(FontID::Info).appendFromFile(path, ctx);
+            m_sharedData.sharedResources->fonts.get(FontID::Label).appendFromFile(path, ctx);
+
+            m_sharedData.sharedResources->fonts.get(FontID::OSK).appendFromFile(path, ctx);
+        }
+    }
+}
+
+void GolfGame::convertPreferences() const
+{
+    auto srcPath = cro::App::getPreferencePath();
+    const auto dstPath = Content::getBaseContentPath();
+
+    if (cro::FileSystem::directoryExists(dstPath))
+    {
+        //assume conversion has already been run at some point
+        //this is just a catch-all if switching between versions
+        //though once 1.15 is released it shouldn't be possible
+        //to run 1.14 outside of the non-steam version
+        return;
+    }
+
+    const std::array FileNames =
+    {
+        std::string("profiles.tar"),
+        std::string("last.gue"),
+        std::string("lea.gue"),
+        std::string("keys.bind"),
+    };
+
+    //make sure the target doesn't yet exist - else
+    //chances are this is already done and we're overwriting
+    //with old data...
+    for (const auto& name : FileNames)
+    {
+        const auto outPath = dstPath + name;
+        const auto inPath = srcPath + name;
+
+        if (!cro::FileSystem::fileExists(outPath))
+        {
+            //LogI << outPath << " doesn't exist" << std::endl;
+            
+            if (cro::FileSystem::fileExists(inPath))
+            {
+                LogI << inPath << " exists - attempting to copy..." << std::endl;
+
+                std::error_code ec;
+                std::filesystem::path src = std::filesystem::u8path(inPath);
+                std::filesystem::path dst = std::filesystem::u8path(outPath);
+
+                std::filesystem::copy(src, dst, std::filesystem::copy_options::skip_existing | std::filesystem::copy_options::recursive, ec);
+
+                if (ec)
+                {
+                    LogE << "Failed copying " << inPath << ": " << ec.message() << std::endl;
+                }
+            }
+        }
+        else
+        {
+            //LogI << outPath << " already exists - skipping." << std::endl;
+            if (cro::FileSystem::fileExists(inPath))
+            {
+                std::error_code ec;
+                std::filesystem::rename(std::filesystem::u8path(inPath), std::filesystem::u8path(inPath + ".old"), ec);
+
+                if (ec)
+                {
+                    LogI << "Failed to rename existing file: " << ec.message() << std::endl;
+                }
+            }
+        }
+    }
+
+    const std::array DirNames =
+    {
+        std::string("avatars"),
+        std::string("balls"),
+        std::string("hair"),
+        std::string("music"),
+        std::string("profiles"),
+    };
+    srcPath += "user/";
+
+    for (const auto& dir : DirNames)
+    {
+        const auto outPath = dstPath + dir;
+        const auto inPath = srcPath + dir;
+
+        if (cro::FileSystem::directoryExists(inPath))
+        {
+            std::error_code ec;
+            std::filesystem::path src = std::filesystem::u8path(inPath);
+            std::filesystem::path dst = std::filesystem::u8path(outPath);
+
+            std::filesystem::copy(src, dst, std::filesystem::copy_options::skip_existing | std::filesystem::copy_options::recursive, ec);
+
+            if (ec)
+            {
+                LogE << "Failed copying " << inPath << ": " << ec.message() << std::endl;
+            }
+            else
+            {
+                std::filesystem::rename(inPath, inPath + ".old");
+            }
+        }
+    }
+}
+
+void GolfGame::loadPreferences()
+{
+    //hack around preference files getting corrupted for some reason
+    //TODO I can't see where this was actually used - did I forget
+    //to finish it???
+    //bool restoreDefaults = false;
+
+    //make sure to set all defaults *before* loading any files
+    m_sharedData.useLargePowerBar = Social::isSteamdeck();
+
+    auto path = getPreferencePath() + "prefs.cfg";
+    if (cro::FileSystem::fileExists(path))
+    {
+        cro::ConfigFile cfg;
+        if (cfg.loadFromFile(path, false))
+        {
+            const auto& properties = cfg.getProperties();
+            for (const auto& prop : properties)
+            {
+                const auto& name = prop.getName();
+                if (name == "use_post_process")
+                {
+                    m_sharedData.usePostProcess = prop.getValue<bool>();
+                }
+                else if (name == "post_index")
+                {
+                    m_sharedData.postProcessIndex = std::max(0, std::min(static_cast<std::int32_t>(PostShaders.size()) - 1, prop.getValue<std::int32_t>()));
+                }
+                else if (name == "custom_shader")
+                {
+                    m_sharedData.customShaderPath = prop.getValue<std::string>();
+                }
+                else if (name == "last_ip")
+                {
+                    auto str = prop.getValue<std::string>();
+
+                    if (!str.empty())
+                    {
+                        m_sharedData.targetIP = str.substr(0, ConstVal::MaxIPChars);
+                    }
+                    else
+                    {
+                        m_sharedData.targetIP = "255.255.255.255";
+                    }
+                }
+                else if (name == "pixel_scale")
+                {
+                    m_sharedData.pixelScale = prop.getValue<bool>();
+                }
+                else if (name == "fov")
+                {
+                    m_sharedData.fov = std::max(MinFOV, std::min(MaxFOV, prop.getValue<float>()));
+                }
+                else if (name == "vertex_snap")
+                {
+                    m_sharedData.vertexSnap = prop.getValue<bool>();
+                }
+                else if (name == "mouse_speed")
+                {
+                    m_sharedData.mouseSpeed = std::max(ConstVal::MinMouseSpeed, std::min(ConstVal::MaxMouseSpeed, prop.getValue<float>()));
+                }
+                else if (name == "swingput_threshold")
+                {
+                    m_sharedData.swingputThreshold = std::max(ConstVal::MinSwingputThresh, std::min(ConstVal::MaxSwingputThresh, prop.getValue<float>()));
+                }
+                else if (name == "invert_x")
+                {
+                    m_sharedData.invertX = prop.getValue<bool>();
+                }
+                else if (name == "invert_y")
+                {
+                    m_sharedData.invertY = prop.getValue<bool>();
+                }
+                else if (name == "show_beacon")
+                {
+                    m_sharedData.showBeacon = prop.getValue<bool>();
+                }
+                else if (name == "beacon_colour")
+                {
+                    m_sharedData.beaconColour = std::fmod(prop.getValue<float>(), 1.f);
+                }
+                else if (name == "imperial_measurements")
+                {
+                    m_sharedData.imperialMeasurements = prop.getValue<bool>();
+                }
+                else if (name == "grid_transparency")
+                {
+                    m_sharedData.gridTransparency = std::max(0.f, std::min(1.f, prop.getValue<float>()));
+                }
+                else if (name == "tree_quality")
+                {
+                    std::int32_t quality = std::min(2, std::max(0, prop.getValue<std::int32_t>()));
+                    m_sharedData.treeQuality = quality;
+                }
+                else if (name == "hq_shadows")
+                {
+                    m_sharedData.shadowQuality = prop.getValue<bool>() ? 1 : 0;
+                }
+                else if (name == "shadow_quality")
+                {
+                    m_sharedData.shadowQuality = std::clamp(prop.getValue<std::int32_t>(), 0, SharedStateData::ShadowQuality::Count - 1);
+                }
+                else if (name == "log_benchmark")
+                {
+                    m_sharedData.logBenchmarks = prop.getValue<bool>();
+                }
+                else if (name == "show_custom")
+                {
+                    m_sharedData.showCustomCourses = prop.getValue<bool>();
+                }
+                else if (name == "show_tutorial")
+                {
+                    m_sharedData.showTutorialTip = prop.getValue<bool>();
+                }
+                else if (name == "putting_power")
+                {
+                    m_sharedData.showPuttingPower = prop.getValue<bool>();
+                }
+                else if (name == "multisamples")
+                {
+                    m_sharedData.multisamples = prop.getValue<std::uint32_t>();
+                    m_sharedData.antialias = m_sharedData.multisamples != 0;
+                }
+                else if (name == "use_vibration")
+                {
+                    m_sharedData.enableRumble = prop.getValue<bool>() ? 1 : 0;
+                }
+                else if (name == "use_trail")
+                {
+                    m_sharedData.showBallTrail = prop.getValue<bool>();
+                }
+                else if (name == "use_beacon_colour")
+                {
+                    m_sharedData.trailBeaconColour = prop.getValue<bool>();
+                }
+                else if (name == "fast_cpu")
+                {
+                    m_sharedData.fastCPU = prop.getValue<bool>();
+                }
+                else if (name == "clubset")
+                {
+                    m_sharedData.preferredClubSet = std::clamp(prop.getValue<std::int32_t>(), 0, 2);
+                    m_sharedData.clubSet = m_sharedData.preferredClubSet;
+                }
+                else if (name == "press_hold")
+                {
+                    m_sharedData.pressHold = prop.getValue<bool>();
+                }
+                else if (name == "use_tts")
+                {
+                    m_sharedData.useTTS = prop.getValue<bool>();
+                }
+                else if (name == "crowd_density")
+                {
+                    m_sharedData.crowdDensity = std::clamp(prop.getValue<std::int32_t>(), 0, CrowdDensityCount - 1);
+                }
+                else if (name == "use_flare")
+                {
+                    m_sharedData.useLensFlare = prop.getValue<bool>();
+                }
+                else if (name == "large_power")
+                {
+                    m_sharedData.useLargePowerBar = prop.getValue<bool>();
+                }
+                
+                else if (name == "web_socket")
+                {
+                    m_sharedData.webSocket = prop.getValue<bool>();
+                }
+                else if (name == "web_port")
+                {
+                    m_sharedData.webPort = std::clamp(prop.getValue<std::int32_t>(), WebSock::MinPort, WebSock::MaxPort);
+                }
+                else if (name == "lightmap_quality")
+                {
+                    m_sharedData.lightmapQuality = std::clamp(prop.getValue<std::int32_t>(), 0, 1);
+                }
+            }
+        }
+        /*else
+        {
+            restoreDefaults = true;
+        }*/
+    }
+
+
+    //read user-specific prefs. This overwrites some of the above as we might be upgrading from the old version
+    if (!safeMode)
+    {
+        path = Content::getBaseContentPath() + "user_prefs.cfg";
+        if (cro::FileSystem::fileExists(path))
+        {
+            cro::ConfigFile cfg;
+            if (cfg.loadFromFile(path, false))
+            {
+                const auto& properties = cfg.getProperties();
+                for (const auto& prop : properties)
+                {
+                    const auto& name = prop.getName();
+                    if (name == "pixel_scale")
+                    {
+                        m_sharedData.pixelScale = prop.getValue<bool>();
+                    }
+                    else if (name == "fov")
+                    {
+                        m_sharedData.fov = std::max(MinFOV, std::min(MaxFOV, prop.getValue<float>()));
+                    }
+                    else if (name == "vertex_snap")
+                    {
+                        m_sharedData.vertexSnap = prop.getValue<bool>();
+                    }
+                    else if (name == "mouse_speed")
+                    {
+                        m_sharedData.mouseSpeed = std::max(ConstVal::MinMouseSpeed, std::min(ConstVal::MaxMouseSpeed, prop.getValue<float>()));
+                    }
+                    else if (name == "invert_x")
+                    {
+                        m_sharedData.invertX = prop.getValue<bool>();
+                    }
+                    else if (name == "invert_y")
+                    {
+                        m_sharedData.invertY = prop.getValue<bool>();
+                    }
+                    else if (name == "show_beacon")
+                    {
+                        m_sharedData.showBeacon = prop.getValue<bool>();
+                    }
+                    else if (name == "beacon_colour")
+                    {
+                        m_sharedData.beaconColour = std::fmod(prop.getValue<float>(), 1.f);
+                    }
+                    else if (name == "imperial_measurements")
+                    {
+                        m_sharedData.imperialMeasurements = prop.getValue<bool>();
+                    }
+                    else if (name == "grid_transparency")
+                    {
+                        m_sharedData.gridTransparency = std::max(0.f, std::min(1.f, prop.getValue<float>()));
+                    }
+                    else if (name == "show_tutorial")
+                    {
+                        m_sharedData.showTutorialTip = prop.getValue<bool>();
+                    }
+                    else if (name == "putting_power")
+                    {
+                        m_sharedData.showPuttingPower = prop.getValue<bool>();
+                    }
+                    else if (name == "use_vibration")
+                    {
+                        m_sharedData.enableRumble = prop.getValue<bool>() ? 1 : 0;
+                    }
+                    else if (name == "use_trail")
+                    {
+                        m_sharedData.showBallTrail = prop.getValue<bool>();
+                    }
+                    else if (name == "use_beacon_colour")
+                    {
+                        m_sharedData.trailBeaconColour = prop.getValue<bool>();
+                    }
+                    else if (name == "fast_cpu")
+                    {
+                        m_sharedData.fastCPU = prop.getValue<bool>();
+                    }
+                    else if (name == "clubset")
+                    {
+                        m_sharedData.preferredClubSet = std::clamp(prop.getValue<std::int32_t>(), 0, 2);
+                        m_sharedData.clubSet = m_sharedData.preferredClubSet;
+                    }
+                    else if (name == "press_hold")
+                    {
+                        m_sharedData.pressHold = prop.getValue<bool>();
+                    }
+                    else if (name == "use_tts")
+                    {
+                        m_sharedData.useTTS = prop.getValue<bool>();
+                    }
+                    else if (name == "use_swingput")
+                    {
+                        m_sharedData.useSwingput = prop.getValue<bool>();
+                    }
+                    else if (name == "use_flare")
+                    {
+                        m_sharedData.useLensFlare = prop.getValue<bool>();
+                    }
+                    else if (name == "use_mouse_action")
+                    {
+                        m_sharedData.useMouseAction = prop.getValue<bool>();
+                    }
+                    else if (name == "large_power")
+                    {
+                        m_sharedData.useLargePowerBar = prop.getValue<bool>();
+                    }
+                    else if (name == "contrast_power")
+                    {
+                        m_sharedData.useContrastPowerBar = prop.getValue<bool>();
+                    }
+                    else if (name == "decimate_power")
+                    {
+                        m_sharedData.decimatePowerBar = prop.getValue<bool>();
+                    }
+                    else if (name == "decimate_distance")
+                    {
+                        m_sharedData.decimateDistance = prop.getValue<bool>();
+                    }
+                    else if (name == "show_roster")
+                    {
+                        m_sharedData.showRosterTip = prop.getValue<bool>();
+                        }
+                    else if (name == "fixed_putting")
+                    {
+                        m_sharedData.fixedPuttingRange = prop.getValue<bool>();
+                    }
+                    
+                    else if (name == "log_csv")
+                    {
+                        m_sharedData.logCSV = prop.getValue<bool>();
+                    }
+                    else if (name == "web_chat")
+                    {
+                        m_sharedData.blockChat = prop.getValue<bool>();
+                    }
+                    else if (name == "log_chat")
+                    {
+                        m_sharedData.logChat = prop.getValue<bool>();
+                    }
+                    else if (name == "remote_content")
+                    {
+                        m_sharedData.remoteContent = prop.getValue<bool>();
+                    }
+                    else if (name == "flag_path")
+                    {
+                        m_sharedData.flagPath = prop.getValue<std::string>();
+                    }
+                    else if (name == "flag_text")
+                    {
+                        m_sharedData.flagText = std::clamp(prop.getValue<std::int32_t>(), 0, 2);
+                    }
+                    else if (name == "show_rival")
+                    {
+                        m_sharedData.showRival = prop.getValue<bool>();
+                    }
+                    else if (name == "putt_follow")
+                    {
+                        m_sharedData.puttFollowCam = prop.getValue<bool>();
+                    }
+                    else if (name == "zoom_follow")
+                    {
+                        m_sharedData.zoomFollowCam = prop.getValue<bool>();
+                    }
+                    else if (name == "club_update")
+                    {
+                        m_sharedData.showClubUpdate = prop.getValue<bool>();
+                    }
+                    else if (name == "rotate_camera")
+                    {
+                        m_sharedData.rotateCamera = prop.getValue<bool>();
+                    }
+                    else if (name == "show_minimap")
+                    {
+                        m_sharedData.showMinimap = prop.getValue<bool>();
+                    }
+                    else if (name == "show_tips")
+                    {
+                        m_sharedData.showInGameTips = prop.getValue<bool>();
+                    }
+                }
+            }
+
+            /*else
+            {
+                restoreDefaults = true;
+            }*/
+        }
+
+        path = Content::getBaseContentPath() + "league_names.txt";
+        if (!cro::FileSystem::fileExists(path))
+        {
+            m_sharedData.leagueNames.write();
+        }
+        else
+        {
+            m_sharedData.leagueNames.read();
+        }
+
+
+        m_sharedData.tournaments[0].id = 0;
+        m_sharedData.tournaments[1].id = 1;
+        readTournamentData(m_sharedData.tournaments[0]);
+        readTournamentData(m_sharedData.tournaments[1]);
+    }
+
+
+    //read keybind bin
+    path = Content::getBaseContentPath() + "keys.bind";
+
+    if (cro::FileSystem::fileExists(path))
+    {
+        cro::RaiiRWops file;
+        file.file = SDL_RWFromFile(path.c_str(), "rb");
+        if (file.file)
+        {
+            auto size = SDL_RWsize(file.file);
+            if (size == sizeof(InputBinding))
+            {
+                SDL_RWread(file.file, &m_sharedData.inputBinding, size, 1);
+                LOG("Read keybinds file", cro::Logger::Type::Info);
+            }
+        }
+    }
+
+    //hack for existing keybinds which weren't expecting the billiards update
+    if (m_sharedData.inputBinding.keys[InputBinding::Up] == SDLK_UNKNOWN)
+    {
+        m_sharedData.inputBinding.keys[InputBinding::Up] = SDLK_w;
+    }
+    if (m_sharedData.inputBinding.keys[InputBinding::Down] == SDLK_UNKNOWN)
+    {
+        m_sharedData.inputBinding.keys[InputBinding::Down] = SDLK_s;
+    }
+
+    //and then the cancel button update
+    if (m_sharedData.inputBinding.keys[InputBinding::CancelShot] == SDLK_UNKNOWN)
+    {
+        m_sharedData.inputBinding.keys[InputBinding::CancelShot] = SDLK_LSHIFT;
+    }
+
+    //and the ball spin update
+    if (m_sharedData.inputBinding.keys[InputBinding::EmoteMenu] == SDLK_UNKNOWN)
+    {
+        m_sharedData.inputBinding.keys[InputBinding::EmoteMenu] = SDLK_LCTRL;
+    }
+    if (m_sharedData.inputBinding.keys[InputBinding::SpinMenu] == SDLK_UNKNOWN)
+    {
+        m_sharedData.inputBinding.keys[InputBinding::SpinMenu] = SDLK_LALT;
+    }
+
+    m_sharedData.inputBinding.clubset = ClubID::DefaultSet;
+
+    if (!cro::FileSystem::directoryExists(Content::getBaseContentPath() + u8"music"))
+    {
+        cro::FileSystem::createDirectory(Content::getBaseContentPath() + u8"music");
+    }
+    loadMusic();
+
+    if (!inv::read(m_sharedData.inventory))
+    {
+        m_sharedData.inventory = {};
+    }
+
+    //do this last so we're saving any settings which were loaded successfully too
+    savePreferences();
+}
+
+void GolfGame::savePreferences()
+{
+    auto path = getPreferencePath() + "prefs.cfg";
+    cro::ConfigFile cfg("preferences");
+
+    //advanced options
+    cfg.addProperty("use_post_process").setValue(m_sharedData.usePostProcess);
+    cfg.addProperty("post_index").setValue(m_sharedData.postProcessIndex);
+    if (!m_sharedData.customShaderPath.empty())
+    {
+        cfg.addProperty("custom_shader").setValue(m_sharedData.customShaderPath);
+    }
+    cfg.addProperty("last_ip").setValue(m_sharedData.targetIP.toAnsiString());
+    cfg.addProperty("multisamples").setValue(m_sharedData.multisamples);
+    cfg.addProperty("swingput_threshold").setValue(m_sharedData.swingputThreshold);
+    cfg.addProperty("tree_quality").setValue(m_sharedData.treeQuality);
+    cfg.addProperty("shadow_quality").setValue(m_sharedData.shadowQuality);
+    cfg.addProperty("log_benchmark").setValue(m_sharedData.logBenchmarks);
+    cfg.addProperty("show_custom").setValue(m_sharedData.showCustomCourses);
+    cfg.addProperty("crowd_density").setValue(m_sharedData.crowdDensity);
+    cfg.addProperty("large_power").setValue(m_sharedData.useLargePowerBar);
+    cfg.addProperty("web_socket").setValue(m_sharedData.webSocket);
+    cfg.addProperty("web_port").setValue(m_sharedData.webPort);
+    cfg.addProperty("lightmap_quality").setValue(m_sharedData.lightmapQuality);
+    cfg.save(path);
+
+
+    //per-user options
+    path = Content::getBaseContentPath() + "user_prefs.cfg";
+    cfg = cro::ConfigFile("user_preferences");
+    cfg.addProperty("pixel_scale").setValue(m_sharedData.pixelScale);
+    cfg.addProperty("fov").setValue(m_sharedData.fov);
+    cfg.addProperty("vertex_snap").setValue(m_sharedData.vertexSnap);
+    cfg.addProperty("mouse_speed").setValue(m_sharedData.mouseSpeed);
+    cfg.addProperty("use_swingput").setValue(m_sharedData.useSwingput);
+    cfg.addProperty("invert_x").setValue(m_sharedData.invertX);
+    cfg.addProperty("invert_y").setValue(m_sharedData.invertY);
+    cfg.addProperty("show_beacon").setValue(m_sharedData.showBeacon);
+    cfg.addProperty("beacon_colour").setValue(m_sharedData.beaconColour);
+    cfg.addProperty("imperial_measurements").setValue(m_sharedData.imperialMeasurements);
+    cfg.addProperty("grid_transparency").setValue(m_sharedData.gridTransparency);
+    cfg.addProperty("show_tutorial").setValue(m_sharedData.showTutorialTip);
+    cfg.addProperty("putting_power").setValue(m_sharedData.showPuttingPower);
+    cfg.addProperty("use_vibration").setValue(m_sharedData.enableRumble == 0 ? false : true);
+    cfg.addProperty("use_trail").setValue(m_sharedData.showBallTrail);
+    cfg.addProperty("use_beacon_colour").setValue(m_sharedData.trailBeaconColour);
+    cfg.addProperty("fast_cpu").setValue(m_sharedData.fastCPU);
+    cfg.addProperty("clubset").setValue(m_sharedData.preferredClubSet);
+    cfg.addProperty("press_hold").setValue(m_sharedData.pressHold);
+    cfg.addProperty("use_tts").setValue(m_sharedData.useTTS);
+    cfg.addProperty("use_flare").setValue(m_sharedData.useLensFlare);
+    cfg.addProperty("use_mouse_action").setValue(m_sharedData.useMouseAction);
+    //cfg.addProperty("large_power").setValue(m_sharedData.useLargePowerBar);
+    cfg.addProperty("contrast_power").setValue(m_sharedData.useContrastPowerBar);
+    cfg.addProperty("decimate_power").setValue(m_sharedData.decimatePowerBar);
+    cfg.addProperty("decimate_distance").setValue(m_sharedData.decimateDistance);
+    cfg.addProperty("show_roster").setValue(m_sharedData.showRosterTip);
+    cfg.addProperty("group_mode").setValue(m_sharedData.groupMode);
+    cfg.addProperty("fixed_putting").setValue(m_sharedData.fixedPuttingRange);
+    cfg.addProperty("log_csv").setValue(m_sharedData.logCSV);
+    cfg.addProperty("web_chat").setValue(m_sharedData.blockChat);
+    cfg.addProperty("log_chat").setValue(m_sharedData.logChat);
+    cfg.addProperty("remote_content").setValue(m_sharedData.remoteContent);
+    cfg.addProperty("flag_path").setValue(m_sharedData.flagPath);
+    cfg.addProperty("flag_text").setValue(m_sharedData.flagText);
+    cfg.addProperty("show_rival").setValue(m_sharedData.showRival);
+    cfg.addProperty("putt_follow").setValue(m_sharedData.puttFollowCam);
+    cfg.addProperty("zoom_follow").setValue(m_sharedData.zoomFollowCam);
+    cfg.addProperty("club_update").setValue(m_sharedData.showClubUpdate);
+    cfg.addProperty("rotate_camera").setValue(m_sharedData.rotateCamera);
+    cfg.addProperty("show_minimap").setValue(m_sharedData.showMinimap);
+    cfg.addProperty("show_tips").setValue(m_sharedData.showInGameTips);
+    cfg.save(path);
+
+
+
+    //keybinds
+    path = Content::getBaseContentPath() + "keys.bind";
+    cro::RaiiRWops file;
+    file.file = SDL_RWFromFile(path.c_str(), "wb");
+    if (file.file)
+    {
+        SDL_RWwrite(file.file, &m_sharedData.inputBinding, sizeof(InputBinding), 1);
+    }
+
+    inv::write(m_sharedData.inventory);
+
+    //std::int32_t total = 0;
+    //for (const auto& i : inv::Items)
+    //{
+    //    total += i.price;
+    //}
+    //LogI << "Total: " << total << ", half: " << (total / 2) << std::endl;
+}
+
+void GolfGame::loadAvatars()
+{
+    //if we're updating attept to read existing profiles and convert them
+    std::vector<PlayerData> oldProfiles;
+
+    auto path = cro::App::getPreferencePath() + "avatars.cfg";
+    cro::ConfigFile cfg;
+    if (cro::FileSystem::fileExists(path) &&
+        cfg.loadFromFile(path, false))
+    {
+        const auto& objects = cfg.getObjects();
+        for (const auto& obj : objects)
+        {
+            if (obj.getName() == "avatar")
+            {
+                auto& profile = oldProfiles.emplace_back();
+
+                const auto& props = obj.getProperties();
+                for (const auto& prop : props)
+                {
+                    const auto& name = prop.getName();
+                    if (name == "name")
+                    {
+                        profile.name = prop.getValue<cro::String>();
+                    }
+                    else if (name == "ball_id")
+                    {
+                        auto id = prop.getValue<std::uint32_t>();
+                        profile.ballID = id;
+                    }
+                    else if (name == "hair_id")
+                    {
+                        auto id = prop.getValue<std::uint32_t>();
+                        profile.hairID = id;
+                    }
+                    else if (name == "skin_id")
+                    {
+                        auto id = prop.getValue<std::uint32_t>();
+                        profile.skinID = id;
+                    }
+                    else if (name == "flipped")
+                    {
+                        profile.flipped = prop.getValue<bool>();
+                    }
+
+                    else if (name == "flags0")
+                    {
+                        auto flag = prop.getValue<std::int32_t>() % pc::PairCounts[3];
+
+                        profile.avatarFlags[4] = static_cast<std::uint8_t>(pc::KeyMap[flag][0]);
+                        profile.avatarFlags[5] = static_cast<std::uint8_t>(pc::KeyMap[flag][1]);
+                    }
+                    else if (name == "flags1")
+                    {
+                        auto flag = prop.getValue<std::int32_t>() % pc::PairCounts[2];
+                        
+                        profile.avatarFlags[2] = static_cast<std::uint8_t>(pc::KeyMap[flag][0]);
+                        profile.avatarFlags[3] = static_cast<std::uint8_t>(pc::KeyMap[flag][1]);
+                    }
+                    else if (name == "flags2")
+                    {
+                        auto flag = prop.getValue<std::int32_t>() % pc::PairCounts[1];
+                        profile.avatarFlags[1] = static_cast<std::uint8_t>(pc::KeyMap[flag][0]);
+                    }
+                    else if (name == "flags3")
+                    {
+                        auto flag = prop.getValue<std::int32_t>() % pc::PairCounts[0];
+                        profile.avatarFlags[0] = static_cast<std::uint8_t>(pc::KeyMap[flag][0]);
+                    }
+
+                    else if (name == "cpu")
+                    {
+                        profile.isCPU = prop.getValue<bool>();
+                    }
+                }
+            }
+        }
+    }
+
+    for (const auto& p : oldProfiles)
+    {
+        p.saveProfile();
+    }
+
+    if (cro::FileSystem::fileExists(path))
+    {
+        //delete the old file
+        std::error_code ec;
+        std::filesystem::remove({ path }, ec);
+    }
+
+    //parse profile dir and load each profile
+    path = Content::getUserContentPath(Content::UserContent::Profile);
+    if (!cro::FileSystem::directoryExists(path))
+    {
+        cro::FileSystem::createDirectory(path);
+    }
+
+
+    std::int32_t i = 0;
+#ifdef USE_GNS
+    auto uid = Social::getPlayerID();
+    
+    auto steamPath = path + uid + "/";
+
+    if (!cro::FileSystem::directoryExists(steamPath)
+        || safeMode)
+    {
+        cro::FileSystem::createDirectory(steamPath);
+
+        PlayerData sPlayer;
+        sPlayer.profileID = uid;
+        sPlayer.name = Social::getPlayerName();
+        sPlayer.saveProfile();
+
+        m_profileData.playerProfiles.emplace_back().playerData = sPlayer;
+        i++;
+    }
+
+    else
+    {
+        auto files = cro::FileSystem::listFiles(steamPath);
+        files.erase(std::remove_if(files.begin(), files.end(),
+            [](const std::string& f)
+            {
+                return cro::FileSystem::getFileExtension(f) != ".pfl";
+            }), files.end());
+
+        if (!files.empty())
+        {
+            PlayerData pd;
+            if (!pd.loadProfile(steamPath + files[0], files[0].substr(0, files[0].size() - 4)))
+            {
+                //if we failed to load use the default
+                pd = PlayerData();
+                pd.profileID = uid;
+            }
+
+            if (!pd.name.empty()
+                && pd.isCustomName)
+            {
+                Social::setPlayerName(pd.name);
+            }
+            else
+            {
+                //always use the current Steam user name
+                pd.name = Social::getPlayerName();
+            }
+            pd.saveProfile();
+
+            m_profileData.playerProfiles.emplace_back().playerData = pd;
+            i++;
+        }
+        else
+        {
+            PlayerData sPlayer;
+            sPlayer.profileID = uid;
+            sPlayer.name = Social::getPlayerName();
+            sPlayer.saveProfile();
+
+            m_profileData.playerProfiles.emplace_back().playerData = sPlayer;
+            i++;
+        }
+    }
+
+    m_profileData.playerProfiles[0].playerData.isSteamID = true;
+
+#endif
+
+    auto profileDirs = cro::FileSystem::listDirectories(path);
+#ifdef USE_GNS
+    //remove the steam profile because we already explicitly parsed it
+    profileDirs.erase(std::remove_if(profileDirs.begin(), profileDirs.end(),
+        [uid](const std::string& d) 
+        {
+            return d == uid;
+        }), profileDirs.end());
+
+#endif // USE_GNS
+
+
+
+
+
+    if (!safeMode)
+    {
+        for (const auto& dir : profileDirs)
+        {
+            auto profilePath = path + dir + "/";
+            auto files = cro::FileSystem::listFiles(profilePath);
+            files.erase(std::remove_if(files.begin(), files.end(),
+                [](const std::string& f)
+                {
+                    return cro::FileSystem::getFileExtension(f) != ".pfl";
+                }), files.end());
+
+            if (!files.empty())
+            {
+                PlayerData pd;
+                if (pd.loadProfile(profilePath + files[0], files[0].substr(0, files[0].size() - 4)))
+                {
+#ifdef USE_GNS
+                    //check if we need to convert this to the UID profile
+                    if (pd.name == Social::getPlayerName())
+                    {
+                        pd.profileID = Social::getPlayerID();
+                        pd.saveProfile();
+                        m_profileData.playerProfiles[0].playerData = pd;
+                        m_profileData.playerProfiles[0].loadout.read(pd.profileID);
+
+                        auto copyFiles = cro::FileSystem::listFiles(profilePath);
+                        for (const auto& cFile : copyFiles)
+                        {
+                            if (cro::FileSystem::getFileExtension(cFile) != ".pfl")
+                            {
+                                auto dbPath = profilePath + cFile;
+                                if (cro::FileSystem::fileExists(dbPath))
+                                {
+                                    std::error_code ec;
+                                    std::filesystem::copy_file(std::filesystem::u8path(dbPath),
+                                        std::filesystem::u8path(steamPath + cFile),
+                                        std::filesystem::copy_options::update_existing, ec);
+
+                                    if (ec)
+                                    {
+                                        LogE << "Failed copying player data, error code: " << ec.value() << std::endl;
+                                    }
+                                }
+                            }
+                        }
+                        //remove the old data so it stops getting sync'd
+                        cro::FileSystem::removeDirectory(profilePath);
+                    }
+                    else
+                    {
+#endif
+                        auto& pf = m_profileData.playerProfiles.emplace_back();
+                        pf.playerData = pd;
+                        pf.loadout.read(pd.profileID);
+                        i++;
+#ifdef USE_GNS
+                    }
+#endif
+                }
+            }
+
+            //arbitrary limit on profile loading.
+            if (i == ConstVal::MaxProfiles)
+            {
+                break;
+            }
+        }
+
+        //for some reason we have to do this else the
+        //steam profile won't read the loadout
+        for (auto& pf : m_profileData.playerProfiles)
+        {
+            pf.loadout.read(pf.playerData.profileID);
+        }
+    }
+
+    if (m_profileData.playerProfiles.empty())
+    {
+        auto& pf = m_profileData.playerProfiles.emplace_back();
+        pf.playerData.name = "Default Profile";
+        pf.playerData.saveProfile();
+        pf.loadout.write(pf.playerData.profileID);
+    }
+    m_sharedData.localConnectionData.playerData[0] = m_profileData.playerProfiles[0].playerData;
+}
+
+void GolfGame::loadMusic()
+{
+    //parse any music files into a playlist
+    M3UPlaylist m3uPlaylist(Content::getBaseContentPath() + u8"music/");
+
+    if (m3uPlaylist.getTrackCount() == 0)
+    {
+        const auto loadFiles = [&](const std::string& path, const std::string& root)
+            {
+                const auto files = cro::FileSystem::listFiles(path);
+                for (const auto& file : files)
+                {
+                    //horrible hack to skip menu music
+#ifdef USE_GNS
+                    if (file.find("101") == std::string::npos
+                        && file.find("201") == std::string::npos
+                        && file.find("104") == std::string::npos
+                        && file.find("204") == std::string::npos)
+#endif
+                    {
+                        //this checks the file has a valid extension
+                        //and limits the number of files loaded
+                        m3uPlaylist.addTrack(root + file);
+                    }
+                }
+                m3uPlaylist.shuffle();
+            };
+
+
+#ifdef USE_GNS
+        //see if the soundtrack is installed and prefer that
+        auto soundtrackPath = Content::getSoundTrackPath();
+        if (!soundtrackPath.empty()
+            && cro::FileSystem::directoryExists(soundtrackPath + u8"/mp3/"))
+        {
+            loadFiles(soundtrackPath + u8"/mp3/", soundtrackPath + u8"/mp3/");
+        }
+
+        if (m3uPlaylist.getTrackCount() == 0)
+#endif
+        {
+            //look in the fallback dir
+            const auto MusicDir = u8"assets/golf/sound/music/";
+            if (cro::FileSystem::directoryExists(cro::FileSystem::getResourcePath() + MusicDir))
+            {
+                loadFiles(cro::FileSystem::getResourcePath() + MusicDir, MusicDir);
+            }
+        }
+    }
+
+    if (cro::Console::getConvarValue<bool>("shuffle_music"))
+    {
+        m3uPlaylist.shuffle();
+    }
+
+    for (const auto& fp : m3uPlaylist.getFilePaths())
+    {
+        m_sharedData.playlist.addPath(fp);
+    }
+    m_sharedData.playlist.precache();
+}
+
+void GolfGame::recreatePostProcess()
+{
+    m_uniformIDs[UniformID::Time] = m_postShader->getUniformID("u_time");
+    m_uniformIDs[UniformID::Scale] = m_postShader->getUniformID("u_scale");
+
+    auto windowSize = cro::App::getWindow().getSize();
+    m_postBuffer->create(windowSize.x, windowSize.y, false);
+    m_postQuad->setTexture(m_postBuffer->getTexture()); //resizes the quad's view
+
+    auto shaderRes = glm::vec2(windowSize);
+    glCheck(glUseProgram(m_postShader->getGLHandle()));
+    glCheck(glUniform2f(m_postShader->getUniformID("u_resolution"), shaderRes.x, shaderRes.y));
+
+    float scale = getViewScale(shaderRes);
+    glCheck(glUniform2f(m_postShader->getUniformID("u_scale"), scale, scale));
+}
+
+void GolfGame::applyPostProcess()
+{
+    if (m_activeIndex != m_sharedData.postProcessIndex
+        || !m_sharedData.customShaderPath.empty())
+    {
+        if (setShader(PostShaders[m_sharedData.postProcessIndex].fragmentString))
+        {
+            m_sharedData.customShaderPath.clear();
+        }
+    }
+}
+
+bool GolfGame::setShader(const char* frag)
+{
+    std::unique_ptr<cro::Shader> shader = std::make_unique<cro::Shader>();
+    if (shader->loadFromString(PostVertex, frag))
+    {
+        //if the shader loaded successfully
+        //swap with current shader.
+        m_postShader.swap(shader);
+        m_postQuad->setShader(*m_postShader);
+
+        m_sharedData.usePostProcess = false; //message handler flips this???
+        auto* msg = getMessageBus().post<SystemEvent>(MessageID::SystemMessage);
+        msg->type = SystemEvent::PostProcessToggled;
+
+        m_activeIndex = m_sharedData.postProcessIndex;
+        return true;
+    }
+    else
+    {
+        cro::FileSystem::showMessageBox("Error", "Failed to compile shader\nSee console for more details");
+    }
+    return false;
+};
+
+void GolfGame::createHowTo()
+{
+    const std::string rootPath = cro::FileSystem::getResourcePath() + "assets/golf/guide/en/";
+    const std::string imagePath = cro::FileSystem::getResourcePath() + "assets/golf/guide/images/";
+    auto filePaths = cro::FileSystem::listFiles(rootPath);
+    std::sort(filePaths.begin(), filePaths.end());
+
+    const auto& controlTex = m_guideTextures.get(imagePath + "controls.png");
+
+    pugi::xml_document doc;
+    for (const auto& path : filePaths)
+    {
+        if (const auto res = doc.load_file((rootPath + path).c_str(), 116, pugi::encoding_utf8); !res)
+        {
+            LogE << "Could not open guide doc " << path << std::endl;
+            LogE << res.description() << std::endl;
+        }
+
+        auto& chapter = m_guideChapters.emplace_back();
+        for (const auto& c : doc.child("root").children())
+        {
+            //oh the fun of utf8 preservation in C++...
+            if (std::strcmp(c.name(), "text") == 0
+                || std::strcmp(c.name(),  "title") == 0
+                || std::strcmp(c.name(), "h") == 0)
+            {
+                std::basic_string<std::uint8_t> s(reinterpret_cast<const std::uint8_t*>(c.text().as_string()));
+                
+                if (!s.empty())
+                {
+                    auto& item = chapter.items.emplace_back();
+                    item.type = std::strcmp(c.name(), "title") == 0 ? pg::Item::Title 
+                        : std::strcmp(c.name(), "h") == 0 ? pg::Item::Header : pg::Item::Text;
+                    item.string.swap(s);
+
+                    if (item.type == pg::Item::Title)
+                    {
+                        chapter.title = item.string;
+                        helpNav.chapterCount++;
+                    }
+                }
+            }
+            else if (std::strcmp(c.name(), "image") == 0)
+            {
+                const std::string imgName = c.text().as_string();
+                const auto& img = m_guideTextures.get(imagePath + imgName);
+                auto& item = chapter.items.emplace_back();
+                item.type = pg::Item::Image;
+                item.image = &img;
+                item.frameSize = img.getSize();
+
+                //if we have this attribute assume the image is animated
+                if (c.attribute("w") && c.attribute("h"))
+                {
+                    auto frameCount = item.frameSize;
+
+                    item.frameSize.x = c.attribute("w").as_float();
+                    item.frameSize.y = c.attribute("h").as_float();
+
+                    frameCount /= item.frameSize;
+
+                    item.animation.frameCount = frameCount;
+                    item.animation.frameSizeNorm = item.frameSize / glm::vec2(img.getSize());
+                    item.animation.active = true;
+
+                    if (c.attribute("fps"))
+                    {
+                        item.animation.FPS = 1.f / c.attribute("fps").as_float(1.f);
+                    }
+                }
+            }
+            else if (std::strcmp(c.name(), "hr") == 0)
+            {
+                auto& item = chapter.items.emplace_back();
+                item.type = pg::Item::Separator;
+            }
+        }
+    }
+
+
+    registerWindow([&]() 
+        {
+            if (m_sharedData.showHelp)
+            {
+                const auto viewScale = std::clamp(getViewScale(), 1.f, 3.f);
+                const auto viewSize = std::min(static_cast<std::int32_t>(viewScale) - 1, 2);
+                const glm::vec2 size = cro::App::getWindow().getSize();// getScaledSize();
+                ImGui::SetNextWindowSize({ size.x, size.y });
+                ImGui::SetNextWindowPos({ 0.f, 0.f });
+                ImGui::Begin("How To Play", nullptr/*&m_sharedData.showHelp*/, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
+                
+
+                ImGui::PushFont(m_sharedData.helpFonts[std::min(viewSize, 1)]);
+                static constexpr auto NavWidth = 180.f;
+                const auto NavWidthScaled = NavWidth * viewScale;
+
+                //chapter navigation
+                ImGui::BeginChild("##nav", { NavWidthScaled, 0.f }, true);
+                helpNav.scrollIndex = 0;
+                static constexpr std::array Offsets = { 0.f, 0.f, 0.4f };
+                ImGui::PushStyleVar(ImGuiStyleVar_ButtonTextAlign, {0.5f, Offsets[viewSize]});
+                for (const auto& chapter : m_guideChapters)
+                {
+                    if (helpNav.scrollIndex == helpNav.selectedScroll)
+                    {
+                        ImGui::PushStyleColor(ImGuiCol_Button, CD32::Colours[CD32::Yellow]);
+                        ImGui::PushStyleColor(ImGuiCol_Text, CD32::Colours[CD32::Black]);
+                    }
+
+                    if (ImGui::Button(reinterpret_cast<const char*>(chapter.title.c_str()), {NavWidthScaled - (18.f /** viewScale*/), 20.f * viewScale}))
+                    {
+                        helpNav.targetIndex = helpNav.scrollIndex;
+                        helpNav.wantsScroll = true;
+                    }
+
+                    if (helpNav.scrollIndex == helpNav.selectedScroll)
+                    {
+                        ImGui::PopStyleColor(2);
+                    }
+
+                    helpNav.scrollIndex++;
+                }
+                ImGui::PopStyleVar();
+
+                //TODO display controller input
+                if (cro::GameController::getControllerCount())
+                {
+                    auto size = glm::vec2(controlTex.getSize()) * viewScale;
+                    size.y /= 2.f;
+
+                    if (cro::GameController::hasPSLayout(0))
+                    {
+                        ImGui::Image(controlTex, { size.x, size.y }, { 0.f, 1.f }, { 1.f, 0.5f });
+                    }
+                    else
+                    {
+                        ImGui::Image(controlTex, { size.x, size.y }, { 0.f, 0.5f }, { 1.f, 0.f });
+                    }
+                }
+                else
+                {
+                    ImGui::NewLine();
+                    ImGui::Text("Press Escape To Close");
+                }
+
+                ImGui::EndChild();
+                ImGui::PopFont();
+                ImGui::SameLine();
+
+                //main pane
+                ImGui::PushFont(m_sharedData.helpFonts[viewSize]);
+                ImGui::BeginChild("##main_view");
+                
+                if (helpNav.manualScroll != 0.f)
+                {
+                    const auto pos = std::clamp(ImGui::GetScrollY() + (HelpNav::ScrollAmount * viewScale * helpNav.manualScroll), 0.f, ImGui::GetScrollMaxY());
+                    ImGui::SetScrollY(pos);
+                    helpNav.manualScroll = 0.f;
+                }
+
+                helpNav.scrollIndex = 0;
+                for (auto& chapter : m_guideChapters)
+                {
+                    for (auto& item : chapter.items)
+                    {
+                        switch (item.type)
+                        {
+                        default: break;
+                        case pg::Item::Separator:
+                            ImGui::NewLine();
+                            ImGui::Separator();
+                            ImGui::NewLine();
+                            break;
+                        case pg::Item::Title:
+                            ImGui::PushStyleColor(ImGuiCol_Text, CD32::Colours[CD32::Yellow]);
+                            ImGui::Text(reinterpret_cast<const char*>(item.string.data()));
+                            ImGui::PopStyleColor();
+
+                            if (helpNav.wantsScroll
+                                && helpNav.targetIndex == helpNav.scrollIndex)
+                            {
+                                ImGui::SetScrollHereY(0.01f);
+                                helpNav.wantsScroll = false;
+                                helpNav.selectedScroll = helpNav.scrollIndex;
+                            }
+                            else
+                            {
+                                bool visible = ImGui::IsItemVisible();
+                                if (visible && !chapter.isVisible)
+                                {
+                                    //we were just exposed
+                                    helpNav.selectedScroll = helpNav.scrollIndex;
+                                }
+                                chapter.isVisible = visible;
+                            }
+                            break;
+                        case pg::Item::Header:
+                            ImGui::NewLine();
+                            ImGui::PushStyleColor(ImGuiCol_Text, CD32::Colours[CD32::BlueLight]);
+                            ImGui::Text(reinterpret_cast<const char*>(item.string.data()));
+                            ImGui::PopStyleColor();
+                            break;
+                        case pg::Item::Text:
+                            ImGui::TextWrapped(reinterpret_cast<const char*>(item.string.data()));
+                            break;
+                        case pg::Item::Image:
+                        {
+                            //const float PaneWidth = (ImGui::GetWindowSize().x - NavWidth);
+                            //const float NavScale = std::min(1.f, PaneWidth / ImGui::GetWindowSize().x);
+
+                            ImGui::NewLine();
+                            auto imgSize = item.frameSize * std::max(1.f, viewScale - 1.f);
+                            /*if (imgSize.x > (PaneWidth - 10.f))
+                            {
+                                imgSize *= NavScale;
+                            }*/
+
+                            cro::FloatRect frame = { 0.f, 0.f, 1.f, 1.f };
+                            if (item.animation.active)
+                            {
+                                frame = item.animation.update();
+                            }
+                            const auto oldPos = ImGui::GetCursorPos();
+                            ImGui::SetCursorPos({ (ImGui::GetWindowSize().x - imgSize.x) * 0.5f, oldPos.y });
+                            ImGui::Image(*item.image, { imgSize.x, imgSize.y }, { frame.left, 1.f - frame.bottom }, { frame.width, 1.f - frame.height });
+                            ImGui::SetCursorPos({ oldPos.x, oldPos.y + imgSize.y });
+                            ImGui::NewLine();
+                        }
+                            break;
+                        }
+                    }
+                    helpNav.scrollIndex++;
+
+                    ImGui::NewLine();
+                    ImGui::Separator();
+                    ImGui::NewLine();
+                }
+                ImGui::EndChild();
+                ImGui::PopFont();
+
+
+                ImGui::End();
+            }
+        });
+}
+
+#ifdef _WIN32
+void GolfGame::assertFileSystem()
+{
+    const auto printErr =
+        [](const std::string& outPath) 
+        {
+            const std::string err = "Failed creating root preference path, reason:\n" + cro::Console::getLastOutput();
+            cro::FileSystem::showMessageBox("Could Not Create Directory", err);
+
+            cro::FileSystem::showMessageBox("Missing Directory", "Please ensure that\n" + outPath + "\nexists");
+        };
+
+    //appdata/roaming/trederia/golf/
+    auto rootPath = getPreferencePath();
+    if (!cro::FileSystem::directoryExists(rootPath))
+    {
+        LogI << "Creating root preferences directory..." << std::endl;
+        if (!cro::FileSystem::createDirectory(rootPath))
+        {
+            //problem with this specific case is that we can't log
+            //the error to the log file... because the log file wants
+            //to exist in this directory. Which wasn't created.
+            printErr(rootPath);
+            return;
+        }
+    }
+
+    rootPath += "user";
+    if (!cro::FileSystem::directoryExists(rootPath))
+    {
+        LogI << "Creating user preferences directory..." << std::endl;
+        if (!cro::FileSystem::createDirectory(rootPath))
+        {
+            printErr(rootPath);
+            return;
+        }
+    }
+}
+#endif

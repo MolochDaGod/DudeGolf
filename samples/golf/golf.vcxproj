@@ -1,0 +1,1096 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="DebugASan|Win32">
+      <Configuration>DebugASan</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugASan|x64">
+      <Configuration>DebugASan</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugGNS-Asan|Win32">
+      <Configuration>DebugGNS-Asan</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugGNS-Asan|x64">
+      <Configuration>DebugGNS-Asan</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugGNS|Win32">
+      <Configuration>DebugGNS</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugGNS|x64">
+      <Configuration>DebugGNS</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-asan|Win32">
+      <Configuration>Release-asan</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-asan|x64">
+      <Configuration>Release-asan</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseGNS-Asan|Win32">
+      <Configuration>ReleaseGNS-Asan</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseGNS-Asan|x64">
+      <Configuration>ReleaseGNS-Asan</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseGNS|Win32">
+      <Configuration>ReleaseGNS</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseGNS|x64">
+      <Configuration>ReleaseGNS</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{B1559428-CDF8-4797-8766-0EA62BDD6D1B}</ProjectGuid>
+    <RootNamespace>template</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS-Asan|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <EnableASAN>true</EnableASAN>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS-Asan|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS-Asan|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <EnableASAN>true</EnableASAN>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <EnableASAN>true</EnableASAN>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <EnableASAN>false</EnableASAN>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS-Asan|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <EnableASAN>true</EnableASAN>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <EnableASAN>true</EnableASAN>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS-Asan|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS-Asan|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS-Asan|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS-Asan|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\Debug\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS-Asan|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\Debug\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS-Asan|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS-Asan|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <TargetName>$(ProjectName)-nosteam</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\Release\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS-Asan|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\Release\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>PARALLEL_GLOBAL_DISABLE;USE_RSS;CRO_DEBUG_;_CRT_SECURE_NO_WARNINGS;_MBCS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)extlibs\libgns\include;$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\bullet\include;$(SolutionDir)extlibs\curl\include;$(SolutionDir)libsocial\include;$(SolutionDir)..\libgns\golf_workshop\include;$(SolutionDir)extlibs\sqlite\include;$(SolutionDir)extlibs\react\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4723</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x64;$(SolutionDir)extlibs\bullet\lib\x64\Debug;$(SolutionDir)extlibs\curl\debug\lib;$(SolutionDir)..\libgns\golf_workshop\lib;$(SolutionDir)extlibs\sqlite\bin;$(SolutionDir)..\libgns\x64\Debug;$(SolutionDir)extlibs\react\lib\debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sapi.lib;libgjs-d.lib;libcurl_debug.lib;crogine-d.lib;SDL2.lib;SDL2main.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib;libsocial-d.lib;sqlite3.lib;reactphysics3d.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>PARALLEL_GLOBAL_DISABLE;USE_WORKSHOP;USE_GNS;GNS_STATIC;CRO_DEBUG_;_CRT_SECURE_NO_WARNINGS;_MBCS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\libgns\golf_ach\include;$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\react\include;$(SolutionDir)extlibs\bullet\include;$(SolutionDir)extlibs\curl\include;$(SolutionDir)..\libgns\libgns\include;$(SolutionDir)..\libgns\extlibs\steam\include;$(SolutionDir)..\libgns\golf_workshop\include;$(SolutionDir)extlibs\sqlite\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\Debug;$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x64;$(SolutionDir)extlibs\bullet\lib\x64\Debug;$(SolutionDir)extlibs\react\lib\debug;$(SolutionDir)extlibs\curl\debug\lib;$(SolutionDir)..\libgns\x64\Debug;$(SolutionDir)..\libgns\extlibs\steam\bin;$(SolutionDir)..\libgns\golf_workshop\lib;$(SolutionDir)extlibs\sqlite\bin</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sapi.lib;libcurl_debug.lib;crogine-d.lib;SDL2.lib;SDL2main.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib;libgns-d.lib;steam_api64.lib;golf_ach-d.lib;workshop-gns-d.lib;sqlite3.lib;reactphysics3d.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS-Asan|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>USE_WORKSHOP;USE_GNS;GNS_STATIC;CRO_DEBUG_;_CRT_SECURE_NO_WARNINGS;_MBCS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\libgns\golf_ach\include;$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\bullet\include;$(SolutionDir)extlibs\curl\include;$(SolutionDir)..\libgns\libgns\include;$(SolutionDir)..\libgns\extlibs\steam\include;$(SolutionDir)..\libgns\golf_workshop\include;$(SolutionDir)extlibs\sqlite\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\Debug;$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x64;$(SolutionDir)extlibs\bullet\lib\x64\Debug;$(SolutionDir)extlibs\curl\debug\lib;$(SolutionDir)..\libgns\x64\Debug;$(SolutionDir)..\libgns\extlibs\steam\bin;$(SolutionDir)..\libgns\golf_workshop\lib;$(SolutionDir)extlibs\sqlite\bin</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libcurl_debug.lib;crogine-d.lib;SDL2.lib;SDL2main.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib;libgns-d.lib;steam_api64.lib;golf_ach-d.lib;workshop-gns-d.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CRO_DEBUG_;_CRT_SECURE_NO_WARNINGS;_MBCS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\bullet\include;$(SolutionDir)libsocial\include;$(SolutionDir)extlibs\curl\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\Debug;$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x64;$(SolutionDir)extlibs\bullet\lib\x64\Debug;$(SolutionDir)extlibs\curl\debug\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>crogine-d.lib;SDL2.lib;SDL2main.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib;libcurl_debug.lib;libsocial-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CRO_DEBUG_;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\bullet\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>crogine-d.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CRO_DEBUG_;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\bullet\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>crogine-d.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugGNS-Asan|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CRO_DEBUG_;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\bullet\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>crogine-d.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CRO_DEBUG_;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\bullet\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>crogine-d.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\bullet\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>crogine.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\bullet\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>crogine.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS-Asan|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\bullet\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>crogine.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\bullet\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>crogine.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>GL41;USE_RSS;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\bullet\include;$(SolutionDir)extlibs\curl\include;$(SolutionDir)extlibs\libgns\include;$(SolutionDir)libsocial\include;$(SolutionDir)extlibs\sqlite\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4723</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x64;$(SolutionDir)extlibs\bullet\lib\x64\Release;$(SolutionDir)extlibs\curl\release\lib;$(SolutionDir)extlibs\libgns\bin;$(SolutionDir)extlibs\sqlite\bin;$(SolutionDir)..\libgns\x64\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sapi.lib;libgjs.lib;libsocial.lib;libgns.lib;libcurl.lib;crogine.lib;SDL2.lib;SDL2main.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;sqlite3.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>USE_WORKSHOP;GL41;USE_GNS;GNS_STATIC;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\libgns\golf_ach\include;$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\bullet\include;$(SolutionDir)extlibs\curl\include;$(SolutionDir)..\libgns\libgns\include;$(SolutionDir)..\libgns\extlibs\steam\include;$(SolutionDir)..\libgns\golf_workshop\include;$(SolutionDir)extlibs\sqlite\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\Release;$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x64;$(SolutionDir)extlibs\bullet\lib\x64\Release;$(SolutionDir)..\libgns\x64\Release;$(SolutionDir)..\libgns\extlibs\steam\bin;$(SolutionDir)..\libgns\golf_workshop\lib;$(SolutionDir)extlibs\sqlite\bin</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sapi.lib;libgns.lib;crogine.lib;SDL2.lib;SDL2main.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;steam_api64.lib;golf_ach.lib;workshop-gns.lib;sqlite3.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGNS-Asan|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>USE_WORKSHOP;GL41;USE_GNS;GNS_STATIC;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\libgns\golf_ach\include;$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\bullet\include;$(SolutionDir)extlibs\curl\include;$(SolutionDir)..\libgns\libgns\include;$(SolutionDir)..\libgns\extlibs\steam\include;$(SolutionDir)..\libgns\golf_workshop\include;$(SolutionDir)extlibs\sqlite\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\Release;$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x64;$(SolutionDir)extlibs\bullet\lib\x64\Release;$(SolutionDir)..\libgns\x64\Release;$(SolutionDir)..\libgns\extlibs\steam\bin;$(SolutionDir)..\libgns\golf_workshop\lib;$(SolutionDir)extlibs\sqlite\bin</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libgns.lib;crogine.lib;SDL2.lib;SDL2main.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;steam_api64.lib;golf_ach.lib;workshop-gns.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PreBuildEvent>
+      <Command>"$(ProjectDir)src/version/buildnumber.exe"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\bullet\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)extlibs\sdl2\lib\x64;$(SolutionDir)extlibs\bullet\lib\x64\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>crogine.lib;SDL2.lib;SDL2main.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\DefaultAchievements.cpp" />
+    <ClCompile Include="src\editor\BushState.cpp" />
+    <ClCompile Include="src\golf\BallAnimationSystem.cpp" />
+    <ClCompile Include="src\golf\BallSystem.cpp" />
+    <ClCompile Include="src\golf\BallTrail.cpp" />
+    <ClCompile Include="src\golf\BilliardsClientCollision.cpp" />
+    <ClCompile Include="src\golf\BilliardsInput.cpp" />
+    <ClCompile Include="src\golf\BilliardsSoundDirector.cpp" />
+    <ClCompile Include="src\golf\BilliardsState.cpp" />
+    <ClCompile Include="src\golf\BilliardsStateUI.cpp" />
+    <ClCompile Include="src\golf\BilliardsSystem.cpp" />
+    <ClCompile Include="src\golf\BilliardsSystemReact.cpp" />
+    <ClCompile Include="src\golf\ButtonHoldSystem.cpp" />
+    <ClCompile Include="src\golf\CameraFollowSystem.cpp" />
+    <ClCompile Include="src\golf\Career.cpp" />
+    <ClCompile Include="src\golf\CareerState.cpp" />
+    <ClCompile Include="src\golf\ChunkVisSystem.cpp" />
+    <ClCompile Include="src\golf\ClientCollisionSystem.cpp" />
+    <ClCompile Include="src\golf\CloudSystem.cpp" />
+    <ClCompile Include="src\golf\ClubhouseState.cpp" />
+    <ClCompile Include="src\golf\ClubhouseStateUI.cpp" />
+    <ClCompile Include="src\golf\ClubInfoState.cpp" />
+    <ClCompile Include="src\golf\ClubModels.cpp" />
+    <ClCompile Include="src\golf\Clubs.cpp" />
+    <ClCompile Include="src\golf\CoinSystem.cpp" />
+    <ClCompile Include="src\golf\CollisionMesh.cpp" />
+    <ClCompile Include="src\golf\CPUGolfer.cpp" />
+    <ClCompile Include="src\golf\CreditsState.cpp" />
+    <ClCompile Include="src\golf\DebugDraw.cpp" />
+    <ClCompile Include="src\golf\DrivingRangeDirector.cpp" />
+    <ClCompile Include="src\golf\DrivingState.cpp" />
+    <ClCompile Include="src\golf\DrivingStateUI.cpp" />
+    <ClCompile Include="src\golf\ErrorState.cpp" />
+    <ClCompile Include="src\golf\FireworksSystem.cpp" />
+    <ClCompile Include="src\golf\FloatingTextSystem.cpp" />
+    <ClCompile Include="src\golf\FpsCameraSystem.cpp" />
+    <ClCompile Include="src\golf\FreePlayState.cpp" />
+    <ClCompile Include="src\golf\GameConsts.cpp" />
+    <ClCompile Include="src\golf\GcState.cpp" />
+    <ClCompile Include="src\golf\GolfCartSystem.cpp" />
+    <ClCompile Include="src\golf\GolfParticleDirector.cpp" />
+    <ClCompile Include="src\golf\GolfSoundDirector.cpp" />
+    <ClCompile Include="src\golf\GolfState.cpp" />
+    <ClCompile Include="src\golf\GolfStateAssets.cpp" />
+    <ClCompile Include="src\golf\GolfStateCameras.cpp" />
+    <ClCompile Include="src\golf\GolfStateDebug.cpp" />
+    <ClCompile Include="src\golf\GolfStateScoring.cpp" />
+    <ClCompile Include="src\golf\InputParser.cpp" />
+    <ClCompile Include="src\golf\GolfStateUI.cpp" />
+    <ClCompile Include="src\golf\KeyboardState.cpp" />
+    <ClCompile Include="src\golf\LeaderboardState.cpp" />
+    <ClCompile Include="src\golf\LeaderboardTexture.cpp" />
+    <ClCompile Include="src\golf\League.cpp" />
+    <ClCompile Include="src\golf\LeagueNames.cpp" />
+    <ClCompile Include="src\golf\LeagueState.cpp" />
+    <ClCompile Include="src\golf\LightAnimationSystem.cpp" />
+    <ClCompile Include="src\golf\LightmapProjectionSystem.cpp" />
+    <ClCompile Include="src\golf\MapOverviewState.cpp" />
+    <ClCompile Include="src\golf\MenuAvatars.cpp" />
+    <ClCompile Include="src\golf\MenuCallbacks.cpp" />
+    <ClCompile Include="src\golf\MenuCreation.cpp" />
+    <ClCompile Include="src\golf\MenuCustomisation.cpp" />
+    <ClCompile Include="src\golf\MenuSoundDirector.cpp" />
+    <ClCompile Include="src\golf\MenuState.cpp" />
+    <ClCompile Include="src\golf\MenuStateCan.cpp" />
+    <ClCompile Include="src\golf\MessageOverlayState.cpp" />
+    <ClCompile Include="src\golf\MiniBallSystem.cpp" />
+    <ClCompile Include="src\golf\MoonPhase.cpp" />
+    <ClCompile Include="src\golf\NameScrollSystem.cpp" />
+    <ClCompile Include="src\golf\NewsState.cpp" />
+    <ClCompile Include="src\golf\NotificationSystem.cpp" />
+    <ClCompile Include="src\golf\OptionsState.cpp" />
+    <ClCompile Include="src\golf\ParticleDirector.cpp" />
+    <ClCompile Include="src\golf\Path.cpp" />
+    <ClCompile Include="src\golf\PauseState.cpp" />
+    <ClCompile Include="src\golf\PlayerAvatar.cpp" />
+    <ClCompile Include="src\golf\PlayerData.cpp" />
+    <ClCompile Include="src\golf\PlayerManagementState.cpp" />
+    <ClCompile Include="src\golf\PlaylistState.cpp" />
+    <ClCompile Include="src\golf\PocketBallSystem.cpp" />
+    <ClCompile Include="src\golf\PracticeState.cpp" />
+    <ClCompile Include="src\golf\ProfileState.cpp" />
+    <ClCompile Include="src\golf\ProgressIcon.cpp" />
+    <ClCompile Include="src\golf\PropFollowSystem.cpp" />
+    <ClCompile Include="src\golf\RayResultCallback.cpp" />
+    <ClCompile Include="src\golf\RopeSystem.cpp" />
+    <ClCompile Include="src\golf\server\EightballDirector.cpp" />
+    <ClCompile Include="src\golf\server\NineballDirector.cpp" />
+    <ClCompile Include="src\golf\server\Server.cpp" />
+    <ClCompile Include="src\golf\server\ServerBilliardsState.cpp" />
+    <ClCompile Include="src\golf\server\ServerGolfRules.cpp" />
+    <ClCompile Include="src\golf\server\ServerGolfState.cpp" />
+    <ClCompile Include="src\golf\server\ServerLobbyGame.cpp" />
+    <ClCompile Include="src\golf\server\ServerLobbyState.cpp" />
+    <ClCompile Include="src\golf\server\ServerVoice.cpp" />
+    <ClCompile Include="src\golf\server\SnookerDirector.cpp" />
+    <ClCompile Include="src\golf\SharedStateData.cpp" />
+    <ClCompile Include="src\golf\ShopState.cpp" />
+    <ClCompile Include="src\golf\SoundEffectsDirector.cpp" />
+    <ClCompile Include="src\golf\SpectatorSystem.cpp" />
+    <ClCompile Include="src\golf\spooky2.cpp" />
+    <ClCompile Include="src\golf\StatsState.cpp" />
+    <ClCompile Include="src\golf\StudioCameraSystem.cpp" />
+    <ClCompile Include="src\golf\Swingput.cpp" />
+    <ClCompile Include="src\golf\TableData.cpp" />
+    <ClCompile Include="src\golf\TerrainBuilder.cpp" />
+    <ClCompile Include="src\golf\TerrainChunks.cpp" />
+    <ClCompile Include="src\golf\TerrainDepthmap.cpp" />
+    <ClCompile Include="src\golf\TextChat.cpp" />
+    <ClCompile Include="src\golf\TimeOfDay.cpp" />
+    <ClCompile Include="src\golf\Tournament.cpp" />
+    <ClCompile Include="src\golf\TournamentState.cpp" />
+    <ClCompile Include="src\golf\TrophyDisplaySystem.cpp" />
+    <ClCompile Include="src\golf\TrophyState.cpp" />
+    <ClCompile Include="src\golf\TutorialDirector.cpp" />
+    <ClCompile Include="src\golf\TutorialState.cpp" />
+    <ClCompile Include="src\golf\UnlockState.cpp" />
+    <ClCompile Include="src\golf\VatAnimationSystem.cpp" />
+    <ClCompile Include="src\golf\VatFile.cpp" />
+    <ClCompile Include="src\golf\VoiceChat.cpp" />
+    <ClCompile Include="src\golf\Weather.cpp" />
+    <ClCompile Include="src\golf\WeatherAnimationSystem.cpp" />
+    <ClCompile Include="src\golf\WeatherDirector.cpp" />
+    <ClCompile Include="src\LoadingScreen.cpp" />
+    <ClCompile Include="src\M3UPlaylist.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\GolfGame.cpp" />
+    <ClCompile Include="src\rss\Newsfeed.cpp" />
+    <ClCompile Include="src\rss\pugixml.cpp" />
+    <ClCompile Include="src\runner\CarSystem.cpp" />
+    <ClCompile Include="src\runner\EndlessAttractState.cpp" />
+    <ClCompile Include="src\runner\EndlessDrivingState.cpp" />
+    <ClCompile Include="src\runner\EndlessPauseState.cpp" />
+    <ClCompile Include="src\runner\EndlessSoundDirector.cpp" />
+    <ClCompile Include="src\runner\Track.cpp" />
+    <ClCompile Include="src\scrub\ScrubAttractState.cpp" />
+    <ClCompile Include="src\scrub\ScrubBackgroundState.cpp" />
+    <ClCompile Include="src\scrub\ScrubGameState.cpp" />
+    <ClCompile Include="src\scrub\ScrubParticleDirector.cpp" />
+    <ClCompile Include="src\scrub\ScrubPauseState.cpp" />
+    <ClCompile Include="src\scrub\ScrubPhysicsSystem.cpp" />
+    <ClCompile Include="src\scrub\ScrubSoundDirector.cpp" />
+    <ClCompile Include="src\sockets\IXBench.cpp" />
+    <ClCompile Include="src\sockets\IXCancellationRequest.cpp" />
+    <ClCompile Include="src\sockets\IXConnectionState.cpp" />
+    <ClCompile Include="src\sockets\IXDNSLookup.cpp" />
+    <ClCompile Include="src\sockets\IXExponentialBackoff.cpp" />
+    <ClCompile Include="src\sockets\IXGetFreePort.cpp" />
+    <ClCompile Include="src\sockets\IXGzipCodec.cpp" />
+    <ClCompile Include="src\sockets\IXHttp.cpp" />
+    <ClCompile Include="src\sockets\IXHttpClient.cpp" />
+    <ClCompile Include="src\sockets\IXHttpServer.cpp" />
+    <ClCompile Include="src\sockets\IXNetSystem.cpp" />
+    <ClCompile Include="src\sockets\IXSelectInterrupt.cpp" />
+    <ClCompile Include="src\sockets\IXSelectInterruptEvent.cpp" />
+    <ClCompile Include="src\sockets\IXSelectInterruptFactory.cpp" />
+    <ClCompile Include="src\sockets\IXSelectInterruptPipe.cpp" />
+    <ClCompile Include="src\sockets\IXSetThreadName.cpp" />
+    <ClCompile Include="src\sockets\IXSocket.cpp" />
+    <ClCompile Include="src\sockets\IXSocketConnect.cpp" />
+    <ClCompile Include="src\sockets\IXSocketFactory.cpp" />
+    <ClCompile Include="src\sockets\IXSocketServer.cpp" />
+    <ClCompile Include="src\sockets\IXSocketTLSOptions.cpp" />
+    <ClCompile Include="src\sockets\IXStrCaseCompare.cpp" />
+    <ClCompile Include="src\sockets\IXUdpSocket.cpp" />
+    <ClCompile Include="src\sockets\IXUrlParser.cpp" />
+    <ClCompile Include="src\sockets\IXUserAgent.cpp" />
+    <ClCompile Include="src\sockets\IXUuid.cpp" />
+    <ClCompile Include="src\sockets\IXWebSocket.cpp" />
+    <ClCompile Include="src\sockets\IXWebSocketCloseConstants.cpp" />
+    <ClCompile Include="src\sockets\IXWebSocketHandshake.cpp" />
+    <ClCompile Include="src\sockets\IXWebSocketHttpHeaders.cpp" />
+    <ClCompile Include="src\sockets\IXWebSocketPerMessageDeflate.cpp" />
+    <ClCompile Include="src\sockets\IXWebSocketPerMessageDeflateCodec.cpp" />
+    <ClCompile Include="src\sockets\IXWebSocketPerMessageDeflateOptions.cpp" />
+    <ClCompile Include="src\sockets\IXWebSocketProxyServer.cpp" />
+    <ClCompile Include="src\sockets\IXWebSocketServer.cpp" />
+    <ClCompile Include="src\sockets\IXWebSocketTransport.cpp" />
+    <ClCompile Include="src\SplashScreenState.cpp" />
+    <ClCompile Include="src\sportsball\BackgroundPhysicsSystem.cpp" />
+    <ClCompile Include="src\sportsball\SBallAttractState.cpp" />
+    <ClCompile Include="src\sportsball\SBallBackgroundState.cpp" />
+    <ClCompile Include="src\sportsball\SBallGameState.cpp" />
+    <ClCompile Include="src\sportsball\SBallParticleDirector.cpp" />
+    <ClCompile Include="src\sportsball\SBallPhysicsSystem.cpp" />
+    <ClCompile Include="src\sportsball\SBallSoundDirector.cpp" />
+    <ClCompile Include="src\sqlite\ProfileDB.cpp" />
+    <ClCompile Include="src\sqlite\SqliteState.cpp" />
+    <ClCompile Include="src\Sunclock.cpp" />
+    <ClCompile Include="src\WebsocketServer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="src\Colordome-32.hpp" />
+    <ClInclude Include="src\DefaultAchievements.hpp" />
+    <ClInclude Include="src\editor\BushState.hpp" />
+    <ClInclude Include="src\ErrorCheck.hpp" />
+    <ClInclude Include="src\golf\AvatarAnimation.hpp" />
+    <ClInclude Include="src\golf\AvatarRotationSystem.hpp" />
+    <ClInclude Include="src\golf\BallAnimationSystem.hpp" />
+    <ClInclude Include="src\golf\BallSystem.hpp" />
+    <ClInclude Include="src\golf\BallTrail.hpp" />
+    <ClInclude Include="src\golf\BannerTexture.hpp" />
+    <ClInclude Include="src\golf\BeaconCallback.hpp" />
+    <ClInclude Include="src\golf\Billboard.hpp" />
+    <ClInclude Include="src\golf\BilliardsClientCollision.hpp" />
+    <ClInclude Include="src\golf\BilliardsSoundDirector.hpp" />
+    <ClInclude Include="src\golf\BilliardsState.hpp" />
+    <ClInclude Include="src\golf\BilliardsSystem.hpp" />
+    <ClInclude Include="src\golf\BilliardsInput.hpp" />
+    <ClInclude Include="src\golf\BilliardsSystemReact.hpp" />
+    <ClInclude Include="src\golf\ButtonHoldSystem.hpp" />
+    <ClInclude Include="src\golf\CallbackData.hpp" />
+    <ClInclude Include="src\golf\CameraFollowSystem.hpp" />
+    <ClInclude Include="src\golf\Career.hpp" />
+    <ClInclude Include="src\golf\CareerState.hpp" />
+    <ClInclude Include="src\golf\ChunkVisSystem.hpp" />
+    <ClInclude Include="src\golf\CircularBuffer.hpp" />
+    <ClInclude Include="src\golf\ClientCollisionSystem.hpp" />
+    <ClInclude Include="src\golf\ClientPacketData.hpp" />
+    <ClInclude Include="src\golf\CloudSystem.hpp" />
+    <ClInclude Include="src\golf\ClubhouseState.hpp" />
+    <ClInclude Include="src\golf\ClubInfoState.hpp" />
+    <ClInclude Include="src\golf\ClubModels.hpp" />
+    <ClInclude Include="src\golf\ClubModifiers.hpp" />
+    <ClInclude Include="src\golf\Clubs.hpp" />
+    <ClInclude Include="src\golf\CoinSystem.hpp" />
+    <ClInclude Include="src\golf\CollisionMesh.hpp" />
+    <ClInclude Include="src\golf\CommandIDs.hpp" />
+    <ClInclude Include="src\golf\CommonConsts.hpp" />
+    <ClInclude Include="src\golf\CPUGolfer.hpp" />
+    <ClInclude Include="src\golf\CreditsState.hpp" />
+    <ClInclude Include="src\golf\DebugDraw.hpp" />
+    <ClInclude Include="src\golf\DrivingRangeDirector.hpp" />
+    <ClInclude Include="src\golf\DrivingState.hpp" />
+    <ClInclude Include="src\golf\ErrorState.hpp" />
+    <ClInclude Include="src\golf\EventOverlay.hpp" />
+    <ClInclude Include="src\golf\FireworksSystem.hpp" />
+    <ClInclude Include="src\golf\FloatingTextSystem.hpp" />
+    <ClInclude Include="src\golf\FpsCameraSystem.hpp" />
+    <ClInclude Include="src\golf\FreePlayState.hpp" />
+    <ClInclude Include="src\golf\GameConsts.hpp" />
+    <ClInclude Include="src\golf\GcState.hpp" />
+    <ClInclude Include="src\golf\GolfCartSystem.hpp" />
+    <ClInclude Include="src\golf\GolfParticleDirector.hpp" />
+    <ClInclude Include="src\golf\GolfSoundDirector.hpp" />
+    <ClInclude Include="src\golf\GolfState.hpp" />
+    <ClInclude Include="src\golf\HoleData.hpp" />
+    <ClInclude Include="src\golf\InputBinding.hpp" />
+    <ClInclude Include="src\golf\InputParser.hpp" />
+    <ClInclude Include="src\golf\InterpolationSystem.hpp" />
+    <ClInclude Include="src\golf\Inventory.hpp" />
+    <ClInclude Include="src\golf\KeyboardState.hpp" />
+    <ClInclude Include="src\golf\LeaderboardState.hpp" />
+    <ClInclude Include="src\golf\LeaderboardTexture.hpp" />
+    <ClInclude Include="src\golf\League.hpp" />
+    <ClInclude Include="src\golf\LeagueNames.hpp" />
+    <ClInclude Include="src\golf\LeagueState.hpp" />
+    <ClInclude Include="src\golf\LightAnimationSystem.hpp" />
+    <ClInclude Include="src\golf\LightmapProjectionSystem.hpp" />
+    <ClInclude Include="src\golf\MapOverviewState.hpp" />
+    <ClInclude Include="src\golf\MenuCallbacks.hpp" />
+    <ClInclude Include="src\golf\MenuConsts.hpp" />
+    <ClInclude Include="src\golf\MenuSoundDirector.hpp" />
+    <ClInclude Include="src\golf\MenuState.hpp" />
+    <ClInclude Include="src\golf\MessageIDs.hpp" />
+    <ClInclude Include="src\golf\MessageOverlayState.hpp" />
+    <ClInclude Include="src\golf\MiniBallSystem.hpp" />
+    <ClInclude Include="src\golf\MinimapZoom.hpp" />
+    <ClInclude Include="src\golf\NameScrollSystem.hpp" />
+    <ClInclude Include="src\golf\Networking.hpp" />
+    <ClInclude Include="src\golf\NewsState.hpp" />
+    <ClInclude Include="src\golf\NotificationSystem.hpp" />
+    <ClInclude Include="src\golf\OptionsState.hpp" />
+    <ClInclude Include="src\golf\PacketIDs.hpp" />
+    <ClInclude Include="src\golf\ParticleDirector.hpp" />
+    <ClInclude Include="src\golf\Path.hpp" />
+    <ClInclude Include="src\golf\PauseState.hpp" />
+    <ClInclude Include="src\golf\PlayerAvatar.hpp" />
+    <ClInclude Include="src\golf\PlayerColours.hpp" />
+    <ClInclude Include="src\golf\PlayerData.hpp" />
+    <ClInclude Include="src\golf\PlayerManagementState.hpp" />
+    <ClInclude Include="src\golf\PlaylistState.hpp" />
+    <ClInclude Include="src\golf\PocketBallSystem.hpp" />
+    <ClInclude Include="src\golf\PoissonDisk.hpp" />
+    <ClInclude Include="src\golf\PracticeState.hpp" />
+    <ClInclude Include="src\golf\ProfileState.hpp" />
+    <ClInclude Include="src\golf\ProgressIcon.hpp" />
+    <ClInclude Include="src\golf\PropFollowSystem.hpp" />
+    <ClInclude Include="src\golf\PuttingState.hpp" />
+    <ClInclude Include="src\golf\RandNames.hpp" />
+    <ClInclude Include="src\golf\RayResultCallback.hpp" />
+    <ClInclude Include="src\golf\RopeSystem.hpp" />
+    <ClInclude Include="src\golf\ScoreStrings.hpp" />
+    <ClInclude Include="src\golf\ScoreType.hpp" />
+    <ClInclude Include="src\golf\server\BilliardsDirector.hpp" />
+    <ClInclude Include="src\golf\server\CPUStats.hpp" />
+    <ClInclude Include="src\golf\server\EightballDirector.hpp" />
+    <ClInclude Include="src\golf\server\Networking.hpp" />
+    <ClInclude Include="src\golf\server\NineballDirector.hpp" />
+    <ClInclude Include="src\golf\server\Server.hpp" />
+    <ClInclude Include="src\golf\server\ServerBilliardsState.hpp" />
+    <ClInclude Include="src\golf\server\ServerGolfState.hpp" />
+    <ClInclude Include="src\golf\server\ServerLobbyState.hpp" />
+    <ClInclude Include="src\golf\server\ServerMessages.hpp" />
+    <ClInclude Include="src\golf\server\ServerPacketData.hpp" />
+    <ClInclude Include="src\golf\server\ServerState.hpp" />
+    <ClInclude Include="src\golf\server\ServerVoice.hpp" />
+    <ClInclude Include="src\golf\server\SnookerDirector.hpp" />
+    <ClInclude Include="src\golf\SharedCourseData.hpp" />
+    <ClInclude Include="src\golf\SharedProfileData.hpp" />
+    <ClInclude Include="src\golf\SharedStateData.hpp" />
+    <ClInclude Include="src\golf\ShopState.hpp" />
+    <ClInclude Include="src\golf\SoundEffectsDirector.hpp" />
+    <ClInclude Include="src\golf\SpectatorAnimCallback.hpp" />
+    <ClInclude Include="src\golf\SpectatorSystem.hpp" />
+    <ClInclude Include="src\golf\spooky2.hpp" />
+    <ClInclude Include="src\golf\StatsState.hpp" />
+    <ClInclude Include="src\golf\StudioCameraSystem.hpp" />
+    <ClInclude Include="src\golf\Swingput.hpp" />
+    <ClInclude Include="src\golf\TableData.hpp" />
+    <ClInclude Include="src\golf\Terrain.hpp" />
+    <ClInclude Include="src\golf\TerrainBuilder.hpp" />
+    <ClInclude Include="src\golf\TerrainChunks.hpp" />
+    <ClInclude Include="src\golf\TerrainDepthmap.hpp" />
+    <ClInclude Include="src\golf\TextAnimCallback.hpp" />
+    <ClInclude Include="src\golf\TextChat.hpp" />
+    <ClInclude Include="src\golf\Thumbsticks.hpp" />
+    <ClInclude Include="src\golf\TimeOfDay.hpp" />
+    <ClInclude Include="src\golf\Tournament.hpp" />
+    <ClInclude Include="src\golf\TournamentState.hpp" />
+    <ClInclude Include="src\golf\Treeset.hpp" />
+    <ClInclude Include="src\golf\TrophyDisplaySystem.hpp" />
+    <ClInclude Include="src\golf\TrophyState.hpp" />
+    <ClInclude Include="src\golf\TutorialDirector.hpp" />
+    <ClInclude Include="src\golf\TutorialState.hpp" />
+    <ClInclude Include="src\golf\UnlockItems.hpp" />
+    <ClInclude Include="src\golf\UnlockState.hpp" />
+    <ClInclude Include="src\golf\Utility.hpp" />
+    <ClInclude Include="src\golf\VatFile.hpp" />
+    <ClInclude Include="src\golf\VatAnimationSystem.hpp" />
+    <ClInclude Include="src\golf\VoiceChat.hpp" />
+    <ClInclude Include="src\golf\WeatherAnimationSystem.hpp" />
+    <ClInclude Include="src\golf\WeatherDirector.hpp" />
+    <ClInclude Include="src\golf\XPAwardStrings.hpp" />
+    <ClInclude Include="src\golf\XPValues.hpp" />
+    <ClInclude Include="src\ImTheme.hpp" />
+    <ClInclude Include="src\LatLong.hpp" />
+    <ClInclude Include="src\LoadingScreen.hpp" />
+    <ClInclude Include="src\GolfGame.hpp" />
+    <ClInclude Include="src\M3UPlaylist.hpp" />
+    <ClInclude Include="src\PlayerGuide.hpp" />
+    <ClInclude Include="src\rss\Newsfeed.hpp" />
+    <ClInclude Include="src\rss\pugiconfig.hpp" />
+    <ClInclude Include="src\rss\pugixml.hpp" />
+    <ClInclude Include="src\runner\CarSystem.hpp" />
+    <ClInclude Include="src\runner\EndlessAttractState.hpp" />
+    <ClInclude Include="src\runner\EndlessConsts.hpp" />
+    <ClInclude Include="src\runner\EndlessDrivingState.hpp" />
+    <ClInclude Include="src\runner\EndlessMessages.hpp" />
+    <ClInclude Include="src\runner\EndlessPauseState.hpp" />
+    <ClInclude Include="src\runner\EndlessShared.hpp" />
+    <ClInclude Include="src\runner\EndlessSoundDirector.hpp" />
+    <ClInclude Include="src\runner\Player.hpp" />
+    <ClInclude Include="src\runner\Track.hpp" />
+    <ClInclude Include="src\runner\TrackCamera.hpp" />
+    <ClInclude Include="src\runner\TrackSegment.hpp" />
+    <ClInclude Include="src\runner\TrackSprite.hpp" />
+    <ClInclude Include="src\scrub\ScrubAttractState.hpp" />
+    <ClInclude Include="src\scrub\ScrubBackgroundState.hpp" />
+    <ClInclude Include="src\scrub\ScrubConsts.hpp" />
+    <ClInclude Include="src\scrub\ScrubGameState.hpp" />
+    <ClInclude Include="src\scrub\ScrubParticleDirector.hpp" />
+    <ClInclude Include="src\scrub\ScrubPauseState.hpp" />
+    <ClInclude Include="src\scrub\ScrubPhysicsSystem.hpp" />
+    <ClInclude Include="src\scrub\ScrubSharedData.hpp" />
+    <ClInclude Include="src\scrub\ScrubSoundDirector.hpp" />
+    <ClInclude Include="src\scrub\TabData.hpp" />
+    <ClInclude Include="src\sockets\IXBase64.h" />
+    <ClInclude Include="src\sockets\IXBench.h" />
+    <ClInclude Include="src\sockets\IXCancellationRequest.h" />
+    <ClInclude Include="src\sockets\IXConnectionState.h" />
+    <ClInclude Include="src\sockets\IXDNSLookup.h" />
+    <ClInclude Include="src\sockets\IXExponentialBackoff.h" />
+    <ClInclude Include="src\sockets\IXGetFreePort.h" />
+    <ClInclude Include="src\sockets\IXGzipCodec.h" />
+    <ClInclude Include="src\sockets\IXHttp.h" />
+    <ClInclude Include="src\sockets\IXHttpClient.h" />
+    <ClInclude Include="src\sockets\IXHttpServer.h" />
+    <ClInclude Include="src\sockets\IXNetSystem.h" />
+    <ClInclude Include="src\sockets\IXProgressCallback.h" />
+    <ClInclude Include="src\sockets\IXSelectInterrupt.h" />
+    <ClInclude Include="src\sockets\IXSelectInterruptEvent.h" />
+    <ClInclude Include="src\sockets\IXSelectInterruptFactory.h" />
+    <ClInclude Include="src\sockets\IXSelectInterruptPipe.h" />
+    <ClInclude Include="src\sockets\IXSetThreadName.h" />
+    <ClInclude Include="src\sockets\IXSocket.h" />
+    <ClInclude Include="src\sockets\IXSocketConnect.h" />
+    <ClInclude Include="src\sockets\IXSocketFactory.h" />
+    <ClInclude Include="src\sockets\IXSocketServer.h" />
+    <ClInclude Include="src\sockets\IXSocketTLSOptions.h" />
+    <ClInclude Include="src\sockets\IXStrCaseCompare.h" />
+    <ClInclude Include="src\sockets\IXUdpSocket.h" />
+    <ClInclude Include="src\sockets\IXUniquePtr.h" />
+    <ClInclude Include="src\sockets\IXUrlParser.h" />
+    <ClInclude Include="src\sockets\IXUserAgent.h" />
+    <ClInclude Include="src\sockets\IXUtf8Validator.h" />
+    <ClInclude Include="src\sockets\IXUuid.h" />
+    <ClInclude Include="src\sockets\IXWebSocket.h" />
+    <ClInclude Include="src\sockets\IXWebSocketCloseConstants.h" />
+    <ClInclude Include="src\sockets\IXWebSocketCloseInfo.h" />
+    <ClInclude Include="src\sockets\IXWebSocketErrorInfo.h" />
+    <ClInclude Include="src\sockets\IXWebSocketHandshake.h" />
+    <ClInclude Include="src\sockets\IXWebSocketHandshakeKeyGen.h" />
+    <ClInclude Include="src\sockets\IXWebSocketHttpHeaders.h" />
+    <ClInclude Include="src\sockets\IXWebSocketInitResult.h" />
+    <ClInclude Include="src\sockets\IXWebSocketMessage.h" />
+    <ClInclude Include="src\sockets\IXWebSocketMessageType.h" />
+    <ClInclude Include="src\sockets\IXWebSocketOpenInfo.h" />
+    <ClInclude Include="src\sockets\IXWebSocketPerMessageDeflate.h" />
+    <ClInclude Include="src\sockets\IXWebSocketPerMessageDeflateCodec.h" />
+    <ClInclude Include="src\sockets\IXWebSocketPerMessageDeflateOptions.h" />
+    <ClInclude Include="src\sockets\IXWebSocketProxyServer.h" />
+    <ClInclude Include="src\sockets\IXWebSocketSendData.h" />
+    <ClInclude Include="src\sockets\IXWebSocketSendInfo.h" />
+    <ClInclude Include="src\sockets\IXWebSocketServer.h" />
+    <ClInclude Include="src\sockets\IXWebSocketTransport.h" />
+    <ClInclude Include="src\sockets\IXWebSocketVersion.h" />
+    <ClInclude Include="src\SplashScreenState.hpp" />
+    <ClInclude Include="src\sportsball\BackgroundPhysicsSystem.hpp" />
+    <ClInclude Include="src\sportsball\BallType.hpp" />
+    <ClInclude Include="src\sportsball\SBallAttractState.hpp" />
+    <ClInclude Include="src\sportsball\SBallBackgroundState.hpp" />
+    <ClInclude Include="src\sportsball\SBallConsts.hpp" />
+    <ClInclude Include="src\sportsball\SBallGameState.hpp" />
+    <ClInclude Include="src\sportsball\SballParticleDirector.hpp" />
+    <ClInclude Include="src\sportsball\SBallPhysicsSystem.hpp" />
+    <ClInclude Include="src\sportsball\SBallSoundDirector.hpp" />
+    <ClInclude Include="src\sqlite\ProfileDB.hpp" />
+    <ClInclude Include="src\sqlite\SqliteState.hpp" />
+    <ClInclude Include="src\StateIDs.hpp" />
+    <ClInclude Include="src\Sunclock.hpp" />
+    <ClInclude Include="src\WebsocketServer.hpp" />
+    <ClInclude Include="VersionNumber.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\golf\MenuEnum.inl" />
+    <None Include="src\golf\OptionsEnum.inl" />
+    <None Include="src\golf\ProfileEnum.inl" />
+    <None Include="src\golf\shaders\BeaconShader.inl" />
+    <None Include="src\golf\shaders\BillboardShader.inl" />
+    <None Include="src\golf\shaders\Blur.inl" />
+    <None Include="src\golf\shaders\CelShader.inl" />
+    <None Include="src\golf\shaders\CloudShader.inl" />
+    <None Include="src\golf\shaders\CompositeShader.inl" />
+    <None Include="src\golf\shaders\EmissiveShader.inl" />
+    <None Include="src\golf\shaders\Glass.inl" />
+    <None Include="src\golf\shaders\GlowShader.inl" />
+    <None Include="src\golf\shaders\Hole.inl" />
+    <None Include="src\golf\shaders\Hologram.inl" />
+    <None Include="src\golf\shaders\Lantern.inl" />
+    <None Include="src\golf\shaders\LensFlare.inl" />
+    <None Include="src\golf\shaders\MinimapShader.inl" />
+    <None Include="src\golf\shaders\PaletteSwap.inl" />
+    <None Include="src\golf\shaders\PointLightShader.inl" />
+    <None Include="src\golf\shaders\PostProcess.inl" />
+    <None Include="src\golf\shaders\RoidShader.inl" />
+    <None Include="src\golf\shaders\ShaderIncludes.inl" />
+    <None Include="src\golf\shaders\ShadowMapping.inl" />
+    <None Include="src\golf\shaders\ShopItems.inl" />
+    <None Include="src\golf\shaders\TerrainMaterials.inl" />
+    <None Include="src\golf\shaders\TerrainShader.inl" />
+    <None Include="src\golf\shaders\TransitionShader.inl" />
+    <None Include="src\golf\shaders\TreeShader.inl" />
+    <None Include="src\golf\shaders\TutorialShaders.inl" />
+    <None Include="src\golf\shaders\TVShader.inl" />
+    <None Include="src\golf\shaders\UnlockShader.inl" />
+    <None Include="src\golf\shaders\WaterShader.inl" />
+    <None Include="src\golf\shaders\Weather.inl" />
+    <None Include="src\golf\shaders\WireframeShader.inl" />
+    <None Include="src\golf\ShopEnum.inl" />
+    <None Include="src\scrub\Shaders.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="golf.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

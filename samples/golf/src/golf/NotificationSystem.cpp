@@ -1,0 +1,121 @@
+/*-----------------------------------------------------------------------
+
+Matt Marchant 2021 - 2023
+http://trederia.blogspot.com
+
+Super Video Golf - zlib licence.
+
+This software is provided 'as-is', without any express or
+implied warranty.In no event will the authors be held
+liable for any damages arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute
+it freely, subject to the following restrictions :
+
+1. The origin of this software must not be misrepresented;
+you must not claim that you wrote the original software.
+If you use this software in a product, an acknowledgment
+in the product documentation would be appreciated but
+is not required.
+
+2. Altered source versions must be plainly marked as such,
+and must not be misrepresented as being the original software.
+
+3. This notice may not be removed or altered from any
+source distribution.
+
+-----------------------------------------------------------------------*/
+
+#include "NotificationSystem.hpp"
+
+#include <crogine/ecs/Scene.hpp>
+#include <crogine/ecs/components/Text.hpp>
+#include <crogine/ecs/components/Drawable2D.hpp>
+
+namespace
+{
+    constexpr float CharTime = 0.01f;
+    constexpr float HoldTime = 3.f;
+}
+
+NotificationSystem::NotificationSystem(cro::MessageBus& mb)
+    : cro::System(mb, typeid(NotificationSystem))
+{
+    requireComponent<cro::Text>();
+    requireComponent<Notification>();
+}
+
+//public
+void NotificationSystem::process(float dt)
+{
+    auto& entities = getEntities();
+    if (!entities.empty())
+    {
+        //only process the first one so messages are displayed sequentially
+        auto& notification = entities[0].getComponent<Notification>();
+        auto& text = entities[0].getComponent<cro::Text>();
+
+        switch (notification.state)
+        {
+        default: break;
+        case Notification::In:
+        {
+            CRO_ASSERT(notification.speed > 0, "");
+            notification.currentTime += (dt * notification.speed);
+
+            if (notification.currentTime > CharTime)
+            {
+                notification.currentTime -= CharTime;
+                notification.charPosition++;
+
+                text.setString(notification.message.substr(0, notification.charPosition));
+
+                if (notification.charPosition == notification.message.size())
+                {
+                    notification.currentTime = HoldTime;
+                    notification.state = Notification::Hold;
+                }
+            }
+        }
+            break;
+        case Notification::Hold:
+            notification.currentTime -= dt;
+            if (notification.currentTime < 0)
+            {
+                notification.state = Notification::Out;
+                notification.currentTime = 0.f;
+            }
+            break;
+        case Notification::Out:
+        {
+            CRO_ASSERT(notification.speed > 0, "");
+            notification.currentTime = std::min(1.f, notification.currentTime + (dt * 10.f));
+
+            auto bounds = cro::Text::getLocalBounds(entities[0]);
+            bounds.height *= std::max(0.f, 1.f - notification.currentTime);
+
+            entities[0].getComponent<cro::Drawable2D>().setCroppingArea(bounds);
+
+            if (notification.currentTime == 1)
+            {
+                getScene()->destroyEntity(entities[0]);
+            }
+        }
+            break;
+        }
+    }
+}
+
+void NotificationSystem::clearCurrent()
+{
+    if (!getEntities().empty())
+    {
+        auto& notification = getEntities()[0].getComponent<Notification>();
+        if (notification.state != Notification::In)
+        {
+            notification.state = Notification::Out;
+            notification.currentTime = 0.f;
+        }
+    }
+}

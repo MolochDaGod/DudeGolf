@@ -1,0 +1,739 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="DebugASan|Win32">
+      <Configuration>DebugASan</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugASan|x64">
+      <Configuration>DebugASan</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-asan|Win32">
+      <Configuration>Release-asan</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-asan|x64">
+      <Configuration>Release-asan</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\crogine\include\crogine\android\Android.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\AudioBuffer.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\AudioDevice.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\AudioScape.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\AudioSource.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\AudioMixer.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\AudioResource.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\AudioStream.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\DynamicAudioStream.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\MumbleLink.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\sound_system\effects_chain\BaseEffect.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\sound_system\effects_chain\NoiseGateEffect.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\sound_system\effects_chain\VolumeEffect.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\sound_system\MusicPlayer.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\sound_system\OpusEncoder.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\sound_system\Playlist.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\sound_system\SoundRecorder.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\sound_system\SoundSource.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\audio\sound_system\SoundStream.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\Config.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\App.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\Clock.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\ConfigFile.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\Console.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\ConsoleClient.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\Cursor.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\FileSystem.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\GameController.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\Keyboard.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\Log.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\Message.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\MessageBus.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\Mouse.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\ProfileTimer.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\State.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\StateStack.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\String.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\SysTime.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\Utf.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\Wavetable.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\core\Window.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\detail\Assert.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\detail\BalancedTree.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\detail\Detail.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\detail\GlobalConsts.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\detail\HashCombine.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\detail\ModelBinary.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\detail\NoResize.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\detail\PoolLog.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\detail\QuadTree.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\detail\SDLResource.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\detail\StackDump.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\detail\Types.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\Component.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\ComponentPool.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\AudioListener.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\AudioEmitter.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\BillboardCollection.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\Callback.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\Camera.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\CommandTarget.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\Drawable2D.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\DynamicTreeComponent.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\GBuffer.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\LightVolume.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\Model.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\ParticleEmitter.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\ProjectionMap.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\ShadowCaster.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\Skeleton.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\Sprite.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\SpriteAnimation.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\Text.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\Transform.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\UIDraggable.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\UIElement.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\components\UIInput.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\Director.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\Entity.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\InfoFlags.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\Renderable.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\Scene.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\Sunlight.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\System.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\AudioPlayerSystem.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\AudioSystem.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\BillboardSystem.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\CallbackSystem.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\CameraSystem.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\CommandSystem.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\DebugInfo.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\DeferredRenderSystem.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\DynamicTreeSystem.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\LightVolumeSystem.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\ParticleSystem.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\ProjectionMapSystem.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\ModelRenderer.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\RenderSystem2D.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\ShadowMapRenderer.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\SkeletalAnimator.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\SpriteAnimator.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\SpriteSystem2D.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\SpriteSystem3D.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\TextSystem.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\UIElementSystem.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\ecs\systems\UISystem.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\ArrayTexture.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\BinaryMeshBuilder.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\BoundingBox.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\CircleMeshBuilder.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\Colour.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\CubeBuilder.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\CubemapTexture.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\DepthTexture.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\DynamicMeshBuilder.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\EnvironmentMap.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\Font.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\FontResource.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\GridMeshBuilder.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\Image.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\ImageArray.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\IqmBuilder.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\LoadingScreen.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\MaterialData.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\MaterialResource.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\MeshBatch.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\MeshBuilder.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\MeshData.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\MeshResource.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\MultiRenderTexture.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\Palette.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\postprocess\PostChromeAB.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\postprocess\PostProcess.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\postprocess\PostVertex.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\QuadBuilder.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\Rectangle.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\RenderTarget.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\RenderTexture.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\ModelDefinition.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\Shader.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\ShaderResource.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\Shape2D.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\SimpleDrawable.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\SimpleQuad.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\SimpleText.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\SimpleVertexArray.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\Spatial.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\SphereBuilder.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\SpriteSheet.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\StaticMeshBuilder.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\Texture.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\TextureResource.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\Transformable2D.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\UniformBuffer.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\Vertex2D.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\graphics\VideoPlayer.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\gui\detail\GraphEditor.h" />
+    <ClInclude Include="..\crogine\include\crogine\gui\detail\imconfig_cro.h" />
+    <ClInclude Include="..\crogine\include\crogine\gui\detail\imfilebrowser.h" />
+    <ClInclude Include="..\crogine\include\crogine\gui\detail\imgui.h" />
+    <ClInclude Include="..\crogine\include\crogine\gui\detail\ImGuiDatePicker.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\gui\detail\ImGuizmo.h" />
+    <ClInclude Include="..\crogine\include\crogine\gui\detail\ImZoomSlider.h" />
+    <ClInclude Include="..\crogine\include\crogine\gui\Gui.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\gui\GuiClient.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\network\NetClient.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\network\NetData.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\network\NetHost.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\util\Constants.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\util\Easings.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\util\Frustum.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\util\Maths.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\util\Matrix.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\util\Network.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\util\Random.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\util\Rectangle.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\util\Spline.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\util\String.hpp" />
+    <ClInclude Include="..\crogine\include\crogine\util\Wavetable.hpp" />
+    <ClInclude Include="..\crogine\src\audio\ALCheck.hpp" />
+    <ClInclude Include="..\crogine\src\audio\AudioFile.hpp" />
+    <ClInclude Include="..\crogine\src\audio\AudioRenderer.hpp" />
+    <ClInclude Include="..\crogine\src\audio\BufferedStreamLoader.hpp" />
+    <ClInclude Include="..\crogine\src\audio\Mp3Loader.hpp" />
+    <ClInclude Include="..\crogine\src\audio\NullImpl.hpp" />
+    <ClInclude Include="..\crogine\src\audio\OpenALImpl.hpp" />
+    <ClInclude Include="..\crogine\src\audio\PCMData.hpp" />
+    <ClInclude Include="..\crogine\src\audio\VorbisLoader.hpp" />
+    <ClInclude Include="..\crogine\src\audio\WavLoader.hpp" />
+    <ClInclude Include="..\crogine\src\core\DefaultLoadingScreen.hpp" />
+    <ClInclude Include="..\crogine\src\detail\DistanceField.hpp" />
+    <ClInclude Include="..\crogine\src\detail\glad.hpp" />
+    <ClInclude Include="..\crogine\src\detail\GLCheck.hpp" />
+    <ClInclude Include="..\crogine\src\detail\HiResTimer.hpp" />
+    <ClInclude Include="..\crogine\src\detail\SDLImageRead.hpp" />
+    <ClInclude Include="..\crogine\src\detail\StaticMeshFile.hpp" />
+    <ClInclude Include="..\crogine\src\detail\TextConstruction.hpp" />
+    <ClInclude Include="..\crogine\src\detail\ust.hpp" />
+    <ClInclude Include="..\crogine\src\graphics\shaders\Billboard.hpp" />
+    <ClInclude Include="..\crogine\src\graphics\shaders\Debug.hpp" />
+    <ClInclude Include="..\crogine\src\graphics\shaders\Default.hpp" />
+    <ClInclude Include="..\crogine\src\graphics\shaders\Deferred.hpp" />
+    <ClInclude Include="..\crogine\src\graphics\shaders\GBuffer.hpp" />
+    <ClInclude Include="..\crogine\src\graphics\shaders\PBR.hpp" />
+    <ClInclude Include="..\crogine\src\graphics\shaders\PBRBRDF.hpp" />
+    <ClInclude Include="..\crogine\src\graphics\shaders\PBRCubemap.hpp" />
+    <ClInclude Include="..\crogine\src\graphics\shaders\ShadowMap.hpp" />
+    <ClInclude Include="..\crogine\src\graphics\shaders\Sprite.hpp" />
+    <ClInclude Include="..\crogine\src\graphics\shaders\Unlit.hpp" />
+    <ClInclude Include="..\crogine\src\graphics\shaders\VertexLit.hpp" />
+    <ClInclude Include="..\crogine\src\graphics\stb_image.h" />
+    <ClInclude Include="..\crogine\src\imgui\imconfig.h" />
+    <ClInclude Include="..\crogine\src\imgui\imgui_freetype.h" />
+    <ClInclude Include="..\crogine\src\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="..\crogine\src\imgui\imgui_impl_sdl.h" />
+    <ClInclude Include="..\crogine\src\imgui\imgui_internal.h" />
+    <ClInclude Include="..\crogine\src\network\NetConf.hpp" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\crogine\src\android\Android.cpp" />
+    <ClCompile Include="..\crogine\src\audio\AudioBuffer.cpp" />
+    <ClCompile Include="..\crogine\src\audio\AudioDevice.cpp" />
+    <ClCompile Include="..\crogine\src\audio\AudioMixer.cpp" />
+    <ClCompile Include="..\crogine\src\audio\AudioRenderer.cpp" />
+    <ClCompile Include="..\crogine\src\audio\AudioResource.cpp" />
+    <ClCompile Include="..\crogine\src\audio\AudioScape.cpp" />
+    <ClCompile Include="..\crogine\src\audio\AudioSource.cpp" />
+    <ClCompile Include="..\crogine\src\audio\AudioStream.cpp" />
+    <ClCompile Include="..\crogine\src\audio\BufferedStreamLoader.cpp" />
+    <ClCompile Include="..\crogine\src\audio\DynamicAudioStream.cpp" />
+    <ClCompile Include="..\crogine\src\audio\Mp3Loader.cpp" />
+    <ClCompile Include="..\crogine\src\audio\MumbleLink.cpp" />
+    <ClCompile Include="..\crogine\src\audio\OpenALImpl.cpp" />
+    <ClCompile Include="..\crogine\src\audio\sound_system\effects_chain\BaseEffect.cpp" />
+    <ClCompile Include="..\crogine\src\audio\sound_system\effects_chain\NoiseGateEffect.cpp" />
+    <ClCompile Include="..\crogine\src\audio\sound_system\effects_chain\VolumeEffect.cpp" />
+    <ClCompile Include="..\crogine\src\audio\sound_system\MusicPlayer.cpp" />
+    <ClCompile Include="..\crogine\src\audio\sound_system\OpusEncoder.cpp" />
+    <ClCompile Include="..\crogine\src\audio\sound_system\Playlist.cpp" />
+    <ClCompile Include="..\crogine\src\audio\sound_system\SoundRecorder.cpp" />
+    <ClCompile Include="..\crogine\src\audio\sound_system\SoundSource.cpp" />
+    <ClCompile Include="..\crogine\src\audio\sound_system\SoundStream.cpp" />
+    <ClCompile Include="..\crogine\src\audio\stb_vorbis.c" />
+    <ClCompile Include="..\crogine\src\audio\VorbisLoader.cpp" />
+    <ClCompile Include="..\crogine\src\audio\WavLoader.cpp" />
+    <ClCompile Include="..\crogine\src\core\App.cpp" />
+    <ClCompile Include="..\crogine\src\core\AppPlugin.cpp" />
+    <ClCompile Include="..\crogine\src\core\Clock.cpp" />
+    <ClCompile Include="..\crogine\src\core\ConfigFile.cpp" />
+    <ClCompile Include="..\crogine\src\core\Console.cpp" />
+    <ClCompile Include="..\crogine\src\core\ConsoleClient.cpp" />
+    <ClCompile Include="..\crogine\src\core\Cursor.cpp" />
+    <ClCompile Include="..\crogine\src\core\DefaultLoadingScreen.cpp" />
+    <ClCompile Include="..\crogine\src\core\FileSystem.cpp" />
+    <ClCompile Include="..\crogine\src\core\GameController.cpp" />
+    <ClCompile Include="..\crogine\src\core\Log.cpp" />
+    <ClCompile Include="..\crogine\src\core\MessageBus.cpp" />
+    <ClCompile Include="..\crogine\src\core\State.cpp" />
+    <ClCompile Include="..\crogine\src\core\StateStack.cpp" />
+    <ClCompile Include="..\crogine\src\core\String.cpp" />
+    <ClCompile Include="..\crogine\src\core\SysTime.cpp" />
+    <ClCompile Include="..\crogine\src\core\tinyfiledialogs.c" />
+    <ClCompile Include="..\crogine\src\core\Wavetable.cpp" />
+    <ClCompile Include="..\crogine\src\core\Window.cpp" />
+    <ClCompile Include="..\crogine\src\detail\backward.cpp" />
+    <ClCompile Include="..\crogine\src\detail\BalancedTree.cpp" />
+    <ClCompile Include="..\crogine\src\detail\clipboard\clip.cpp" />
+    <ClCompile Include="..\crogine\src\detail\clipboard\clip_win.cpp" />
+    <ClCompile Include="..\crogine\src\detail\clipboard\clip_win_bmp.cpp" />
+    <ClCompile Include="..\crogine\src\detail\clipboard\clip_win_wic.cpp" />
+    <ClCompile Include="..\crogine\src\detail\clipboard\clip_image.cpp" />
+    <ClCompile Include="..\crogine\src\detail\DistanceField.cpp" />
+    <ClCompile Include="..\crogine\src\detail\enet\callbacks.c" />
+    <ClCompile Include="..\crogine\src\detail\enet\compress.c" />
+    <ClCompile Include="..\crogine\src\detail\enet\host.c" />
+    <ClCompile Include="..\crogine\src\detail\enet\list.c" />
+    <ClCompile Include="..\crogine\src\detail\enet\packet.c" />
+    <ClCompile Include="..\crogine\src\detail\enet\peer.c" />
+    <ClCompile Include="..\crogine\src\detail\enet\protocol.c" />
+    <ClCompile Include="..\crogine\src\detail\enet\win32.c" />
+    <ClCompile Include="..\crogine\src\detail\glad.c" />
+    <ClCompile Include="..\crogine\src\detail\ModelBinary.cpp" />
+    <ClCompile Include="..\crogine\src\detail\PoolLog.cpp" />
+    <ClCompile Include="..\crogine\src\detail\QuadTree.cpp" />
+    <ClCompile Include="..\crogine\src\detail\SDLImageRead.cpp" />
+    <ClCompile Include="..\crogine\src\detail\SDLResource.cpp" />
+    <ClCompile Include="..\crogine\src\detail\StackDump.cpp" />
+    <ClCompile Include="..\crogine\src\detail\StaticMeshFile.cpp" />
+    <ClCompile Include="..\crogine\src\detail\TextConstruction.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\Component.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\components\AudioEmitter.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\components\Camera.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\components\Drawable2D.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\components\Model.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\components\ParticleEmitter.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\components\Skeleton.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\components\Sprite.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\components\Text.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\components\Transform.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\Director.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\Entity.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\EntityManager.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\Renderable.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\Scene.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\Sunlight.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\System.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\SystemManager.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\AudioPlayerSystem.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\AudioSystem.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\BillboardSystem.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\CallbackSystem.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\CameraSystem.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\CommandSystem.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\DebugInfo.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\DeferredRenderSystem.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\DynamicTreeSystem.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\LightVolumeSystem.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\ParticleSystem.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\ProjectionMapSystem.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\ModelRenderer.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\RenderSystem2D.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\ShadowMapRenderer.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\SkeletalAnimator.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\SpriteAnimator.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\SpriteSystem2D.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\SpriteSystem3D.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\TextSystem.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\UIElementSystem.cpp" />
+    <ClCompile Include="..\crogine\src\ecs\systems\UISystem.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\BinaryMeshBuilder.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\BoundingBox.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\CircleMeshBuilder.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\Colour.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\CubemapTexture.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\DepthTexture.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\DynamicMeshBuilder.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\EnvironmentMap.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\Font.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\FontResource.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\GridMeshBuilder.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\Image.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\ImageArray.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\IqmBuilder.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\MaterialData.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\MaterialResource.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\MeshBatch.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\MeshBuilder.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\MeshData.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\MeshResource.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\MultiRenderTexture.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\Palette.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\postprocess\PostChromeAB.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\postprocess\PostProcess.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\PrimitiveBuilders.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\RenderTarget.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\RenderTexture.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\ModelDefinition.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\Shader.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\ShaderResource.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\Shape2D.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\SimpleDrawable.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\SimpleQuad.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\SimpleText.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\SimpleVertexArray.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\Spatial.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\SpriteSheet.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\StaticMeshBuilder.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\Texture.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\TextureResource.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\Transformable2D.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\UniformBuffer.cpp" />
+    <ClCompile Include="..\crogine\src\graphics\VideoPlayer.cpp" />
+    <ClCompile Include="..\crogine\src\imgui\GraphEditor.cpp" />
+    <ClCompile Include="..\crogine\src\imgui\Gui.cpp" />
+    <ClCompile Include="..\crogine\src\imgui\GuiClient.cpp" />
+    <ClCompile Include="..\crogine\src\imgui\imfilebrowser.cpp" />
+    <ClCompile Include="..\crogine\src\imgui\imgui.cpp" />
+    <ClCompile Include="..\crogine\src\imgui\ImGuiDatePicker.cpp" />
+    <ClCompile Include="..\crogine\src\imgui\ImGuizmo.cpp" />
+    <ClCompile Include="..\crogine\src\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\crogine\src\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\crogine\src\imgui\imgui_freetype.cpp" />
+    <ClCompile Include="..\crogine\src\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="..\crogine\src\imgui\imgui_impl_sdl.cpp" />
+    <ClCompile Include="..\crogine\src\imgui\imgui_stdlib.cpp" />
+    <ClCompile Include="..\crogine\src\imgui\imgui_tables.cpp" />
+    <ClCompile Include="..\crogine\src\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="..\crogine\src\network\NetClient.cpp" />
+    <ClCompile Include="..\crogine\src\network\NetConf.cpp" />
+    <ClCompile Include="..\crogine\src\network\NetEvent.cpp" />
+    <ClCompile Include="..\crogine\src\network\NetHost.cpp" />
+    <ClCompile Include="..\crogine\src\network\NetPeer.cpp" />
+    <ClCompile Include="..\crogine\src\util\Frustum.cpp" />
+    <ClCompile Include="..\crogine\src\util\Matrix.cpp" />
+    <ClCompile Include="..\crogine\src\util\Network.cpp" />
+    <ClCompile Include="..\crogine\src\util\Random.cpp" />
+    <ClCompile Include="..\crogine\src\util\Spline.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\crogine\include\crogine\core\ConfigFile.inl" />
+    <None Include="..\crogine\include\crogine\core\String.inl" />
+    <None Include="..\crogine\include\crogine\core\Utf.inl" />
+    <None Include="..\crogine\include\crogine\ecs\Entity.inl" />
+    <None Include="..\crogine\include\crogine\ecs\EntityManager.inl" />
+    <None Include="..\crogine\include\crogine\ecs\Scene.inl" />
+    <None Include="..\crogine\include\crogine\ecs\System.inl" />
+    <None Include="..\crogine\include\crogine\ecs\SystemManager.inl" />
+    <None Include="..\crogine\include\crogine\graphics\MeshData.inl" />
+    <None Include="..\crogine\include\crogine\graphics\Rectangle.inl" />
+    <None Include="..\crogine\include\crogine\graphics\SimpleDrawable.inl" />
+    <None Include="..\crogine\include\crogine\network\NetClient.inl" />
+    <None Include="..\crogine\include\crogine\network\NetData.inl" />
+    <None Include="..\crogine\include\crogine\network\NetHost.inl" />
+    <None Include="..\crogine\src\graphics\postprocess\PostChromeAB.inl" />
+    <None Include="..\crogine\src\graphics\shaders\ShaderIncludes.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="crogine.rc" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{72B8CEB9-E80A-4707-BF7C-80ED4028D0F3}</ProjectGuid>
+    <RootNamespace>crowin</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>crogine</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <EnableASAN>true</EnableASAN>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <EnableASAN>false</EnableASAN>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <EnableASAN>true</EnableASAN>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <EnableASAN>true</EnableASAN>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>$(SolutionName)-d</TargetName>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|Win32'">
+    <TargetName>$(SolutionName)-d</TargetName>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(SolutionName)-d</TargetName>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|x64'">
+    <TargetName>$(SolutionName)-d-asan</TargetName>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(IncludePath)</IncludePath>
+    <TargetName>$(SolutionName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|x64'">
+    <IncludePath>$(IncludePath)</IncludePath>
+    <TargetName>$(SolutionName)</TargetName>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(IncludePath)</IncludePath>
+    <TargetName>$(SolutionName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|Win32'">
+    <IncludePath>$(IncludePath)</IncludePath>
+    <TargetName>$(SolutionName)</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\freetype\include;$(SolutionDir)extlibs\openal\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CRO_BUILD;USE_IMGUI;_CRT_SECURE_NO_WARNINGS;_DEBUG_;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <AdditionalOptions>/w34457 /w34456 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)extlibs\freetype\win32;$(SolutionDir)extlibs\sdl2\lib\x86;$(SolutionDir)extlibs\enet\lib\debug;$(SolutionDir)extlibs\openal\msvc\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;freetype.lib;openal32.lib;ws2_32.lib;winmm.lib;IPHLPAPI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\freetype\include;$(SolutionDir)extlibs\openal\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CRO_BUILD;USE_IMGUI;_CRT_SECURE_NO_WARNINGS;_DEBUG_;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <AdditionalOptions>/w34457 /w34456 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)extlibs\freetype\win32;$(SolutionDir)extlibs\sdl2\lib\x86;$(SolutionDir)extlibs\enet\lib\debug;$(SolutionDir)extlibs\openal\msvc\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;freetype.lib;openal32.lib;ws2_32.lib;winmm.lib;IPHLPAPI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)extlibs\freetype\include;..\crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\openal\include;$(SolutionDir)extlibs\opus\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CLIP_SCREENSHOT;_SCL_SECURE_NO_WARNINGS;PARALLEL_GLOBAL_DISABLE;CRO_BUILD;USE_IMGUI;_CRT_SECURE_NO_WARNINGS;CRO_DEBUG_;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/w34457 /w34456 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4723;5287</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)extlibs\freetype\win64;$(SolutionDir)extlibs\sdl2\lib\x64;$(SolutionDir)extlibs\openal\msvc\x64\debug;$(SolutionDir)extlibs\opus\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;freetype.lib;ws2_32.lib;winmm.lib;IPHLPAPI.lib;%(AdditionalDependencies);openal32.lib;DbgHelp.lib;Shlwapi.lib;opus-d.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugASan|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)extlibs\freetype\include;..\crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\openal\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CRO_BUILD;USE_IMGUI;_CRT_SECURE_NO_WARNINGS;CRO_DEBUG_;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/w34457 /w34456 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ConformanceMode>true</ConformanceMode>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)extlibs\freetype\win64;$(SolutionDir)extlibs\sdl2\lib\x64;$(SolutionDir)extlibs\openal\msvc\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;freetype.lib;ws2_32.lib;winmm.lib;IPHLPAPI.lib;%(AdditionalDependencies);openal32.lib</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)extlibs\bullet\include;$(SolutionDir)extlibs\freetype\include;..\crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\openal\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>USE_IMGUI;_CRT_SECURE_NO_WARNINGS;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)extlibs\freetype\win32;$(SolutionDir)extlibs\sdl2\lib\x86;$(SolutionDir)extlibs\bullet\lib\x86\Release;$(SolutionDir)extlibs\enet\lib\release;$(SolutionDir)extlibs\openal\msvc\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;freetype.lib;openal32.lib;ws2_32.lib;winmm.lib;IPHLPAPI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)extlibs\bullet\include;$(SolutionDir)extlibs\freetype\include;..\crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\openal\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>USE_IMGUI;_CRT_SECURE_NO_WARNINGS;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)extlibs\freetype\win32;$(SolutionDir)extlibs\sdl2\lib\x86;$(SolutionDir)extlibs\bullet\lib\x86\Release;$(SolutionDir)extlibs\enet\lib\release;$(SolutionDir)extlibs\openal\msvc\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;freetype.lib;openal32.lib;ws2_32.lib;winmm.lib;IPHLPAPI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)extlibs\freetype\include;..\crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\openal\include;$(SolutionDir)extlibs\opus\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GL41;CLIP_SCREENSHOT;_SCL_SECURE_NO_WARNINGS;CRO_BUILD;USE_IMGUI;_CRT_SECURE_NO_WARNINGS;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4723;5287</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)extlibs\freetype\win64;$(SolutionDir)extlibs\sdl2\lib\x64;$(SolutionDir)extlibs\enet\lib\release;$(SolutionDir)extlibs\openal\msvc\x64;$(SolutionDir)extlibs\opus\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>openal32.lib;SDL2.lib;freetype.lib;ws2_32.lib;winmm.lib;IPHLPAPI.lib;DbgHelp.lib;Shlwapi.lib;opus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-asan|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)extlibs\freetype\include;..\crogine\include;$(SolutionDir)extlibs\sdl2\include;$(SolutionDir)extlibs\openal\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CRO_BUILD;USE_IMGUI;_CRT_SECURE_NO_WARNINGS;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)extlibs\freetype\win64;$(SolutionDir)extlibs\sdl2\lib\x64;$(SolutionDir)extlibs\enet\lib\release;$(SolutionDir)extlibs\openal\msvc\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>openal32.lib;SDL2.lib;freetype.lib;ws2_32.lib;winmm.lib;IPHLPAPI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

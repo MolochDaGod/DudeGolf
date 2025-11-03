@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\model viewer">
+      <UniqueIdentifier>{66f9e606-9606-46ad-8cce-1f22b4a80b8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\model viewer">
+      <UniqueIdentifier>{c3177e8a-1656-4946-9bca-16bda3273cff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\world viewer">
+      <UniqueIdentifier>{8c87316d-b04c-4eb7-a778-0533cdfe6bc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\world viewer">
+      <UniqueIdentifier>{54486e91-4e69-4544-9072-ea0e9783de78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\model viewer\gltf">
+      <UniqueIdentifier>{cdb9e394-6df6-4873-94aa-cc8e61f45f2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\model viewer\gltf">
+      <UniqueIdentifier>{a8c2f695-573e-4b4b-9376-8dd3350f1a2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\particle editor">
+      <UniqueIdentifier>{bd2aafb4-1a19-4054-8d53-ba0db821c78b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\particle editor">
+      <UniqueIdentifier>{b485ac72-2379-4c40-81d8-b83c5c3ae6da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\layout editor">
+      <UniqueIdentifier>{4c7305a9-6992-4a0c-b60b-96385820a75e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\layout editor">
+      <UniqueIdentifier>{5c9a054a-0ef9-4f78-94f5-74dc47707042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sprite editor">
+      <UniqueIdentifier>{5d85a18d-161e-4aa9-bc75-bcc9e6c7b34a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sprite editor">
+      <UniqueIdentifier>{717c8f5c-465e-4fed-b320-453a213edd04}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LoadingScreen.cpp">
+      <Filter>Source Files\model viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NormalVisMeshBuilder.cpp">
+      <Filter>Source Files\model viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OriginIconBuilder.cpp">
+      <Filter>Source Files\model viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModelState.cpp">
+      <Filter>Source Files\model viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WorldState.cpp">
+      <Filter>Source Files\world viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gltf\gltf.cpp">
+      <Filter>Source Files\model viewer\gltf</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModelStateMaterials.cpp">
+      <Filter>Source Files\model viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModelStateModels.cpp">
+      <Filter>Source Files\model viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModelStateUI.cpp">
+      <Filter>Source Files\model viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WorldStateUI.cpp">
+      <Filter>Source Files\world viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ParticleState.cpp">
+      <Filter>Source Files\particle editor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ParticleStateUI.cpp">
+      <Filter>Source Files\particle editor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MaskEditor.cpp">
+      <Filter>Source Files\model viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LayoutState.cpp">
+      <Filter>Source Files\layout editor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LayoutStateUI.cpp">
+      <Filter>Source Files\layout editor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SrgbTransform.cpp">
+      <Filter>Source Files\model viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FpsCameraSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FileHistory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpriteState.cpp">
+      <Filter>Source Files\sprite editor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpriteStateUI.cpp">
+      <Filter>Source Files\sprite editor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Palettiser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ErrorCheck.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Messages.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyApp.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StateIDs.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LoadingScreen.hpp">
+      <Filter>Header Files\model viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NormalVisMeshBuilder.hpp">
+      <Filter>Header Files\model viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OriginIconBuilder.hpp">
+      <Filter>Header Files\model viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ResourceIDs.hpp">
+      <Filter>Header Files\model viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModelState.hpp">
+      <Filter>Header Files\model viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WorldState.hpp">
+      <Filter>Header Files\world viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIConsts.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MaterialDefinition.hpp">
+      <Filter>Header Files\model viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SharedStateData.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gltf\json.hpp">
+      <Filter>Header Files\model viewer\gltf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gltf\stb_image.h">
+      <Filter>Header Files\model viewer\gltf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gltf\stb_image_write.h">
+      <Filter>Header Files\model viewer\gltf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gltf\tiny_gltf.h">
+      <Filter>Header Files\model viewer\gltf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ParticleState.hpp">
+      <Filter>Header Files\particle editor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MaskEditor.hpp">
+      <Filter>Header Files\model viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LayoutState.hpp">
+      <Filter>Header Files\layout editor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LayoutConsts.hpp">
+      <Filter>Header Files\layout editor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SrgbTransform.hpp">
+      <Filter>Header Files\model viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FpsCameraSystem.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FileHistory.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextEditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditorWindow.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SpriteState.hpp">
+      <Filter>Header Files\sprite editor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Palettiser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\LightmapShader.inl">
+      <Filter>Header Files\model viewer</Filter>
+    </None>
+    <None Include="src\ModelViewerConsts.inl">
+      <Filter>Header Files\model viewer</Filter>
+    </None>
+  </ItemGroup>
+</Project>

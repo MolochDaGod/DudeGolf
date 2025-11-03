@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\TL">
+      <UniqueIdentifier>{8963ed67-5a29-447a-a803-fac933d6051d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TL">
+      <UniqueIdentifier>{cd9d4109-524a-4419-86ff-d476099d9efc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\systems">
+      <UniqueIdentifier>{37611082-c33c-455f-a97e-4ec2bfee20bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\systems">
+      <UniqueIdentifier>{ca72897f-ded0-4029-8edf-7f4a316d6164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TL\shaders">
+      <UniqueIdentifier>{3bb9db09-ca99-47c3-8ac2-efc692828806}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RotateSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ColourSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MainState.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DriftSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MenuMain.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MenuOptions.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MenuScores.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SliderSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameState.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PostRadial.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LoadingScreen.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TerrainChunk.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChunkBuilder.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RockFallSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RandomTranslation.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VelocitySystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerDirector.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BackgroundDirector.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BackgroundSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ItemSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ItemsDirector.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NpcSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NpcDirector.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerWeaponsSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MenuMapSelect.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NpcWeaponSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ExplosionSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HudItems.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HudDirector.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BuddySystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EmpSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameOverState.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PauseState.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RoundEndState.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BossSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CollisionSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PhysicsDebug.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PhysicsObject.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SoundEffectsDirector.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ParticleDirector.cpp">
+      <Filter>Source Files\TL</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\MyApp.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StateIDs.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RotateSystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ColourSystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MainState.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DriftSystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ResourceIDs.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Slider.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameState.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BackgroundShader.hpp">
+      <Filter>Header Files\TL\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PostRadial.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LoadingScreen.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TerrainChunk.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Messages.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChunkBuilder.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ErrorCheck.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RockFallSystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RandomTranslation.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VelocitySystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlayerDirector.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BackgroundDirector.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BackgroundSystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ItemsDirector.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ItemSystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NPCSystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NpcDirector.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlayerSystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlayerWeaponsSystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NpcWeaponSystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ExplosionSystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HudItems.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HudDirector.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BuddySystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EmpSystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameOverState.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PauseState.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeatMan.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RoundEndState.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BossSystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CollisionSystem.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PhysicsDebug.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PhysicsObject.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SoundEffectsDirector.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ParticleDirector.hpp">
+      <Filter>Header Files\TL</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\PostRadial.inl">
+      <Filter>Header Files\TL\shaders</Filter>
+    </None>
+    <None Include="src\MenuConsts.inl">
+      <Filter>Header Files\TL</Filter>
+    </None>
+  </ItemGroup>
+</Project>

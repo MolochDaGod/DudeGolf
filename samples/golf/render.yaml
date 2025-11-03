@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: golf-server
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: SERVER_MODE
+        value: 1
+      - key: MAX_PLAYERS
+        value: 4
+      - key: SERVER_PORT
+        value: 25565
+    healthCheckPath: /
+    # Free tier limitations
+    disk:
+      name: golf-data
+      mountPath: /data
+      sizeGB: 1

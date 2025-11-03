@@ -1,0 +1,264 @@
+/*-----------------------------------------------------------------------
+
+Matt Marchant 2022 - 2025
+http://trederia.blogspot.com
+
+Super Video Golf - zlib licence.
+
+This software is provided 'as-is', without any express or
+implied warranty.In no event will the authors be held
+liable for any damages arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute
+it freely, subject to the following restrictions :
+
+1. The origin of this software must not be misrepresented;
+you must not claim that you wrote the original software.
+If you use this software in a product, an acknowledgment
+in the product documentation would be appreciated but
+is not required.
+
+2. Altered source versions must be plainly marked as such,
+and must not be misrepresented as being the original software.
+
+3. This notice may not be removed or altered from any
+source distribution.
+
+-----------------------------------------------------------------------*/
+
+#pragma once
+
+#include "MonthlyChallenge.hpp"
+
+#include <crogine/graphics/Image.hpp>
+#include <crogine/core/App.hpp>
+#include <crogine/core/String.hpp>
+
+#include <array>
+
+//just to detect client/server version mismatch
+//(terrain data changed between 100 -> 110)
+//(model format changed between 120 -> 130)
+//(server layout updated 140 -> 150)
+//(skybox format changed 150 -> 160)
+//(hole count became game rule 170 -> 180)
+//(connection method changed 190 -> 1100)
+//(terrain vertex data and materials changed 1100 -> 1110)
+//(player avatar data format changed 1110 -> 1120)
+//(ball started sending wind effect 1120 -> 1124)
+//(added night mode/weather 1141 -> 1150)
+//(player avatar data format changed 1153 -> 1160)
+//(player avatar data format changed 1170 -> 1180)
+//(course data changed 1180 -> 1181)
+//(player profile data changed 1190 -> 1200)
+static constexpr std::uint16_t CURRENT_VER = 1212;
+#ifdef __APPLE__
+static const std::string StringVer("1.21.2 (macOS beta)");
+#else
+static const std::string StringVer("1.21.2");
+#endif
+
+struct HallEntry final
+{
+    cro::String topTenNames;
+    cro::String topTenScores;
+    cro::String nearestTenNames;
+    cro::String nearestTenScores;
+    cro::String personalBest;
+    bool hasData = false;
+};
+
+class Social final
+{
+public:
+    static constexpr std::int32_t ExpertLevel = 10;
+    static constexpr std::int32_t ProLevel = 20;
+    static constexpr std::int32_t ClubStepLevel = 2;
+
+    struct InfoID final
+    {
+        enum
+        {
+            Menu,
+            Lobby,
+            Course,
+            Billiards
+        };
+    };
+
+    struct MessageID final
+    {
+        enum
+        {
+            SocialMessage = 10000,
+            StatsMessage,
+            LocationMessage
+        };
+    };
+
+    struct StatEvent final
+    {
+        enum
+        {
+            StatsReceived,
+            HOFReceived,
+            AwardsReceived,
+            RequestRestart,
+            LeagueReceived,
+            ScrubScoresReceived,
+            SBallScoresReceived,
+        }type = StatsReceived;
+        std::int32_t index = -1;
+        std::int32_t page = -1;
+        std::int32_t holeCount = -1;
+    };
+
+    struct SocialEvent final
+    {
+        enum
+        {
+            AvatarDownloaded,
+            LevelUp,
+            XPAwarded,
+            OverlayActivated,
+            PlayerAchievement, //as in we should cheer, not an actual achievement
+            MonthlyProgress,
+            LeagueProgress,
+            AchievementProgress,
+            LobbyUpdated,
+            PlayerNameChanged,
+            CreditsAwarded,
+            NewClubset //an as-yet unpurchased manufacturer was added to available club set models
+        }type = LevelUp;
+        std::int32_t level = 0; //if monthly progress then current value, if credits then value
+        std::int32_t reason = -1; //if monthly progress then target value
+        union
+        {
+            std::uint64_t playerID = 0;
+            std::int32_t challengeID; //id of monthly challenge
+        };
+    };
+
+    struct LocationEvent final
+    {
+        glm::vec2 latlon = glm::vec2(0.f);
+    };
+
+    struct ProgressData final
+    {
+        float progress = 0.f;
+        std::int32_t currentXP = 0;
+        std::int32_t levelXP = 0;
+
+        explicit ProgressData(std::int32_t c, std::int32_t l)
+            : progress(static_cast<float>(c) / static_cast<float>(l)),
+            currentXP(c),
+            levelXP(l) {}
+    };
+    static cro::Image userIcon;
+
+    static cro::String getPlayerName();
+    static void setPlayerName(const cro::String&);
+    static constexpr bool isGreyscale() { return false; }
+    static bool isValid();
+    static constexpr bool isValid(const std::string&) { return true; }
+    static constexpr bool isAuth() { return false; }
+    static constexpr bool isAvailable() { return false; }
+    static constexpr bool isSteamdeck(bool = false) { return false; }
+    static cro::Image getUserIcon(std::uint64_t) { return userIcon; }
+    static void findFriends() {}
+    static void inviteFriends(std::uint64_t) {}
+    static void awardXP(std::int32_t, std::int32_t = -1);
+    static std::int32_t getXP();
+    static std::int32_t doubleXP(); //usually 1, or 2 if second weekend of the month
+    static std::int32_t getLevel();
+    static std::int32_t getClubLevel();
+    static ProgressData getLevelProgress();
+    static std::uint32_t getCurrentStreak();
+    static std::uint32_t updateStreak();
+    static std::uint32_t getLongestStreak();
+    static void resetProfile();
+    static void storeDrivingStats(const std::array<float, 3u>&);
+    static void readDrivingStats(std::array<float, 3u>&);
+    static cro::String getDrivingLeader(std::int32_t holeIndex, std::int32_t tryCount) { return {}; }
+    struct BoardType final
+    {
+        enum
+        {
+            DrivingRange, Courses
+        };
+    };
+    static void findLeaderboards(std::int32_t) {}
+    static void setLeaderboardsEnabled(bool);
+    static bool getLeaderboardsEnabled();
+    static void insertScore(const std::string&, std::uint8_t, std::int32_t, std::int32_t, const std::vector<std::uint8_t>&);
+    static cro::String getLeader(const std::string&, std::uint8_t);
+    static cro::String getTopFive(const std::string& course, std::uint8_t holeCount);
+    static void invalidateTopFive(const std::string& course, std::uint8_t holeCount);
+    static std::int32_t getPersonalBest(const std::string&, std::uint8_t);
+    static std::int32_t getMonthlyBest(const std::string&, std::uint8_t) { return -1; }
+    static std::vector<std::uint8_t> getMonthlyHoleScores(const std::string& course, std::uint8_t holeCount, cro::String& playerName);
+    static const std::array<cro::String, 5u>& getMonthlyLeague() { static std::array<cro::String, 5u> fallback = {}; return fallback; }
+    static void getRandomBest() {}
+    static std::vector<cro::String> getLeaderboardResults(std::int32_t, std::int32_t) { return {}; }
+    static void courseComplete(const std::string&, std::uint8_t);
+    static std::vector<std::byte> setStatus(std::int32_t, const std::vector<const char*>&);
+    static void setGroup(std::uint64_t, std::int32_t = 0) {}
+    static void takeScreenshot(const cro::String&, std::size_t);
+    static constexpr std::uint32_t IconSize = 64;
+    static inline const std::string RSSFeed = "https://fallahn.itch.io/super-video-golf/devlog.rss";
+    static inline const std::string WebURL = "https://fallahn.itch.io/super-video-golf";
+    static void updateHallOfFame() {}
+    static void refreshHallOfFame(const std::string&) {}
+    static HallEntry getHallOfFame(const std::string&, std::int32_t, std::int32_t) { return {}; }
+    static void refreshGlobalBoard(std::int32_t) {}
+    static HallEntry getGlobalBoard(std::int32_t) { return {}; }
+    static cro::String getTickerMessage() { return {}; }
+
+    static float getCompletionCount(const std::string&, bool);
+
+    //awards (inventory items) to display in clubhouse
+    struct Award final
+    {
+        //dictates appearance
+        enum
+        {
+            MonthlyGold, MonthlySilver, MonthlyBronze,
+            MonthlyChallenge,
+            Level10, Level20, Level30, Level40, Level50,
+            LeagueFirst, LeagueSecond, LeagueThird
+        };
+        std::int32_t type;
+        cro::String description;
+    };
+    static void refreshAwards();
+    static const std::vector<Award>& getAwards();
+
+    enum class UnlockType
+    {
+        Ball, Club, Level, Generic,
+        CareerBalls, CareerHair, CareerAvatar,
+        CareerPosition, Tournament
+    };
+    static std::int32_t getUnlockStatus(UnlockType);
+    static void setUnlockStatus(UnlockType, std::int32_t set);
+
+    static MonthlyChallenge& getMonthlyChallenge();
+    static std::int32_t getMonth();
+
+    static void setScrubScore(std::int32_t);
+    static void refreshScrubScore();
+    static const cro::String& getScrubScores();
+    static std::int32_t getScrubPB();
+
+    static void setSBallScore(std::int32_t);
+    static void refreshSBallScore();
+    static const cro::String& getSBallScores();
+    static std::int32_t getSBallPB();
+
+    static void showWebPage(const std::string&) {}
+    static void readAllStats();
+
+    static constexpr bool getLatLon() { return false; }
+};

@@ -1,0 +1,213 @@
+#source files used by crogine library
+set(PROJECT_SRC
+  ${PROJECT_DIR}/audio/AudioBuffer.cpp
+  ${PROJECT_DIR}/audio/AudioDevice.cpp
+  ${PROJECT_DIR}/audio/AudioMixer.cpp
+  ${PROJECT_DIR}/audio/AudioResource.cpp
+  ${PROJECT_DIR}/audio/AudioRenderer.cpp
+  ${PROJECT_DIR}/audio/AudioScape.cpp
+  ${PROJECT_DIR}/audio/AudioSource.cpp
+  ${PROJECT_DIR}/audio/AudioStream.cpp
+  ${PROJECT_DIR}/audio/BufferedStreamLoader.cpp
+  ${PROJECT_DIR}/audio/DynamicAudioStream.cpp
+  ${PROJECT_DIR}/audio/Mp3Loader.cpp
+  ${PROJECT_DIR}/audio/MumbleLink.cpp
+  ${PROJECT_DIR}/audio/stb_vorbis.c
+  ${PROJECT_DIR}/audio/VorbisLoader.cpp
+  ${PROJECT_DIR}/audio/WavLoader.cpp
+
+  ${PROJECT_DIR}/audio/sound_system/MusicPlayer.cpp
+  ${PROJECT_DIR}/audio/sound_system/OpusEncoder.cpp
+  ${PROJECT_DIR}/audio/sound_system/Playlist.cpp
+  ${PROJECT_DIR}/audio/sound_system/SoundRecorder.cpp
+  ${PROJECT_DIR}/audio/sound_system/SoundSource.cpp
+  ${PROJECT_DIR}/audio/sound_system/SoundStream.cpp
+
+  ${PROJECT_DIR}/audio/sound_system/effects_chain/BaseEffect.cpp
+  ${PROJECT_DIR}/audio/sound_system/effects_chain/NoiseGateEffect.cpp
+  ${PROJECT_DIR}/audio/sound_system/effects_chain/VolumeEffect.cpp
+  
+  ${PROJECT_DIR}/core/App.cpp
+  ${PROJECT_DIR}/core/AppPlugin.cpp
+  ${PROJECT_DIR}/core/Clock.cpp
+  ${PROJECT_DIR}/core/ConfigFile.cpp
+  ${PROJECT_DIR}/core/Console.cpp
+  ${PROJECT_DIR}/core/ConsoleClient.cpp
+  ${PROJECT_DIR}/core/Cursor.cpp
+  ${PROJECT_DIR}/core/DefaultLoadingScreen.cpp
+  ${PROJECT_DIR}/core/FileSystem.cpp
+  ${PROJECT_DIR}/core/GameController.cpp
+  ${PROJECT_DIR}/core/Log.cpp
+  ${PROJECT_DIR}/core/MessageBus.cpp
+  ${PROJECT_DIR}/core/State.cpp
+  ${PROJECT_DIR}/core/StateStack.cpp
+  ${PROJECT_DIR}/core/String.cpp
+  ${PROJECT_DIR}/core/SysTime.cpp
+  ${PROJECT_DIR}/core/tinyfiledialogs.c
+  ${PROJECT_DIR}/core/Wavetable.cpp
+  ${PROJECT_DIR}/core/Window.cpp
+
+  ${PROJECT_DIR}/detail/backward.cpp
+  ${PROJECT_DIR}/detail/BalancedTree.cpp
+  ${PROJECT_DIR}/detail/DistanceField.cpp
+  #${PROJECT_DIR}/detail/glad.c
+  ${PROJECT_DIR}/detail/ModelBinary.cpp
+  ${PROJECT_DIR}/detail/PoolLog.cpp
+  ${PROJECT_DIR}/detail/SDLImageRead.cpp
+  ${PROJECT_DIR}/detail/SDLResource.cpp
+  ${PROJECT_DIR}/detail/StackDump.cpp
+  ${PROJECT_DIR}/detail/StaticMeshFile.cpp
+  ${PROJECT_DIR}/detail/TextConstruction.cpp
+  ${PROJECT_DIR}/detail/QuadTree.cpp
+
+  ${PROJECT_DIR}/detail/enet/callbacks.c
+  ${PROJECT_DIR}/detail/enet/compress.c
+  ${PROJECT_DIR}/detail/enet/host.c
+  ${PROJECT_DIR}/detail/enet/list.c
+  ${PROJECT_DIR}/detail/enet/packet.c
+  ${PROJECT_DIR}/detail/enet/peer.c
+  ${PROJECT_DIR}/detail/enet/protocol.c
+
+  ${PROJECT_DIR}/ecs/Component.cpp
+  ${PROJECT_DIR}/ecs/Director.cpp
+  ${PROJECT_DIR}/ecs/Entity.cpp
+  ${PROJECT_DIR}/ecs/EntityManager.cpp
+  ${PROJECT_DIR}/ecs/Renderable.cpp
+  ${PROJECT_DIR}/ecs/Scene.cpp
+  ${PROJECT_DIR}/ecs/Sunlight.cpp
+  ${PROJECT_DIR}/ecs/System.cpp
+  ${PROJECT_DIR}/ecs/SystemManager.cpp
+
+  ${PROJECT_DIR}/ecs/components/AudioEmitter.cpp
+  ${PROJECT_DIR}/ecs/components/Camera.cpp
+  ${PROJECT_DIR}/ecs/components/Drawable2D.cpp
+  ${PROJECT_DIR}/ecs/components/Model.cpp
+  ${PROJECT_DIR}/ecs/components/ParticleEmitter.cpp
+  ${PROJECT_DIR}/ecs/components/Skeleton.cpp
+  ${PROJECT_DIR}/ecs/components/Sprite.cpp
+  ${PROJECT_DIR}/ecs/components/Text.cpp
+  ${PROJECT_DIR}/ecs/components/Transform.cpp
+
+  ${PROJECT_DIR}/ecs/systems/AudioPlayerSystem.cpp
+  ${PROJECT_DIR}/ecs/systems/AudioSystem.cpp
+  ${PROJECT_DIR}/ecs/systems/BillboardSystem.cpp
+  ${PROJECT_DIR}/ecs/systems/CallbackSystem.cpp
+  ${PROJECT_DIR}/ecs/systems/CameraSystem.cpp
+  ${PROJECT_DIR}/ecs/systems/CommandSystem.cpp
+  ${PROJECT_DIR}/ecs/systems/DebugInfo.cpp
+  ${PROJECT_DIR}/ecs/systems/DeferredRenderSystem.cpp
+  ${PROJECT_DIR}/ecs/systems/DynamicTreeSystem.cpp
+  ${PROJECT_DIR}/ecs/systems/LightVolumeSystem.cpp
+  ${PROJECT_DIR}/ecs/systems/ModelRenderer.cpp
+  ${PROJECT_DIR}/ecs/systems/ParticleSystem.cpp
+  ${PROJECT_DIR}/ecs/systems/ProjectionMapSystem.cpp
+  ${PROJECT_DIR}/ecs/systems/RenderSystem2D.cpp
+  ${PROJECT_DIR}/ecs/systems/ShadowMapRenderer.cpp
+  ${PROJECT_DIR}/ecs/systems/SkeletalAnimator.cpp
+  ${PROJECT_DIR}/ecs/systems/SpriteAnimator.cpp
+  ${PROJECT_DIR}/ecs/systems/SpriteSystem2D.cpp
+  ${PROJECT_DIR}/ecs/systems/SpriteSystem3D.cpp
+  ${PROJECT_DIR}/ecs/systems/TextSystem.cpp
+  ${PROJECT_DIR}/ecs/systems/UIElementSystem.cpp
+  ${PROJECT_DIR}/ecs/systems/UISystem.cpp
+
+  ${PROJECT_DIR}/graphics/BinaryMeshBuilder.cpp
+  ${PROJECT_DIR}/graphics/BoundingBox.cpp
+  ${PROJECT_DIR}/graphics/CircleMeshBuilder.cpp
+  ${PROJECT_DIR}/graphics/Colour.cpp
+  ${PROJECT_DIR}/graphics/CubemapTexture.cpp
+  ${PROJECT_DIR}/graphics/DepthTexture.cpp
+  ${PROJECT_DIR}/graphics/DynamicMeshBuilder.cpp
+  ${PROJECT_DIR}/graphics/EnvironmentMap.cpp
+  ${PROJECT_DIR}/graphics/Font.cpp
+  ${PROJECT_DIR}/graphics/FontResource.cpp
+  ${PROJECT_DIR}/graphics/GridMeshBuilder.cpp
+  ${PROJECT_DIR}/graphics/Image.cpp
+  ${PROJECT_DIR}/graphics/ImageArray.cpp
+  ${PROJECT_DIR}/graphics/IqmBuilder.cpp
+  ${PROJECT_DIR}/graphics/MaterialData.cpp
+  ${PROJECT_DIR}/graphics/MaterialResource.cpp
+  ${PROJECT_DIR}/graphics/MeshBatch.cpp
+  ${PROJECT_DIR}/graphics/MeshBuilder.cpp
+  ${PROJECT_DIR}/graphics/MeshData.cpp
+  ${PROJECT_DIR}/graphics/MeshResource.cpp
+  ${PROJECT_DIR}/graphics/ModelDefinition.cpp
+  ${PROJECT_DIR}/graphics/MultiRenderTexture.cpp
+  ${PROJECT_DIR}/graphics/Palette.cpp
+  ${PROJECT_DIR}/graphics/PrimitiveBuilders.cpp
+  ${PROJECT_DIR}/graphics/RenderTarget.cpp
+  ${PROJECT_DIR}/graphics/RenderTexture.cpp
+  ${PROJECT_DIR}/graphics/Shader.cpp
+  ${PROJECT_DIR}/graphics/ShaderResource.cpp
+  ${PROJECT_DIR}/graphics/Shape2D.cpp
+  ${PROJECT_DIR}/graphics/SimpleDrawable.cpp
+  ${PROJECT_DIR}/graphics/SimpleQuad.cpp
+  ${PROJECT_DIR}/graphics/SimpleText.cpp
+  ${PROJECT_DIR}/graphics/SimpleVertexArray.cpp
+  ${PROJECT_DIR}/graphics/Spatial.cpp
+  ${PROJECT_DIR}/graphics/SpriteSheet.cpp
+  ${PROJECT_DIR}/graphics/StaticMeshBuilder.cpp
+  ${PROJECT_DIR}/graphics/Texture.cpp
+  ${PROJECT_DIR}/graphics/TextureResource.cpp
+  ${PROJECT_DIR}/graphics/Transformable2D.cpp
+  ${PROJECT_DIR}/graphics/UniformBuffer.cpp
+  ${PROJECT_DIR}/graphics/VideoPlayer.cpp
+  
+  ${PROJECT_DIR}/graphics/postprocess/PostChromeAB.cpp
+  ${PROJECT_DIR}/graphics/postprocess/PostProcess.cpp
+  #${PROJECT_DIR}/graphics/postprocess/PostSSAO.cpp
+
+  ${PROJECT_DIR}/imgui/Gui.cpp
+  ${PROJECT_DIR}/imgui/GuiClient.cpp
+  #${PROJECT_DIR}/imgui/ImCurveEdit.cpp
+  ${PROJECT_DIR}/imgui/imfilebrowser.cpp
+  #${PROJECT_DIR}/imgui/ImGradient.cpp
+  ${PROJECT_DIR}/imgui/imgui.cpp
+  ${PROJECT_DIR}/imgui/imgui_demo.cpp
+  ${PROJECT_DIR}/imgui/imgui_draw.cpp
+  ${PROJECT_DIR}/imgui/imgui_freetype.cpp
+  ${PROJECT_DIR}/imgui/imgui_impl_opengl3.cpp
+  ${PROJECT_DIR}/imgui/imgui_impl_sdl.cpp
+  ${PROJECT_DIR}/imgui/imgui_stdlib.cpp
+  ${PROJECT_DIR}/imgui/imgui_tables.cpp
+  ${PROJECT_DIR}/imgui/imgui_widgets.cpp
+  ${PROJECT_DIR}/imgui/ImGuiDatePicker.cpp
+  ${PROJECT_DIR}/imgui/ImGuizmo.cpp
+  #${PROJECT_DIR}/imgui/implot.cpp
+  #${PROJECT_DIR}/imgui/implot_demo.cpp
+  #${PROJECT_DIR}/imgui/implot_items.cpp
+  #${PROJECT_DIR}/imgui/ImSequencer.cpp
+
+  ${PROJECT_DIR}/network/NetClient.cpp
+  ${PROJECT_DIR}/network/NetConf.cpp
+  ${PROJECT_DIR}/network/NetEvent.cpp
+  ${PROJECT_DIR}/network/NetHost.cpp
+  ${PROJECT_DIR}/network/NetPeer.cpp
+
+  ${PROJECT_DIR}/util/Frustum.cpp
+  ${PROJECT_DIR}/util/Matrix.cpp
+  ${PROJECT_DIR}/util/Network.cpp
+  ${PROJECT_DIR}/util/Random.cpp
+  ${PROJECT_DIR}/util/Spline.cpp)
+
+SET(project_src_openal
+  ${PROJECT_DIR}/audio/OpenALImpl.cpp
+  )
+
+SET(project_src_sdlmixer
+  ${PROJECT_DIR}/audio/SDLMixerImpl.cpp
+  )
+
+SET(project_src_win32
+  ${PROJECT_DIR}/detail/enet/win32.c
+  )
+
+SET(project_src_nix
+  ${PROJECT_DIR}/detail/enet/unix.c
+  )
+
+SET(project_src_macos
+  #${PROJECT_DIR}/audio/mojoal.c
+  ${PROJECT_DIR}/detail/ResourcePath.mm 
+  ${PROJECT_DIR}/detail/41/glad.c
+  )
