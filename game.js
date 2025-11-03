@@ -4,6 +4,11 @@ class DudeGolf {
         this.canvas = document.getElementById('game-canvas');
         this.ctx = this.canvas.getContext('2d');
         
+        // Game constants
+        this.UPGRADE_COST = 50;
+        this.UPGRADE_INCREMENT = 5;
+        this.MAX_STAT_VALUE = 150;
+        
         // Player RPG stats
         this.player = {
             level: 1,
@@ -305,16 +310,15 @@ class DudeGolf {
     }
 
     purchaseUpgrade(type) {
-        const cost = 50;
-        if (this.player.xp < cost) {
+        if (this.player.xp < this.UPGRADE_COST) {
             this.showMessage('Not enough XP!', null, 1500);
             return;
         }
 
-        this.player.xp -= cost;
+        this.player.xp -= this.UPGRADE_COST;
         
         if (type === 'power') {
-            this.player.power = Math.min(150, this.player.power + 5);
+            this.player.power = Math.min(this.MAX_STAT_VALUE, this.player.power + this.UPGRADE_INCREMENT);
             if (this.player.power >= 50 && !this.achievements.find(a => a.id === 'power_50').unlocked) {
                 this.unlockAchievement('power_50');
             }
@@ -322,7 +326,7 @@ class DudeGolf {
                 this.unlockAchievement('power_100');
             }
         } else if (type === 'accuracy') {
-            this.player.accuracy = Math.min(150, this.player.accuracy + 5);
+            this.player.accuracy = Math.min(this.MAX_STAT_VALUE, this.player.accuracy + this.UPGRADE_INCREMENT);
             if (this.player.accuracy >= 100 && !this.achievements.find(a => a.id === 'accuracy_100').unlocked) {
                 this.unlockAchievement('accuracy_100');
             }
@@ -445,7 +449,7 @@ class DudeGolf {
 
         // Update upgrade buttons
         document.querySelectorAll('.upgrade-btn').forEach(btn => {
-            btn.disabled = this.player.xp < 50;
+            btn.disabled = this.player.xp < this.UPGRADE_COST;
         });
 
         // Update shoot button
