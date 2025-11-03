@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dude Golf - RPG Golf Adventure</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>🏌️ Dude Golf ⛳</h1>
+            <div id="player-stats">
+                <div class="stat">
+                    <span class="stat-label">Level:</span>
+                    <span id="player-level">1</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">XP:</span>
+                    <span id="player-xp">0</span>/<span id="player-xp-next">100</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Power:</span>
+                    <span id="player-power">50</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Accuracy:</span>
+                    <span id="player-accuracy">50</span>
+                </div>
+            </div>
+        </header>
+
+        <div id="main-content">
+            <div id="game-area">
+                <canvas id="game-canvas" width="800" height="600"></canvas>
+                <div id="game-controls">
+                    <div class="control-group">
+                        <label for="power-slider">Power:</label>
+                        <input type="range" id="power-slider" min="0" max="100" value="50">
+                        <span id="power-value">50</span>
+                    </div>
+                    <div class="control-group">
+                        <label for="angle-slider">Angle:</label>
+                        <input type="range" id="angle-slider" min="0" max="90" value="45">
+                        <span id="angle-value">45</span>°
+                    </div>
+                    <button id="shoot-button" class="btn-primary">⛳ Shoot!</button>
+                    <button id="reset-button" class="btn-secondary">🔄 Reset Hole</button>
+                </div>
+                <div id="hole-info">
+                    <p>Hole: <span id="current-hole">1</span> / 9</p>
+                    <p>Strokes: <span id="stroke-count">0</span></p>
+                    <p>Par: <span id="hole-par">3</span></p>
+                </div>
+            </div>
+
+            <aside id="sidebar">
+                <div id="achievements-panel" class="panel">
+                    <h2>🏆 Achievements</h2>
+                    <div id="achievements-list"></div>
+                </div>
+
+                <div id="stats-panel" class="panel">
+                    <h2>📊 Career Stats</h2>
+                    <div id="career-stats">
+                        <p>Holes Completed: <span id="holes-completed">0</span></p>
+                        <p>Total Strokes: <span id="total-strokes">0</span></p>
+                        <p>Best Score: <span id="best-score">-</span></p>
+                        <p>Holes in One: <span id="holes-in-one">0</span></p>
+                    </div>
+                </div>
+
+                <div id="upgrades-panel" class="panel">
+                    <h2>⬆️ Upgrades</h2>
+                    <div id="upgrades-list">
+                        <button class="upgrade-btn" data-upgrade="power">
+                            💪 Power (+5) - 50 XP
+                        </button>
+                        <button class="upgrade-btn" data-upgrade="accuracy">
+                            🎯 Accuracy (+5) - 50 XP
+                        </button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <div id="message-overlay" class="hidden">
+            <div id="message-content"></div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
