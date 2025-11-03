@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DudeGolf - Dude Cup Golf</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>🏌️ DudeGolf 🏌️</h1>
+            <p class="subtitle">Dude Cup Golf Championship</p>
+        </header>
+        
+        <div id="game-info">
+            <div class="info-panel">
+                <span class="label">Hole:</span>
+                <span id="current-hole">1</span> / <span id="total-holes">9</span>
+            </div>
+            <div class="info-panel">
+                <span class="label">Par:</span>
+                <span id="par">3</span>
+            </div>
+            <div class="info-panel">
+                <span class="label">Strokes:</span>
+                <span id="strokes">0</span>
+            </div>
+            <div class="info-panel">
+                <span class="label">Score:</span>
+                <span id="score">0</span>
+            </div>
+        </div>
+
+        <canvas id="game-canvas" width="800" height="600"></canvas>
+
+        <div id="controls">
+            <div id="power-control">
+                <label for="power-slider">Power:</label>
+                <input type="range" id="power-slider" min="10" max="100" value="50">
+                <span id="power-value">50</span>%
+            </div>
+            <div id="angle-control">
+                <label for="angle-slider">Angle:</label>
+                <input type="range" id="angle-slider" min="0" max="360" value="0">
+                <span id="angle-value">0</span>°
+            </div>
+            <button id="shoot-button" class="btn">Shoot!</button>
+        </div>
+
+        <div id="message-box"></div>
+
+        <div id="instructions">
+            <h3>How to Play:</h3>
+            <ul>
+                <li>Adjust power and angle using the sliders</li>
+                <li>Click "Shoot!" to hit the ball</li>
+                <li>Get the ball in the hole with as few strokes as possible</li>
+                <li>Par is the target number of strokes for each hole</li>
+                <li>Complete all 9 holes to finish the game!</li>
+            </ul>
+        </div>
+
+        <div id="game-over" style="display: none;">
+            <h2>🏆 Game Complete! 🏆</h2>
+            <p id="final-score"></p>
+            <button id="restart-button" class="btn">Play Again</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
