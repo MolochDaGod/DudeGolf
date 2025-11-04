@@ -35,6 +35,7 @@ jobs:
       uses: lukka/run-vcpkg@v11
       with:
         vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+        # Commit ID from vcpkg-configuration.json for reproducible builds
         vcpkgGitCommitId: '000d1bda1ffa95a73e0b40334fa4103d6f4d3d48'
         vcpkgJsonGlob: '**/vcpkg.json'
 
