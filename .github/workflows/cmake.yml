@@ -32,10 +32,11 @@ jobs:
 
     - name: Bootstrap vcpkg and install SDL2
       if: runner.os == 'Windows'
-      uses: microsoft/vcpkg-action@v2
+      uses: lukka/run-vcpkg@v11
       with:
-        vcpkgArguments: sdl2:x64-windows
-        vcpkgCache: true
+        vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+        vcpkgGitCommitId: '000d1bda1ffa95a73e0b40334fa4103d6f4d3d48'
+        vcpkgJsonGlob: '**/vcpkg.json'
 
     - name: Install linux Dependencies
       if: runner.os == 'Linux'
@@ -60,7 +61,7 @@ jobs:
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
-          cmake $GITHUB_WORKSPACE -A x64 -DCMAKE_TOOLCHAIN_FILE="${{ runner.temp }}/vcpkg/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=install -DBUILD_TEMPLATES=true ${{ matrix.platform.flags }} ${{ matrix.config.flags }}
+          cmake $GITHUB_WORKSPACE -A x64 -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=install -DBUILD_TEMPLATES=true ${{ matrix.platform.flags }} ${{ matrix.config.flags }}
         else
           cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=install -DBUILD_TEMPLATES=true ${{ matrix.platform.flags }} ${{ matrix.config.flags }}
         fi
