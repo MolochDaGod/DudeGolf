@@ -16,20 +16,7 @@ if (Test-Path $vsWhere) {
         # Import Visual Studio environment
         $devShell = Join-Path $vsPath "Common7\Tools\Launch-VsDevShell.ps1"
         
-Connection URL
-
-hide
-open
-postgresql://postgres:UyfuHOzPtLRhTLrLcDftlteVRuLMiDDU@interchange.proxy.rlwy.net:55024/railway
-
-Raw psql command
-
-hide
-PGPASSWORD=UyfuHOzPtLRhTLrLcDftlteVRuLMiDDU psql -h interchange.proxy.rlwy.net -U postgres -p 55024 -d railway
-
-Railway CLI connect command
-
-railway connect Postgres        if (Test-Path $devShell) {
+        if (Test-Path $devShell) {
             Write-Host "Loading Visual Studio environment..." -ForegroundColor Yellow
             & $devShell -SkipAutomaticLocation -Arch amd64
             
