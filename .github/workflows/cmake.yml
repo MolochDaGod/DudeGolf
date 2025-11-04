@@ -30,6 +30,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Bootstrap vcpkg and install SDL2
+      if: runner.os == 'Windows'
+      uses: microsoft/vcpkg-action@v2
+      with:
+        vcpkgArguments: sdl2:x64-windows
+        vcpkgCache: true
+
     - name: Install linux Dependencies
       if: runner.os == 'Linux'
       run: sudo apt-get update && sudo apt-get install libtbb-dev libgtk-3-dev libenet-dev libxrandr-dev libudev-dev libopenal-dev libflac-dev libvorbis-dev libopus-dev libsdl2-dev libunwind-dev libassimp-dev assimp-utils
@@ -51,7 +58,12 @@ jobs:
       # Note the current convention is to use the -S and -B options here to specify source 
       # and build directories, but this is only available with CMake 3.13 and higher.  
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
-      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=install -DBUILD_TEMPLATES=true
+      run: |
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          cmake $GITHUB_WORKSPACE -A x64 -DCMAKE_TOOLCHAIN_FILE="${{ runner.temp }}/vcpkg/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=install -DBUILD_TEMPLATES=true ${{ matrix.platform.flags }} ${{ matrix.config.flags }}
+        else
+          cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=install -DBUILD_TEMPLATES=true ${{ matrix.platform.flags }} ${{ matrix.config.flags }}
+        fi
 
     - name: Build
       working-directory: ${{github.workspace}}/build
